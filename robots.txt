@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://gesztitamas14.github.io/sitemap.xml
+Sitemap: https://gestware.web.app/sitemap.xml

@@ -1,6 +1,8 @@
-# gesztitamas14.github.io
+# Gestware weboldal
 
-A Gestware (Geszti Tamás e.v.) weboldala. Statikus HTML és CSS, build nélkül, GitHub Pages-en.
+A Gestware (Geszti Tamás e.v.) weboldala: https://gestware.web.app. Statikus HTML és CSS, build nélkül, Firebase Hostingon.
+
+A Pont jó jogi oldalai nem itt vannak, hanem a `felveteli-gyakorlo` tároló GitHub Pages oldalán (`https://gesztitamas14.github.io/felveteli-gyakorlo/...`); az oldal teljes címmel linkel rájuk.
 
 ```
 index.html            magyar főoldal
@@ -12,6 +14,8 @@ assets/css/style.css
 assets/js/main.js     kapcsolati űrlap
 assets/fonts/         IBM Plex Sans / Mono (helyben, nem a Google Fonts-ról)
 assets/img/
+firebase.json         Firebase Hosting beállítás (gyorsítótár, fejlécek)
+.firebaserc           a Firebase-projekt azonosítója
 ```
 
 ## Helyi futtatás
@@ -19,18 +23,20 @@ assets/img/
 Az útvonalak gyökér-relatívak (`/assets/...`), ezért fájlként megnyitva nem működnek, kell egy szerver:
 
 ```
-npx serve .
+python -m http.server 8000
 ```
 
-vagy `python -m http.server 8000`, utána http://localhost:8000.
+vagy `npx serve .`, utána http://localhost:8000.
 
-## Közzététel
+## Közzététel (Firebase Hosting)
 
-1. GitHubon új, nyilvános tároló pontosan ezzel a névvel: `gesztitamas14.github.io`.
-2. Feltöltés a `main` ágra.
-3. *Settings → Pages → Build and deployment*: Deploy from a branch, `main`, `/ (root)`.
+Feltöltés (minden módosítás után):
 
-A `felveteli-gyakorlo` tároló jogi oldalai ugyanezen a domainen maradnak: `/felveteli-gyakorlo/...`.
+```
+npx firebase-tools deploy --only hosting
+```
+
+Utána az oldal a https://gestware.web.app (és a https://gestware.firebaseapp.com) címen él.
 
 ## Teendők élesítés előtt
 
