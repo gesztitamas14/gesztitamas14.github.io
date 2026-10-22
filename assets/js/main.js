@@ -1,12 +1,12 @@
 // Contact form -> Google Forms. The form posts in no-cors mode, so the
 // response is opaque: a resolved fetch is the best signal we get.
 const GOOGLE_FORM = {
-  action: 'https://docs.google.com/forms/d/e/FORM_ID/formResponse',
+  action: 'https://docs.google.com/forms/d/e/1FAIpQLSeZWYmbSCFMsxnpZ7cao2t_6oM0VA_WBWJVq3i8jPdg6tU_Aw/formResponse',
   fields: {
-    name: 'entry.NAME',
-    email: 'entry.EMAIL',
-    topic: 'entry.TOPIC',
-    message: 'entry.MESSAGE',
+    name: 'entry.1715458988',
+    email: 'entry.262878736',
+    topic: 'entry.1972632556',
+    message: 'entry.1584596513',
   },
 };
 
