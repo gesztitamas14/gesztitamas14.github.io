@@ -692,30 +692,17 @@ a:hover {
   color: var(--muted);
 }
 
-.imprint {
-  grid-column: 1 / span 8;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0 24px;
-}
-
-.imprint div {
-  display: grid;
-  grid-template-columns: 12.5em 1fr;
-  padding: 6px 0;
-  border-top: 1px solid var(--rule);
-}
-
-.imprint dd {
-  color: var(--ink);
-}
-
 .footer-links {
-  grid-column: 9 / -1;
-  display: grid;
-  align-content: start;
-  justify-items: end;
-  gap: 6px;
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 28px;
+}
+
+.footer-inline {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
 }
 
 .footer-bottom {
@@ -723,7 +710,7 @@ a:hover {
   display: flex;
   justify-content: space-between;
   gap: 16px;
-  margin-top: 36px;
+  margin-top: 28px;
 }
 
 /* plain pages: privacy, 404 */
@@ -847,15 +834,6 @@ a:hover {
     margin-top: 80px;
   }
 
-  .imprint {
-    grid-column: 1 / -1;
-  }
-
-  .footer-links {
-    grid-column: 1 / -1;
-    justify-items: start;
-    margin-top: 24px;
-  }
 }
 
 @media (max-width: 720px) {
@@ -900,13 +878,6 @@ a:hover {
     grid-template-columns: 1fr;
   }
 
-  .imprint {
-    grid-template-columns: 1fr;
-  }
-
-  .imprint div {
-    grid-template-columns: 10em 1fr;
-  }
 
   .footer-bottom {
     flex-direction: column;
@@ -927,7 +898,6 @@ a:hover {
     font-size: 12px;
   }
 
-  .imprint div,
   .hero-meta div,
   .project-facts div {
     grid-template-columns: 1fr;
