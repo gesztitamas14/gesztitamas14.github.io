@@ -97,3 +97,16 @@ if (form) {
     }
   });
 }
+
+// Demo strip on phones: keep the "1 / 6" counter in step with the swipe position.
+const demoList = document.querySelector('.demo-list');
+const demoCount = document.querySelector('.demo-count span');
+
+if (demoList && demoCount) {
+  demoList.addEventListener('scroll', () => {
+    const cards = demoList.children;
+    const step = cards[0].getBoundingClientRect().width + parseFloat(getComputedStyle(demoList).columnGap);
+    const atEnd = demoList.scrollLeft >= demoList.scrollWidth - demoList.clientWidth - 2;
+    demoCount.textContent = atEnd ? cards.length : Math.round(demoList.scrollLeft / step) + 1;
+  }, { passive: true });
+}
