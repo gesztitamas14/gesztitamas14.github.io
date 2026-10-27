@@ -1,0 +1,950 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tartás Mozgásterápia — gyógytorna és manuálterápia Szegeden</title>
+  <meta name="description" content="Demó oldal a Gestware referenciái közül: gyógytorna-stúdió online időpontfoglalással.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect x='5' y='1' width='6' height='3' rx='1.5' fill='%231d2b24'/%3E%3Crect x='5' y='6.5' width='6' height='3' rx='1.5' fill='%231d2b24'/%3E%3Crect x='5' y='12' width='6' height='3' rx='1.5' fill='%232554c7'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../fonts/fonts.css">
+  <style>
+    :root {
+      --bone: #f3efe6;
+      --bone-2: #e9e3d6;
+      --ink: #1d2b24;
+      --ink-2: #44534b;
+      --sage: #8fa89a;
+      --line: #cfc7b6;
+      --tape: #2554c7;
+      --tape-2: #1b3f9a;
+      --warn: #b4472a;
+      --serif: "Young Serif", Georgia, serif;
+      --sans: "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
+      --wrap: 1180px;
+      --gut: clamp(16px, 4vw, 40px);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bone);
+      color: var(--ink);
+      font: 400 17px/1.55 var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3, p, ul, ol, dl, dd, figure { margin: 0; }
+    ul, ol { padding: 0; list-style: none; }
+    a { color: inherit; }
+    button { font: inherit; color: inherit; }
+    :focus-visible { outline: 2px solid var(--tape); outline-offset: 3px; }
+    .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gut); }
+
+    .demo-bar {
+      background: var(--ink);
+      color: var(--bone);
+      font-size: 13px;
+      padding: 7px 0;
+    }
+    .demo-bar .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .demo-bar a { color: var(--bone); }
+
+    /* header */
+    .top { border-bottom: 1px solid var(--line); }
+    .top .wrap { display: flex; align-items: center; justify-content: space-between; height: 72px; gap: 20px; }
+    .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; font-family: var(--serif); font-size: 26px; letter-spacing: -0.01em; }
+    .logo-mark { display: grid; gap: 3px; }
+    .logo-mark i { display: block; width: 14px; height: 5px; border-radius: 3px; background: var(--ink); }
+    .logo-mark i:last-child { background: var(--tape); }
+    .logo small { display: block; font: 500 11px/1 var(--sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-2); margin-top: 3px; }
+    .menu { display: flex; align-items: center; gap: 28px; font-size: 15px; }
+    .menu a { text-decoration: none; }
+    .menu a:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+    /* kinesio-tape button */
+    .tape {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 26px;
+      border: 0;
+      border-radius: 999px;
+      background:
+        repeating-linear-gradient(90deg, rgb(255 255 255 / 0.08) 0 2px, transparent 2px 6px),
+        var(--tape);
+      color: #fff;
+      font-weight: 600;
+      font-size: 16px;
+      text-decoration: none;
+      cursor: pointer;
+      transform: rotate(-1.2deg);
+      box-shadow: 0 1px 0 rgb(0 0 0 / 0.15);
+      transition: transform 0.2s, background-color 0.2s;
+    }
+    .tape:hover { transform: rotate(0deg) translateY(-1px); background-color: var(--tape-2); }
+    .tape.small { padding: 10px 18px; font-size: 15px; }
+    .tape[disabled] { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+    /* hero */
+    .hero { position: relative; padding: clamp(40px, 7vw, 96px) 0 clamp(48px, 7vw, 96px); overflow: hidden; }
+    .hero .wrap { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 40px; align-items: center; }
+    .kicker { font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-2); }
+    .hero h1 {
+      margin-top: 18px;
+      font: 400 clamp(42px, 6.4vw, 84px)/1.02 var(--serif);
+      letter-spacing: -0.025em;
+    }
+    .hero h1 span { color: var(--tape); }
+    .hero-lead { max-width: 33em; margin-top: 26px; font-size: clamp(17px, 1.5vw, 20px); color: var(--ink-2); }
+    .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; margin-top: 34px; }
+    .note { font-size: 14px; color: var(--ink-2); }
+    .note b { color: var(--ink); }
+
+    .plate {
+      position: relative;
+      justify-self: center;
+      width: min(100%, 360px);
+      padding: 18px 18px 14px;
+      border: 1px solid var(--line);
+      background: #f7f4ec;
+    }
+    .plate svg { display: block; width: 100%; height: auto; }
+    .plate figcaption { display: flex; justify-content: space-between; gap: 12px; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--line); font-size: 13px; color: var(--ink-2); }
+    .plate figcaption b { font-family: var(--serif); font-weight: 400; color: var(--ink); }
+    .meter { font-variant-numeric: tabular-nums; }
+
+    /* complaint chooser */
+    .section { padding: clamp(56px, 8vw, 104px) 0; border-top: 1px solid var(--line); }
+    .section-title { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 24px 40px; align-items: end; margin-bottom: 44px; }
+    .section-title h2 { font: 400 clamp(32px, 4.2vw, 52px)/1.06 var(--serif); letter-spacing: -0.02em; }
+    .section-title p { color: var(--ink-2); max-width: 36em; }
+
+    .complaints { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 40px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 10px; align-content: flex-start; }
+    .chip {
+      padding: 10px 16px;
+      border: 1px solid var(--ink);
+      border-radius: 999px;
+      background: transparent;
+      cursor: pointer;
+      font-size: 15px;
+      transition: background-color 0.15s, color 0.15s;
+    }
+    .chip:hover { background: var(--bone-2); }
+    .chip[aria-pressed="true"] { background: var(--ink); color: var(--bone); }
+    .advice {
+      position: relative;
+      padding: 28px 30px 30px;
+      background: var(--ink);
+      color: var(--bone);
+      min-height: 260px;
+    }
+    .advice .kicker { color: var(--sage); }
+    .advice h3 { margin-top: 12px; font: 400 30px/1.15 var(--serif); }
+    .advice p { margin-top: 14px; color: #d5d8cf; max-width: 34em; }
+    .advice ul { margin-top: 18px; display: grid; gap: 6px; font-size: 15px; }
+    .advice li::before { content: "→ "; color: var(--sage); }
+    .advice .tape { margin-top: 24px; }
+
+    /* treatments */
+    .price-list { border-top: 2px solid var(--ink); }
+    .price-list li {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 7em 9em;
+      gap: 6px 24px;
+      align-items: baseline;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .price-list h3 { font: 400 24px/1.2 var(--serif); }
+    .price-list p { grid-column: 1; color: var(--ink-2); font-size: 15px; max-width: 40em; }
+    .price-list .dur { grid-row: 1; grid-column: 2; font-size: 15px; color: var(--ink-2); }
+    .price-list .price { grid-row: 1; grid-column: 3; text-align: right; font-weight: 600; font-variant-numeric: tabular-nums; }
+    .price-foot { display: flex; flex-wrap: wrap; gap: 8px 32px; margin-top: 18px; font-size: 14px; color: var(--ink-2); }
+    .price-foot span::before { content: "✓ "; color: var(--tape); font-weight: 700; }
+
+    /* first visit timeline */
+    .timeline { position: relative; }
+    .tl-bar { display: grid; grid-template-columns: 10fr 20fr 20fr 10fr; height: 56px; border: 1px solid var(--ink); }
+    .tl-bar div { display: flex; align-items: center; padding: 0 12px; border-right: 1px solid var(--ink); font-size: 13px; font-weight: 600; }
+    .tl-bar div:last-child { border-right: 0; }
+    .tl-bar div:nth-child(1) { background: var(--bone-2); }
+    .tl-bar div:nth-child(2) { background: var(--sage); }
+    .tl-bar div:nth-child(3) { background: var(--tape); color: #fff; }
+    .tl-bar div:nth-child(4) { background: var(--ink); color: var(--bone); }
+    .tl-ticks { display: grid; grid-template-columns: 10fr 20fr 20fr 10fr; margin-top: 6px; font-size: 12px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+    .tl-ticks span:last-child { display: flex; justify-content: space-between; }
+    .tl-text { display: grid; grid-template-columns: 10fr 20fr 20fr 10fr; gap: 0; margin-top: 28px; }
+    .tl-text div { padding-right: 18px; }
+    .tl-text h3 { font: 400 20px/1.2 var(--serif); }
+    .tl-text p { margin-top: 8px; font-size: 15px; color: var(--ink-2); }
+
+    /* therapists */
+    .people { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+    .card {
+      position: relative;
+      padding: 26px 24px 24px;
+      background: #f8f5ee;
+      border: 1px solid var(--line);
+    }
+    .card .badge {
+      position: absolute;
+      top: -12px;
+      right: 18px;
+      padding: 4px 12px;
+      background: var(--tape);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 600;
+      border-radius: 999px;
+      transform: rotate(2deg);
+    }
+    .avatar { width: 64px; height: 64px; }
+    .card h3 { margin-top: 16px; font: 400 24px/1.15 var(--serif); }
+    .card .role { font-size: 14px; color: var(--ink-2); }
+    .card dl { margin-top: 18px; font-size: 14px; }
+    .card dl div { display: grid; grid-template-columns: 6.5em 1fr; gap: 10px; padding: 7px 0; border-top: 1px dashed var(--line); }
+    .card dt { color: var(--ink-2); }
+    .card .next { margin-top: 16px; font-size: 14px; }
+    .card .next b { color: var(--tape); }
+
+    /* booking */
+    .booking { background: var(--ink); color: var(--bone); border-top: 0; }
+    .booking .section-title p { color: #c9cec4; }
+    .booker { display: grid; grid-template-columns: minmax(0, 8fr) minmax(0, 4fr); gap: 32px; align-items: start; }
+    .step { padding: 22px 0 26px; border-top: 1px solid #3a4a41; }
+    .step-head { display: flex; gap: 14px; align-items: baseline; margin-bottom: 16px; }
+    .step-head span { font: 400 15px/1 var(--serif); color: var(--sage); }
+    .step-head h3 { font: 600 17px/1.3 var(--sans); }
+    .opts { display: flex; flex-wrap: wrap; gap: 8px; }
+    .opt {
+      padding: 10px 14px;
+      border: 1px solid #56665d;
+      background: transparent;
+      color: var(--bone);
+      border-radius: 6px;
+      cursor: pointer;
+      text-align: left;
+      font-size: 15px;
+      line-height: 1.25;
+    }
+    .opt small { display: block; color: #a9b3aa; font-size: 12.5px; margin-top: 3px; }
+    .opt:hover { border-color: var(--bone); }
+    .opt[aria-pressed="true"] { background: var(--bone); color: var(--ink); border-color: var(--bone); }
+    .opt[aria-pressed="true"] small { color: var(--ink-2); }
+    .days { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; }
+    .day { padding: 10px 4px; text-align: center; }
+    .day b { display: block; font: 400 22px/1.1 var(--serif); }
+    .day small { margin-top: 2px; }
+    .day:disabled { opacity: 0.3; cursor: not-allowed; }
+    .week-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 14px; color: #c9cec4; }
+    .week-nav button { background: none; border: 1px solid #56665d; color: var(--bone); border-radius: 6px; padding: 4px 10px; cursor: pointer; }
+    .week-nav button:disabled { opacity: 0.3; cursor: not-allowed; }
+    .slots { display: grid; grid-template-columns: repeat(auto-fill, minmax(78px, 1fr)); gap: 6px; }
+    .slot { text-align: center; font-variant-numeric: tabular-nums; }
+    .slot:disabled { opacity: 0.28; text-decoration: line-through; cursor: not-allowed; }
+    .empty { grid-column: 1 / -1; color: #a9b3aa; font-size: 15px; }
+    .fields { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .fields label { display: grid; gap: 6px; font-size: 13px; color: #c9cec4; }
+    .fields .full { grid-column: 1 / -1; }
+    .fields input, .fields textarea {
+      width: 100%;
+      padding: 11px 12px;
+      border: 1px solid #56665d;
+      border-radius: 6px;
+      background: #24342c;
+      color: var(--bone);
+      font: 400 16px/1.4 var(--sans);
+    }
+    .fields input:focus, .fields textarea:focus { outline: none; border-color: var(--bone); }
+
+    .summary {
+      position: sticky;
+      top: 20px;
+      padding: 24px;
+      background: var(--bone);
+      color: var(--ink);
+    }
+    .summary h3 { font: 400 22px/1.2 var(--serif); }
+    .summary dl { margin: 16px 0 20px; font-size: 15px; }
+    .summary dl div { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; border-top: 1px solid var(--line); }
+    .summary dt { color: var(--ink-2); }
+    .summary dd { text-align: right; font-weight: 600; }
+    .summary .tape { width: 100%; justify-content: center; }
+    .summary .fine { margin-top: 12px; font-size: 12.5px; color: var(--ink-2); }
+    .err { margin-top: 10px; font-size: 14px; color: var(--warn); min-height: 1.4em; }
+
+    .ticket { display: none; }
+    .done .ticket { display: block; }
+    .done .form-part { display: none; }
+    .ticket .stamp {
+      display: inline-block;
+      margin-bottom: 12px;
+      padding: 4px 10px;
+      border: 2px solid var(--tape);
+      color: var(--tape);
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transform: rotate(-3deg);
+    }
+    .ticket p { font-size: 15px; color: var(--ink-2); margin-top: 8px; }
+    .ticket .row { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; margin-top: 18px; }
+    .link-btn { background: none; border: 0; padding: 0; text-decoration: underline; cursor: pointer; font-size: 14px; }
+
+    /* faq */
+    .faq { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 40px; }
+    details { border-top: 1px solid var(--line); }
+    details:last-child { border-bottom: 1px solid var(--line); }
+    summary { display: flex; justify-content: space-between; gap: 16px; padding: 18px 0; cursor: pointer; list-style: none; font: 400 20px/1.3 var(--serif); }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; font-family: var(--sans); font-size: 22px; line-height: 1; transition: transform 0.2s; }
+    details[open] summary::after { transform: rotate(45deg); }
+    details p { padding: 0 0 20px; color: var(--ink-2); max-width: 40em; }
+
+    .faq-title { font: 400 clamp(32px, 4.2vw, 52px)/1.06 var(--serif); letter-spacing: -0.02em; }
+    .visit { display: grid; gap: 22px; align-content: start; font-size: 15px; }
+    .visit h3 { font: 400 15px/1 var(--sans); font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-2); margin-bottom: 6px; }
+    .hours div { display: flex; justify-content: space-between; max-width: 20em; padding: 3px 0; border-bottom: 1px dotted var(--line); }
+    .hours .today { font-weight: 700; }
+
+    footer { padding: 32px 0 44px; border-top: 1px solid var(--ink); font-size: 14px; color: var(--ink-2); }
+    footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+
+    @media (max-width: 900px) {
+      .hero .wrap, .section-title, .complaints, .booker, .faq { grid-template-columns: 1fr; }
+      .plate { width: min(100%, 300px); }
+      .people { grid-template-columns: 1fr; }
+      .tl-text { grid-template-columns: 1fr 1fr; gap: 22px 0; }
+      .summary { position: static; }
+      .menu .opt-link { display: none; }
+    }
+    @media (max-width: 560px) {
+      body { font-size: 16px; }
+      .menu { gap: 16px; }
+      .logo small { white-space: nowrap; font-size: 9.5px; letter-spacing: 0.1em; }
+      .menu a:not(.tape) { display: none; }
+      .price-list li { grid-template-columns: minmax(0, 1fr) auto; }
+      .price-list .dur { grid-column: 1; grid-row: auto; }
+      .price-list .price { grid-column: 2; }
+      .tl-bar div { font-size: 0; }
+      .tl-text { grid-template-columns: 1fr; }
+      .fields { grid-template-columns: 1fr; }
+      .days { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .tape { transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="demo-bar">
+    <div class="wrap">
+      <span>Demó oldal — kitalált vállalkozás, a foglalás nem küld adatot.</span>
+      <a href="/#munkak">← Készítette a Gestware</a>
+    </div>
+  </div>
+
+  <header class="top">
+    <div class="wrap">
+      <a class="logo" href="#">
+        <span class="logo-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span>tartás<small>mozgásterápia · Szeged</small></span>
+      </a>
+      <nav class="menu" aria-label="Fő menü">
+        <a class="opt-link" href="#panaszok">Panaszok</a>
+        <a href="#kezelesek">Kezelések</a>
+        <a class="opt-link" href="#terapeutak">Terapeuták</a>
+        <a class="tape small" href="#foglalas">Időpontfoglalás</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <div>
+          <p class="kicker">Gyógytorna · manuálterápia · rehabilitáció</p>
+          <h1>Fáj a háta? Előbb megnézzük, <span>miért.</span></h1>
+          <p class="hero-lead">Az első alkalommal egy teljes órát szánunk a felmérésre. Megnézzük a tartását, a mozgását és a napi szokásait. Utána kap egy otthon is végezhető programot, és tudni fogja, mire számíthat.</p>
+          <div class="hero-actions">
+            <a class="tape" href="#foglalas">Időpontot foglalok <span aria-hidden="true">→</span></a>
+            <p class="note"><b>Beutaló nem kell.</b> Egészségpénztári kártyát elfogadunk.</p>
+          </div>
+        </div>
+
+        <figure class="plate" aria-label="A gerinc ábrája, amely görgetés közben kiegyenesedik">
+          <svg id="spine" viewBox="0 0 300 420" role="img" aria-hidden="true"></svg>
+          <figcaption>
+            <span><b>1. ábra.</b> Gerinc, péntek délután</span>
+            <span class="meter" id="meter">eltérés: 18°</span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section" id="panaszok" aria-labelledby="panaszok-cim">
+      <div class="wrap">
+        <div class="section-title">
+          <h2 id="panaszok-cim">Mi hozza ide?</h2>
+          <p>Válassza ki, ami a legjobban illik önre. Megmutatjuk, melyik kezeléssel érdemes kezdeni, és ezt a foglalásnál már ki is jelöljük.</p>
+        </div>
+        <div class="complaints">
+          <div class="chips" role="group" aria-label="Panaszok">
+            <button class="chip" type="button" data-key="derek" aria-pressed="true">Derékfájás</button>
+            <button class="chip" type="button" data-key="nyak">Nyak és váll, ülőmunka után</button>
+            <button class="chip" type="button" data-key="sport">Sportsérülés</button>
+            <button class="chip" type="button" data-key="mutet">Műtét utáni rehabilitáció</button>
+            <button class="chip" type="button" data-key="varandos">Várandósság, szülés után</button>
+            <button class="chip" type="button" data-key="gyerek">Gyerek tartáshibája</button>
+          </div>
+          <div class="advice" aria-live="polite">
+            <p class="kicker" id="adv-kicker">Javasolt kezdés</p>
+            <h3 id="adv-title"></h3>
+            <p id="adv-text"></p>
+            <ul id="adv-list"></ul>
+            <a class="tape small" href="#foglalas" id="adv-cta">Ezt foglalom <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="kezelesek" aria-labelledby="kezelesek-cim">
+      <div class="wrap">
+        <div class="section-title">
+          <h2 id="kezelesek-cim">Kezelések és árak</h2>
+          <p>Az árak egy alkalomra vonatkoznak. Ha a felmérés után sorozatot javaslunk, azt bérlettel kedvezőbben veheti igénybe.</p>
+        </div>
+        <ul class="price-list">
+          <li>
+            <h3>Állapotfelmérés</h3>
+            <span class="dur">60 perc</span>
+            <span class="price">18 000 Ft</span>
+            <p>Beszélgetés, tartás- és mozgásvizsgálat, első gyakorlatok, írásos otthoni program. Új vendégeknél ezzel kezdünk.</p>
+          </li>
+          <li>
+            <h3>Gyógytorna</h3>
+            <span class="dur">45 perc</span>
+            <span class="price">14 000 Ft</span>
+            <p>Egyéni, a felmérésre épülő gyakorlatsor. Hétről hétre nézzük, mi változott.</p>
+          </li>
+          <li>
+            <h3>Manuálterápia</h3>
+            <span class="dur">45 perc</span>
+            <span class="price">16 000 Ft</span>
+            <p>Kézi technikák az ízületek és a lágyrészek mozgásának javítására, mindig gyakorlatokkal együtt.</p>
+          </li>
+          <li>
+            <h3>Kinesio tape</h3>
+            <span class="dur">20 perc</span>
+            <span class="price">6 000 Ft</span>
+            <p>Rugalmas szalag a terhelés csökkentésére. Kezelés mellé vagy önállóan, például verseny előtt.</p>
+          </li>
+          <li>
+            <h3>Bérlet, 10 alkalom</h3>
+            <span class="dur">3 hónapig</span>
+            <span class="price">126 000 Ft</span>
+            <p>Gyógytornára vagy manuálterápiára, a kettő kombinálható.</p>
+          </li>
+        </ul>
+        <div class="price-foot">
+          <span>Egészségpénztári kártya</span>
+          <span>SZÉP-kártya nem</span>
+          <span>Számla a helyszínen</span>
+          <span>Díjmentes lemondás 24 órán belül</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="elso-cim">
+      <div class="wrap">
+        <div class="section-title">
+          <h2 id="elso-cim">Az első óra, percről percre</h2>
+          <p>Nem kell átöltözni: elég egy kényelmes nadrág és póló. Ha vannak leletei vagy képalkotó vizsgálatai, hozza magával.</p>
+        </div>
+        <div class="timeline">
+          <div class="tl-bar" aria-hidden="true">
+            <div>Beszélgetés</div><div>Felmérés</div><div>Első gyakorlatok</div><div>Program</div>
+          </div>
+          <div class="tl-ticks" aria-hidden="true">
+            <span>0'</span><span>10'</span><span>30'</span><span><span>50'</span><span>60'</span></span>
+          </div>
+          <div class="tl-text">
+            <div><h3>Beszélgetés</h3><p>Mikor kezdődött, mitől rosszabb, mivel tölti a napjait.</p></div>
+            <div><h3>Felmérés</h3><p>Tartás, mozgástartomány, izomerő és egyensúly. Mindent elmagyarázunk közben.</p></div>
+            <div><h3>Első gyakorlatok</h3><p>Kipróbáljuk, mi könnyít a panaszon, és mi az, amit egyelőre kerülni érdemes.</p></div>
+            <div><h3>Program</h3><p>Írásban és videóval, hogy otthon is pontosan menjen.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="terapeutak" aria-labelledby="terapeutak-cim">
+      <div class="wrap">
+        <div class="section-title">
+          <h2 id="terapeutak-cim">Akikkel találkozni fog</h2>
+          <p>Mindhárman diplomás fizioterapeuták, a Szegedi Tudományegyetemen végeztek. Ha nem tudja, kit válasszon, a foglalásnál hagyja ránk.</p>
+        </div>
+        <div class="people">
+          <article class="card">
+            <svg class="avatar" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="31" fill="#e9e3d6" stroke="#1d2b24"/><circle cx="32" cy="25" r="10" fill="none" stroke="#1d2b24" stroke-width="2"/><path d="M14 54c3-10 10-15 18-15s15 5 18 15" fill="none" stroke="#1d2b24" stroke-width="2"/><path d="M22 22c3-7 17-7 20 0" fill="none" stroke="#2554c7" stroke-width="3" stroke-linecap="round"/></svg>
+            <h3>Varga Eszter</h3>
+            <p class="role">vezető fizioterapeuta</p>
+            <dl>
+              <div><dt>Szakterület</dt><dd>derék, gerinc, ülőmunka</dd></div>
+              <div><dt>Nyelvek</dt><dd>magyar, angol</dd></div>
+              <div><dt>Rendel</dt><dd>hétfő–csütörtök</dd></div>
+            </dl>
+            <p class="next" data-next="eszter">Legkorábbi szabad időpont: <b>…</b></p>
+          </article>
+          <article class="card">
+            <span class="badge">srpski</span>
+            <svg class="avatar" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="31" fill="#e9e3d6" stroke="#1d2b24"/><circle cx="32" cy="26" r="10" fill="none" stroke="#1d2b24" stroke-width="2"/><path d="M14 54c3-10 10-15 18-15s15 5 18 15" fill="none" stroke="#1d2b24" stroke-width="2"/><path d="M24 36c4 3 12 3 16 0" fill="none" stroke="#2554c7" stroke-width="3" stroke-linecap="round"/></svg>
+            <h3>Nikolić Márk</h3>
+            <p class="role">sport-fizioterapeuta</p>
+            <dl>
+              <div><dt>Szakterület</dt><dd>sportsérülés, térd, boka</dd></div>
+              <div><dt>Nyelvek</dt><dd>magyar, szerb, angol</dd></div>
+              <div><dt>Rendel</dt><dd>kedd–szombat</dd></div>
+            </dl>
+            <p class="next" data-next="mark">Legkorábbi szabad időpont: <b>…</b></p>
+          </article>
+          <article class="card">
+            <svg class="avatar" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="31" fill="#e9e3d6" stroke="#1d2b24"/><circle cx="32" cy="25" r="10" fill="none" stroke="#1d2b24" stroke-width="2"/><path d="M14 54c3-10 10-15 18-15s15 5 18 15" fill="none" stroke="#1d2b24" stroke-width="2"/><circle cx="44" cy="17" r="5" fill="none" stroke="#2554c7" stroke-width="3"/></svg>
+            <h3>Szűcs Lilla</h3>
+            <p class="role">fizioterapeuta, gyermek és várandós</p>
+            <dl>
+              <div><dt>Szakterület</dt><dd>gyerek tartás, várandósság</dd></div>
+              <div><dt>Nyelvek</dt><dd>magyar, német</dd></div>
+              <div><dt>Rendel</dt><dd>hétfő, szerda, péntek</dd></div>
+            </dl>
+            <p class="next" data-next="lilla">Legkorábbi szabad időpont: <b>…</b></p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section booking" id="foglalas" aria-labelledby="foglalas-cim">
+      <div class="wrap">
+        <div class="section-title">
+          <h2 id="foglalas-cim">Időpontfoglalás</h2>
+          <p>Négy lépés, nagyjából egy perc. A foglalásról e-mailben visszaigazolást küldünk, és az időpont előtt egy nappal SMS-ben emlékeztetjük.</p>
+        </div>
+
+        <div class="booker" id="booker">
+          <div class="form-part">
+            <div class="step">
+              <div class="step-head"><span>01</span><h3>Kezelés</h3></div>
+              <div class="opts" id="opt-service" role="group" aria-label="Kezelés"></div>
+            </div>
+            <div class="step">
+              <div class="step-head"><span>02</span><h3>Terapeuta</h3></div>
+              <div class="opts" id="opt-person" role="group" aria-label="Terapeuta"></div>
+            </div>
+            <div class="step">
+              <div class="step-head"><span>03</span><h3>Nap és időpont</h3></div>
+              <div class="week-nav">
+                <button type="button" id="prev-week" aria-label="Előző hét">←</button>
+                <span id="week-label"></span>
+                <button type="button" id="next-week" aria-label="Következő hét">→</button>
+              </div>
+              <div class="days" id="days" role="group" aria-label="Nap"></div>
+              <div class="slots" id="slots" role="group" aria-label="Időpont" style="margin-top:14px"></div>
+            </div>
+            <div class="step">
+              <div class="step-head"><span>04</span><h3>Adatok</h3></div>
+              <div class="fields">
+                <label>Név<input id="f-name" autocomplete="name"></label>
+                <label>Telefon<input id="f-phone" type="tel" autocomplete="tel" placeholder="+36 …"></label>
+                <label class="full">E-mail<input id="f-email" type="email" autocomplete="email"></label>
+                <label class="full">Megjegyzés (nem kötelező)<textarea id="f-note" rows="3" placeholder="Pl. mióta tart a panasz, volt-e műtét"></textarea></label>
+              </div>
+            </div>
+          </div>
+
+          <aside class="summary" aria-live="polite">
+            <div class="form-part">
+              <h3>Összesítő</h3>
+              <dl>
+                <div><dt>Kezelés</dt><dd id="s-service">—</dd></div>
+                <div><dt>Terapeuta</dt><dd id="s-person">—</dd></div>
+                <div><dt>Időpont</dt><dd id="s-time">—</dd></div>
+                <div><dt>Fizetendő</dt><dd id="s-price">—</dd></div>
+              </dl>
+              <button class="tape" type="button" id="confirm">Foglalás véglegesítése</button>
+              <p class="err" id="err" role="alert"></p>
+              <p class="fine">Fizetés a helyszínen. Lemondás díjmentesen az időpont előtt 24 órával.</p>
+            </div>
+            <div class="ticket">
+              <span class="stamp">Rögzítve</span>
+              <h3 id="t-title"></h3>
+              <p id="t-text"></p>
+              <div class="row">
+                <button class="tape small" type="button" id="ics">Naptárba (.ics)</button>
+                <button class="link-btn" type="button" id="again">Új foglalás</button>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="gyik-cim">
+      <div class="wrap faq">
+        <div class="visit">
+          <h2 class="faq-title" id="gyik-cim">Jó tudni</h2>
+          <div>
+            <h3>Cím</h3>
+            <p>6720 Szeged, belváros (demó cím)<br>2. emelet, lifttel. Kerékpártároló az udvaron.</p>
+          </div>
+          <div>
+            <h3>Nyitvatartás</h3>
+            <div class="hours" id="hours">
+              <div data-d="1"><span>Hétfő</span><span>7:30–19:00</span></div>
+              <div data-d="2"><span>Kedd</span><span>7:30–19:00</span></div>
+              <div data-d="3"><span>Szerda</span><span>7:30–19:00</span></div>
+              <div data-d="4"><span>Csütörtök</span><span>7:30–19:00</span></div>
+              <div data-d="5"><span>Péntek</span><span>7:30–15:00</span></div>
+              <div data-d="6"><span>Szombat</span><span>8:00–12:00</span></div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <details open>
+            <summary>Kell beutaló vagy orvosi lelet?</summary>
+            <p>Nem kell. Ha van friss lelete, röntgen- vagy MR-felvétele, hozza el, mert segít. Ha a felmérésen olyat látunk, amit orvosnak kell megnéznie, szólunk és megmondjuk, kihez forduljon.</p>
+          </details>
+          <details>
+            <summary>Fizethetek egészségpénztári kártyával?</summary>
+            <p>Igen, minden nagyobb pénztár kártyáját elfogadjuk. Kérésre a számlát a pénztár nevére állítjuk ki.</p>
+          </details>
+          <details>
+            <summary>Mi van, ha nem tudok elmenni?</summary>
+            <p>Az időpont előtt 24 órával díjmentesen lemondhatja vagy áttehetheti a visszaigazoló e-mailben lévő linkkel. Később lemondott vagy elmaradt alkalomnál a díj felét felszámítjuk.</p>
+          </details>
+          <details>
+            <summary>Hány alkalomra lesz szükségem?</summary>
+            <p>Ez a felmérés után derül ki. Egy friss derékfájásnál gyakran 4–6 alkalom elég, műtét után hosszabb a folyamat. Az otthoni gyakorlás legalább annyit számít, mint az órák.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span>© Tartás Mozgásterápia — demó</span>
+      <span>Weboldal és foglalórendszer: <a href="/">Gestware</a></span>
+    </div>
+  </footer>
+
+  <script>
+    // ---- spine plate: the curve straightens as the page is scrolled ----
+    const svg = document.getElementById('spine');
+    const meter = document.getElementById('meter');
+    const NS = 'http://www.w3.org/2000/svg';
+    const verts = [];
+    const labels = { 0: 'C1', 6: 'C7', 18: 'Th12', 23: 'L5' };
+    const COUNT = 24;
+
+    for (let i = 0; i < COUNT; i++) {
+      const g = document.createElementNS(NS, 'g');
+      const size = i < 7 ? 0.62 + i * 0.03 : i < 19 ? 0.85 + (i - 7) * 0.012 : 1.02 + (i - 19) * 0.03;
+      const w = 46 * size;
+      const h = 11 + size * 2;
+      const body = document.createElementNS(NS, 'rect');
+      body.setAttribute('x', -w / 2);
+      body.setAttribute('y', -h / 2);
+      body.setAttribute('width', w);
+      body.setAttribute('height', h);
+      body.setAttribute('rx', h / 2.4);
+      body.setAttribute('fill', i === 21 ? '#2554c7' : '#efe9dc');
+      body.setAttribute('stroke', '#1d2b24');
+      body.setAttribute('stroke-width', '1.4');
+      const spike = document.createElementNS(NS, 'path');
+      spike.setAttribute('d', `M${w / 2 - 2} 0 L${w / 2 + 12 * size} 2`);
+      spike.setAttribute('stroke', '#1d2b24');
+      spike.setAttribute('stroke-width', '1.4');
+      spike.setAttribute('stroke-linecap', 'round');
+      g.append(spike, body);
+      svg.append(g);
+      let label = null;
+      if (labels[i]) {
+        label = document.createElementNS(NS, 'g');
+        const line = document.createElementNS(NS, 'line');
+        line.setAttribute('stroke', '#8fa89a');
+        line.setAttribute('stroke-dasharray', '2 3');
+        const text = document.createElementNS(NS, 'text');
+        text.textContent = labels[i];
+        text.setAttribute('font-family', 'Hanken Grotesk, sans-serif');
+        text.setAttribute('font-size', '12');
+        text.setAttribute('fill', '#44534b');
+        label.append(line, text);
+        svg.append(label);
+      }
+      verts.push({ g, label, i });
+    }
+
+    const pain = document.createElementNS(NS, 'circle');
+    pain.setAttribute('r', '22');
+    pain.setAttribute('fill', 'none');
+    pain.setAttribute('stroke', '#b4472a');
+    pain.setAttribute('stroke-dasharray', '3 4');
+    svg.append(pain);
+
+    function drawSpine(p) {
+      const amp = 34 * (1 - p);
+      const top = 22, step = 15.6, cx = 140;
+      let painPos = null;
+      verts.forEach(({ g, label, i }) => {
+        const t = i / (COUNT - 1);
+        // an S-shaped sideways curve, the kind a long week at a desk leaves behind
+        const x = cx + amp * Math.sin(t * Math.PI * 1.6 + 0.4);
+        const dx = amp * Math.PI * 1.6 * Math.cos(t * Math.PI * 1.6 + 0.4) / (COUNT - 1);
+        const y = top + i * step;
+        const angle = Math.atan2(dx, step) * -180 / Math.PI;
+        g.setAttribute('transform', `translate(${x} ${y}) rotate(${angle})`);
+        if (label) {
+          const lx = 36, tx = 236;
+          label.firstChild.setAttribute('x1', x + lx);
+          label.firstChild.setAttribute('y1', y);
+          label.firstChild.setAttribute('x2', tx - 6);
+          label.firstChild.setAttribute('y2', y);
+          label.lastChild.setAttribute('x', tx);
+          label.lastChild.setAttribute('y', y + 4);
+        }
+        if (i === 21) painPos = { x, y };
+      });
+      pain.setAttribute('cx', painPos.x);
+      pain.setAttribute('cy', painPos.y);
+      pain.style.opacity = String(1 - p);
+      meter.textContent = `eltérés: ${Math.round(18 * (1 - p))}°`;
+    }
+
+    // the spine straightens while the plate itself is on screen: from when its centre
+    // enters the lower part of the viewport until it reaches the upper third
+    const plate = document.querySelector('.plate');
+    const caption = plate.querySelector('figcaption span');
+    let ticking = false;
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const r = plate.getBoundingClientRect();
+        const centre = r.top + scrollY + r.height / 2;
+        const start = Math.max(0, centre - innerHeight * 0.9);
+        const end = Math.max(centre - innerHeight * 0.3, start + 250);
+        const p = Math.min(1, Math.max(0, (scrollY - start) / (end - start)));
+        drawSpine(p);
+        caption.innerHTML = p > 0.98 ? '<b>2. ábra.</b> Gerinc, négy alkalom után' : '<b>1. ábra.</b> Gerinc, péntek délután';
+        ticking = false;
+      });
+    }
+    // scroll-linked rather than autonomous motion, so it stays on with reduced motion too
+    onScroll();
+    addEventListener('scroll', onScroll, { passive: true });
+    addEventListener('resize', onScroll);
+
+    // ---- data ----
+    const SERVICES = [
+      { id: 'felmeres', name: 'Állapotfelmérés', min: 60, price: 18000 },
+      { id: 'torna', name: 'Gyógytorna', min: 45, price: 14000 },
+      { id: 'manual', name: 'Manuálterápia', min: 45, price: 16000 },
+      { id: 'tape', name: 'Kinesio tape', min: 20, price: 6000 },
+    ];
+    const PEOPLE = [
+      { id: 'any', name: 'Mindegy', note: 'az első szabad' },
+      { id: 'eszter', name: 'Varga Eszter', note: 'H–Cs', days: [1, 2, 3, 4] },
+      { id: 'mark', name: 'Nikolić Márk', note: 'K–Szo', days: [2, 3, 4, 5, 6] },
+      { id: 'lilla', name: 'Szűcs Lilla', note: 'H, Sze, P', days: [1, 3, 5] },
+    ];
+    const ADVICE = {
+      derek: { service: 'felmeres', person: 'eszter', title: 'Állapotfelmérés, utána gyógytorna', text: 'A derékfájás oka legtöbbször a mozgásban és a terhelésben keresendő, nem a gerincben. A felmérés megmutatja, mit érdemes erősíteni és mit lazítani.', list: ['általában 4–6 alkalom', 'otthoni program napi 10 percben', 'Varga Eszter szakterülete'] },
+      nyak: { service: 'felmeres', person: 'eszter', title: 'Felmérés és munkahelyi tippek', text: 'Megnézzük a nyak- és vállöv mozgását, és azt is, hogyan ül a gép előtt. Gyakran a monitor magassága többet számít, mint gondolná.', list: ['fénykép a munkahelyi ülésről sokat segít', 'manuálterápiával kombinálható', 'esti időpontok is vannak'] },
+      sport: { service: 'felmeres', person: 'mark', title: 'Sportfelmérés, visszatérési tervvel', text: 'Friss sérülésnél a terhelés fokozatos visszaépítése a cél. Kap egy tervet arról, hogy mikor mit csinálhat újra.', list: ['futás, foci, kézilabda, tenisz', 'kinesio tape verseny előtt', 'Nikolić Márk szerbül is beszél'] },
+      mutet: { service: 'felmeres', person: 'eszter', title: 'Rehabilitáció műtét után', text: 'Hozza el a zárójelentést. Az orvosi előírások szerint, lépésről lépésre építjük fel a mozgást.', list: ['térd-, csípő-, váll- és gerincműtét után', 'heti 2 alkalom az első hónapban', 'bérlettel kedvezőbb'] },
+      varandos: { service: 'torna', person: 'lilla', title: 'Gyógytorna várandósan és szülés után', text: 'Medencefenék, derék- és csípőpanaszok, szülés utáni hasizom-szétválás. Kíméletes, de célzott gyakorlatok.', list: ['a 12. héttől', 'babát is hozhatja', 'Szűcs Lilla szakterülete'] },
+      gyerek: { service: 'felmeres', person: 'lilla', title: 'Tartásvizsgálat gyerekeknek', text: 'Iskolai szűrés után vagy ha önnek tűnt fel valami. A gyerek játékos feladatokat kap, a szülő pedig egy rövid otthoni programot.', list: ['6 éves kortól', 'szülő jelenlétében', 'délutáni időpontok'] },
+    };
+
+    const $ = (id) => document.getElementById(id);
+    const fmt = (n) => n.toLocaleString('hu-HU') + ' Ft';
+    const DAYNAMES = ['vasárnap', 'hétfő', 'kedd', 'szerda', 'csütörtök', 'péntek', 'szombat'];
+    const SHORT = ['V', 'H', 'K', 'Sze', 'Cs', 'P', 'Szo'];
+
+    const state = { service: 'felmeres', person: 'any', week: 0, date: null, time: null };
+
+    // deterministic "already booked" pattern, so the demo looks lived in
+    function isTaken(date, time, person) {
+      const s = `${date.toDateString()}${time}${person}`;
+      let h = 0;
+      for (const ch of s) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
+      return h % 10 < 6;
+    }
+
+    function slotsFor(date, personId) {
+      const dow = date.getDay();
+      if (dow === 0) return [];
+      const end = dow === 5 ? 15 : dow === 6 ? 12 : 19;
+      const start = dow === 6 ? 8 : 7.5;
+      const people = personId === 'any' ? PEOPLE.slice(1) : PEOPLE.filter((p) => p.id === personId);
+      const out = [];
+      for (let t = start; t + 0.75 <= end; t += 0.75) {
+        const hh = Math.floor(t), mm = Math.round((t - hh) * 60);
+        const label = `${hh}:${String(mm).padStart(2, '0')}`;
+        const free = people.filter((p) => p.days.includes(dow) && !isTaken(date, label, p.id));
+        const working = people.some((p) => p.days.includes(dow));
+        if (working) out.push({ label, free: free.length > 0, who: free[0]?.id });
+      }
+      const now = new Date();
+      if (date.toDateString() === now.toDateString()) {
+        return out.map((s) => {
+          const [h, m] = s.label.split(':').map(Number);
+          return h * 60 + m <= now.getHours() * 60 + now.getMinutes() + 60 ? { ...s, free: false } : s;
+        });
+      }
+      return out;
+    }
+
+    function weekDays(offset) {
+      const d = new Date();
+      d.setHours(0, 0, 0, 0);
+      const monday = new Date(d);
+      monday.setDate(d.getDate() - ((d.getDay() + 6) % 7) + offset * 7);
+      return Array.from({ length: 7 }, (_, i) => {
+        const x = new Date(monday);
+        x.setDate(monday.getDate() + i);
+        return x;
+      });
+    }
+
+    function opt(label, small, pressed, onClick) {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'opt';
+      b.setAttribute('aria-pressed', String(pressed));
+      b.innerHTML = `${label}${small ? `<small>${small}</small>` : ''}`;
+      b.addEventListener('click', onClick);
+      return b;
+    }
+
+    function render() {
+      const sOpts = $('opt-service');
+      sOpts.replaceChildren(...SERVICES.map((s) => opt(s.name, `${s.min} perc · ${fmt(s.price)}`, s.id === state.service, () => { state.service = s.id; render(); })));
+      const pOpts = $('opt-person');
+      pOpts.replaceChildren(...PEOPLE.map((p) => opt(p.name, p.note, p.id === state.person, () => { state.person = p.id; state.time = null; render(); })));
+
+      const today = new Date(); today.setHours(0, 0, 0, 0);
+      const days = weekDays(state.week);
+      $('week-label').textContent = `${days[0].toLocaleDateString('hu-HU', { month: 'long', day: 'numeric' })} – ${days[6].toLocaleDateString('hu-HU', { month: 'long', day: 'numeric' })}`;
+      $('prev-week').disabled = state.week === 0;
+      $('next-week').disabled = state.week >= 3;
+      $('days').replaceChildren(...days.map((d) => {
+        const slots = slotsFor(d, state.person);
+        const freeCount = slots.filter((s) => s.free).length;
+        const past = d < today;
+        const b = opt(`${SHORT[d.getDay()]}<b>${d.getDate()}</b>`, past || !slots.length ? 'zárva' : `${freeCount} szabad`, state.date?.toDateString() === d.toDateString(), () => { state.date = d; state.time = null; render(); });
+        b.classList.add('day');
+        b.disabled = past || freeCount === 0;
+        b.setAttribute('aria-label', `${d.toLocaleDateString('hu-HU', { month: 'long', day: 'numeric' })}, ${DAYNAMES[d.getDay()]}, ${freeCount} szabad időpont`);
+        return b;
+      }));
+
+      const slotWrap = $('slots');
+      if (!state.date) {
+        slotWrap.innerHTML = '<p class="empty">Válasszon napot a szabad időpontokhoz.</p>';
+      } else {
+        slotWrap.replaceChildren(...slotsFor(state.date, state.person).map((s) => {
+          const b = opt(s.label, '', state.time?.label === s.label, () => { state.time = s; render(); });
+          b.classList.add('slot');
+          b.disabled = !s.free;
+          return b;
+        }));
+      }
+
+      const svc = SERVICES.find((s) => s.id === state.service);
+      const who = state.time ? PEOPLE.find((p) => p.id === (state.person === 'any' ? state.time.who : state.person)) : PEOPLE.find((p) => p.id === state.person);
+      $('s-service').textContent = `${svc.name}, ${svc.min}'`;
+      $('s-person').textContent = who && who.id !== 'any' ? who.name : 'az első szabad';
+      $('s-time').textContent = state.date && state.time ? `${state.date.toLocaleDateString('hu-HU', { month: 'short', day: 'numeric' })}, ${DAYNAMES[state.date.getDay()]} ${state.time.label}` : '—';
+      $('s-price').textContent = fmt(svc.price);
+    }
+
+    $('prev-week').addEventListener('click', () => { state.week--; state.date = null; state.time = null; render(); });
+    $('next-week').addEventListener('click', () => { state.week++; state.date = null; state.time = null; render(); });
+
+    // earliest free slot per therapist on the cards
+    document.querySelectorAll('[data-next]').forEach((el) => {
+      const id = el.dataset.next;
+      outer: for (let w = 0; w < 4; w++) {
+        for (const d of weekDays(w)) {
+          if (d < new Date(new Date().toDateString())) continue;
+          const s = slotsFor(d, id).find((x) => x.free);
+          if (s) {
+            el.querySelector('b').textContent = `${DAYNAMES[d.getDay()]}, ${d.toLocaleDateString('hu-HU', { month: 'short', day: 'numeric' })} ${s.label}`;
+            break outer;
+          }
+        }
+      }
+    });
+
+    // complaint chips
+    function showAdvice(key) {
+      const a = ADVICE[key];
+      $('adv-title').textContent = a.title;
+      $('adv-text').textContent = a.text;
+      $('adv-list').replaceChildren(...a.list.map((t) => Object.assign(document.createElement('li'), { textContent: t })));
+      $('adv-cta').onclick = () => { state.service = a.service; state.person = a.person; state.time = null; render(); };
+    }
+    document.querySelectorAll('.chip').forEach((chip) => chip.addEventListener('click', () => {
+      document.querySelectorAll('.chip').forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
+      showAdvice(chip.dataset.key);
+    }));
+    showAdvice('derek');
+
+    // confirm
+    let lastBooking = null;
+    $('confirm').addEventListener('click', () => {
+      const name = $('f-name').value.trim();
+      const phone = $('f-phone').value.trim();
+      const email = $('f-email').value.trim();
+      const err = $('err');
+      if (!state.date || !state.time) { err.textContent = 'Válasszon napot és időpontot.'; return; }
+      if (!name || !phone) { err.textContent = 'A név és a telefonszám kell a foglaláshoz.'; return; }
+      if (email && !$('f-email').checkValidity()) { err.textContent = 'Az e-mail-cím nem tűnik érvényesnek.'; return; }
+      err.textContent = '';
+      const svc = SERVICES.find((s) => s.id === state.service);
+      const whoId = state.person === 'any' ? state.time.who : state.person;
+      const who = PEOPLE.find((p) => p.id === whoId);
+      const [h, m] = state.time.label.split(':').map(Number);
+      const start = new Date(state.date); start.setHours(h, m);
+      lastBooking = { svc, who, start };
+      $('t-title').textContent = `${state.date.toLocaleDateString('hu-HU', { month: 'long', day: 'numeric' })}, ${state.time.label}`;
+      $('t-text').textContent = `${svc.name} ${who.name} terapeutával, ${name} névre. Demó: valójában nem ment el semmi, de így nézne ki a visszaigazolás.`;
+      $('booker').classList.add('done');
+    });
+    $('again').addEventListener('click', () => { $('booker').classList.remove('done'); state.time = null; render(); });
+    $('ics').addEventListener('click', () => {
+      if (!lastBooking) return;
+      const { svc, who, start } = lastBooking;
+      const end = new Date(start.getTime() + svc.min * 60000);
+      const stamp = (d) => d.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+      const ics = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Tartas demo//HU', 'BEGIN:VEVENT', `UID:${Date.now()}@tartas-demo`, `DTSTAMP:${stamp(new Date())}`, `DTSTART:${stamp(start)}`, `DTEND:${stamp(end)}`, `SUMMARY:${svc.name} – Tartás Mozgásterápia`, `DESCRIPTION:Terapeuta: ${who.name}`, 'LOCATION:Szeged', 'END:VEVENT', 'END:VCALENDAR'].join('\r\n');
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(new Blob([ics], { type: 'text/calendar' }));
+      a.download = 'tartas-idopont.ics';
+      a.click();
+      URL.revokeObjectURL(a.href);
+    });
+
+    // today's opening hours
+    document.querySelector(`#hours [data-d="${new Date().getDay()}"]`)?.classList.add('today');
+
+    render();
+  </script>
+</body>
+</html>

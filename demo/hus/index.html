@@ -1,0 +1,509 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hűs Klíma — klímaszerelés Szegeden és környékén</title>
+  <meta name="description" content="Demó oldal a Gestware referenciái közül: klímaszerelő vállalkozás teljesítménykalkulátorral és ajánlatkéréssel.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%230d1b2a'/%3E%3Cpath d='M8 2v12M3 5l10 6M13 5L3 11' stroke='%237cc4ff' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../fonts/fonts.css">
+  <style>
+    :root {
+      --navy: #0d1b2a;
+      --navy-2: #1b2d40;
+      --ice: #7cc4ff;
+      --ice-2: #d9eefc;
+      --snow: #f3f6f8;
+      --steel: #5d6b78;
+      --line: #c9d3db;
+      --hot: #ff5a1f;
+      --sans: "Archivo", "Helvetica Neue", Arial, sans-serif;
+      --gut: clamp(16px, 4vw, 40px);
+      --heat: 0.4;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--snow); color: var(--navy); font: 400 17px/1.55 var(--sans); -webkit-font-smoothing: antialiased; }
+    h1, h2, h3, p, ul, dl, dd { margin: 0; }
+    ul { padding: 0; list-style: none; }
+    a { color: inherit; }
+    button, input, select { font: inherit; color: inherit; }
+    :focus-visible { outline: 2px solid var(--hot); outline-offset: 3px; }
+    .wrap { max-width: 1220px; margin: 0 auto; padding: 0 var(--gut); }
+    .wide { font-stretch: 125%; }
+    .narrow { font-stretch: 75%; }
+
+    .demo-bar { background: #000; color: #cfd8df; font-size: 13px; padding: 6px 0; }
+    .demo-bar .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+    /* hero: inside temperature drives the colour of the whole block */
+    .hero {
+      position: relative;
+      color: #fff;
+      background:
+        linear-gradient(160deg,
+          color-mix(in oklab, var(--hot) calc(var(--heat) * 100%), #1d5d9b) 0%,
+          color-mix(in oklab, #ff9b54 calc(var(--heat) * 100%), var(--navy)) 100%);
+      overflow: hidden;
+      transition: background 0.3s;
+    }
+    .hero header { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-top: 20px; padding-bottom: 20px; }
+    .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-stretch: 125%; font-size: 22px; letter-spacing: -0.01em; text-decoration: none; }
+    .logo svg { width: 28px; height: 28px; }
+    .hero nav { display: flex; gap: 24px; align-items: center; font-size: 15px; font-weight: 500; }
+    .hero nav a { text-decoration: none; }
+    .hero nav a:hover { text-decoration: underline; }
+    .tel { padding: 9px 16px; border: 1.5px solid #fff; border-radius: 999px; font-weight: 600; }
+
+    .hero-grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 40px; align-items: center; padding-top: clamp(20px, 5vw, 60px); padding-bottom: clamp(48px, 7vw, 90px); }
+    .outside { font-size: 15px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.85; }
+    .hero h1 { margin-top: 14px; font-weight: 800; font-stretch: 125%; font-size: clamp(38px, 5.6vw, 76px); line-height: 0.98; letter-spacing: -0.03em; }
+    .hero h1 span { display: block; font-stretch: 75%; font-weight: 300; letter-spacing: -0.01em; }
+    .hero-lead { margin-top: 20px; max-width: 32em; font-size: clamp(17px, 1.5vw, 19px); opacity: 0.92; }
+    .hero-cta { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 30px; }
+    .btn { display: inline-flex; align-items: center; gap: 10px; padding: 15px 24px; border-radius: 4px; border: 0; background: #fff; color: var(--navy); font-weight: 700; text-decoration: none; cursor: pointer; }
+    .btn:hover { background: var(--navy); color: #fff; }
+    .btn.ghost { background: transparent; color: #fff; box-shadow: inset 0 0 0 1.5px #fff; }
+    .btn.ghost:hover { background: #fff; color: var(--navy); }
+
+    .thermo { justify-self: center; display: grid; grid-template-columns: auto auto; gap: 22px; align-items: center; }
+    .dial { position: relative; width: clamp(220px, 26vw, 320px); aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center; background: rgb(255 255 255 / 0.1); box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.35); }
+    .dial svg { position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(135deg); }
+    .dial-num { font-weight: 800; font-stretch: 62%; font-size: clamp(96px, 11vw, 150px); line-height: 0.8; letter-spacing: -0.04em; font-variant-numeric: tabular-nums; }
+    .dial-num sup { font-size: 0.4em; font-weight: 400; vertical-align: 0.9em; }
+    .dial-cap { position: absolute; bottom: 22%; font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.85; }
+    .vrange { display: grid; justify-items: center; gap: 8px; font-size: 13px; font-weight: 600; }
+    .vrange input { writing-mode: vertical-lr; direction: rtl; width: 34px; height: 220px; accent-color: #fff; cursor: grab; }
+    .diff { margin-top: 22px; grid-column: 1 / -1; text-align: center; font-size: 15px; }
+    .diff b { font-stretch: 125%; }
+
+    .flow-lines { position: absolute; right: -40px; top: 120px; width: 46%; opacity: 0.25; pointer-events: none; }
+    .flow-lines path { stroke-dasharray: 8 14; animation: blow 3s linear infinite; }
+    @keyframes blow { to { stroke-dashoffset: -88; } }
+
+    /* sections */
+    .sec { padding: clamp(64px, 9vw, 112px) 0; }
+    .sec-head { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: 20px 48px; align-items: end; margin-bottom: 44px; }
+    .tag { font-size: 13px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--hot); }
+    .sec-head h2 { margin-top: 10px; font-weight: 800; font-stretch: 125%; font-size: clamp(32px, 4.2vw, 56px); line-height: 1; letter-spacing: -0.03em; }
+    .sec-head p { color: var(--steel); max-width: 34em; }
+
+    /* calculator */
+    .calc { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 0; border: 1.5px solid var(--navy); background: #fff; }
+    .calc-in { padding: 28px; display: grid; gap: 26px; }
+    .field-h { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; font-weight: 700; }
+    .field-h output { font-stretch: 125%; font-weight: 800; font-size: 22px; font-variant-numeric: tabular-nums; }
+    .calc input[type="range"] { width: 100%; accent-color: var(--navy); }
+    .seg { display: flex; flex-wrap: wrap; gap: 0; border: 1.5px solid var(--navy); border-radius: 4px; overflow: hidden; width: fit-content; max-width: 100%; }
+    .seg button { padding: 10px 16px; border: 0; border-right: 1.5px solid var(--navy); background: transparent; cursor: pointer; font-size: 15px; font-weight: 500; }
+    .seg button:last-child { border-right: 0; }
+    .seg button[aria-pressed="true"] { background: var(--navy); color: #fff; }
+    .check { display: flex; gap: 10px; align-items: center; font-size: 15px; cursor: pointer; }
+    .check input { width: 20px; height: 20px; accent-color: var(--navy); }
+
+    .calc-out { position: relative; padding: 28px; background: var(--navy); color: #fff; display: grid; align-content: space-between; gap: 24px; overflow: hidden; }
+    .kw { font-weight: 800; font-stretch: 62%; font-size: clamp(110px, 12vw, 168px); line-height: 0.82; letter-spacing: -0.04em; font-variant-numeric: tabular-nums; }
+    .kw small { font-size: 0.3em; font-stretch: 100%; font-weight: 600; letter-spacing: 0; margin-left: 6px; }
+    .kw-cap { font-size: 14px; color: var(--ice); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+    .sizes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-top: 18px; }
+    .sizes span { padding: 8px 0; text-align: center; font-size: 13px; font-weight: 600; border: 1px solid #36506a; color: #8ea6bd; }
+    .sizes span.on { background: var(--ice); border-color: var(--ice); color: var(--navy); }
+    .price-range { font-weight: 800; font-stretch: 125%; font-size: clamp(24px, 2.4vw, 32px); letter-spacing: -0.02em; }
+    .calc-out #calc-note { font-size: 14px; color: #b9c8d6; margin-top: 6px; }
+    .calc-out .btn { justify-content: center; }
+
+    /* included */
+    .incl { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1.5px solid var(--navy); }
+    .incl li { padding: 22px 24px 24px 0; border-bottom: 1px solid var(--line); }
+    .incl li:nth-child(3n+2), .incl li:nth-child(3n) { padding-left: 24px; border-left: 1px solid var(--line); }
+    .incl b { display: block; font-weight: 700; font-size: 18px; }
+    .incl p { margin-top: 6px; font-size: 15px; color: var(--steel); }
+    .incl .n { display: block; margin-bottom: 10px; font-stretch: 62%; font-weight: 800; font-size: 40px; line-height: 1; color: var(--ice); -webkit-text-stroke: 1.2px var(--navy); }
+
+    /* schedule */
+    .sched-sec { background: var(--navy); color: #fff; }
+    .sched-sec .sec-head p { color: #b9c8d6; }
+    .days { display: grid; grid-template-columns: repeat(15, minmax(0, 1fr)); gap: 4px; }
+    .d { padding: 10px 4px 12px; text-align: center; border-top: 4px solid; font-size: 13px; }
+    .d b { display: block; font-stretch: 75%; font-weight: 700; font-size: 26px; line-height: 1.1; }
+    .d small { display: block; margin-top: 4px; font-size: 11.5px; }
+    .d.full { border-color: #3c5269; color: #6f869b; }
+    .d.one { border-color: var(--hot); }
+    .d.two { border-color: var(--ice); }
+    .legend { display: flex; flex-wrap: wrap; gap: 8px 26px; margin-top: 18px; font-size: 14px; color: #b9c8d6; }
+    .legend i { display: inline-block; width: 22px; height: 4px; margin-right: 8px; vertical-align: middle; }
+
+    /* quote form */
+    .quote { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 48px; align-items: start; }
+    .steps li { display: grid; grid-template-columns: 54px 1fr; gap: 14px; padding: 16px 0; border-top: 1px solid var(--line); }
+    .steps li:last-child { border-bottom: 1px solid var(--line); }
+    .steps b { font-stretch: 62%; font-size: 38px; line-height: 1; font-weight: 800; color: var(--hot); }
+    .steps h3 { font-size: 18px; font-weight: 700; }
+    .steps p { margin-top: 4px; font-size: 15px; color: var(--steel); }
+    form { padding: 28px; border: 1.5px solid var(--navy); background: #fff; display: grid; gap: 18px; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    label.f { display: grid; gap: 6px; font-size: 14px; font-weight: 600; }
+    label.f input, label.f select, label.f textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1.5px solid var(--line);
+      border-radius: 4px;
+      background: var(--snow);
+      font: 400 16px/1.4 var(--sans);
+    }
+    label.f input:focus, label.f select:focus, label.f textarea:focus { outline: none; border-color: var(--navy); background: #fff; }
+    .attached { padding: 12px 14px; border-radius: 4px; background: var(--ice-2); font-size: 14px; }
+    .attached b { font-stretch: 125%; }
+    .drop { display: grid; place-items: center; gap: 4px; padding: 22px; border: 1.5px dashed var(--steel); border-radius: 4px; text-align: center; font-size: 14px; color: var(--steel); cursor: pointer; }
+    .drop:hover { border-color: var(--navy); color: var(--navy); }
+    .drop input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+    .fee { font-size: 14px; color: var(--steel); }
+    .fee b { color: var(--navy); }
+    .form-foot { display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap; }
+    form .btn { background: var(--hot); color: #fff; }
+    form .btn:hover { background: var(--navy); }
+    .msg { font-size: 14px; min-height: 1.4em; }
+    .msg.err { color: #c43d0c; }
+    .msg.ok { color: #15803d; font-weight: 600; }
+
+    /* service strip */
+    .service { display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center; padding: 26px 28px; background: var(--ice-2); border-radius: 4px; }
+    .service h3 { font-weight: 800; font-stretch: 125%; font-size: 24px; letter-spacing: -0.02em; }
+    .service p { margin-top: 4px; color: var(--steel); }
+    .service .btn { background: var(--navy); color: #fff; }
+
+    footer { padding: 36px 0 44px; border-top: 1.5px solid var(--navy); font-size: 14px; color: var(--steel); }
+    footer .wrap { display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap; }
+
+    @media (max-width: 980px) {
+      .hero-grid, .calc, .quote, .sec-head { grid-template-columns: 1fr; }
+      .thermo { justify-self: start; }
+      .days { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+      .incl { grid-template-columns: 1fr 1fr; }
+      .incl li, .incl li:nth-child(3n+2), .incl li:nth-child(3n) { padding: 20px 20px 20px 0; border-left: 0; }
+      .incl li:nth-child(even) { padding-left: 20px; border-left: 1px solid var(--line); }
+      .hero nav a:not(.tel) { display: none; }
+    }
+    @media (max-width: 600px) {
+      .thermo { grid-template-columns: 1fr auto; gap: 14px; justify-self: stretch; }
+      .vrange input { height: 180px; }
+      .incl { grid-template-columns: 1fr; }
+      .incl li:nth-child(even) { padding-left: 0; border-left: 0; }
+      .row { grid-template-columns: 1fr; }
+      .service { grid-template-columns: 1fr; }
+      .seg button { padding: 9px 12px; font-size: 14px; }
+      .calc-in, .calc-out, form { padding: 20px; }
+    }
+    @media (prefers-reduced-motion: reduce) { .flow-lines path { animation: none; } html { scroll-behavior: auto; } }
+  </style>
+</head>
+<body>
+  <div class="demo-bar">
+    <div class="wrap">
+      <span>Demó oldal: kitalált vállalkozás, az ajánlatkérés nem küld adatot.</span>
+      <a href="/#munkak">← Gestware referencia</a>
+    </div>
+  </div>
+
+  <section class="hero" id="hero" aria-labelledby="hero-cim">
+    <header class="wrap">
+      <a class="logo" href="#">
+        <svg viewBox="0 0 28 28" aria-hidden="true"><path d="M14 3v22M4.5 8.5l19 11M23.5 8.5l-19 11" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M11 4.5l3 2.5 3-2.5M11 23.5l3-2.5 3 2.5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+        hűs
+      </a>
+      <nav aria-label="Fő menü">
+        <a href="#kalkulator">Kalkulátor</a>
+        <a href="#arban">Mi van az árban</a>
+        <a href="#ajanlat">Ajánlatkérés</a>
+        <a class="tel" href="#ajanlat">Felmérést kérek</a>
+      </nav>
+    </header>
+
+    <svg class="flow-lines" viewBox="0 0 400 300" aria-hidden="true">
+      <g fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round">
+        <path d="M0 40 C 120 40, 160 90, 400 80"/>
+        <path d="M0 100 C 140 100, 180 150, 400 150"/>
+        <path d="M0 160 C 110 160, 200 220, 400 220"/>
+        <path d="M0 220 C 150 220, 190 270, 400 290"/>
+      </g>
+    </svg>
+
+    <div class="wrap hero-grid">
+      <div>
+        <p class="outside" id="outside">Kint 36 °C, árnyékban</p>
+        <h1 id="hero-cim">Klímaszerelés Szegeden. <span>Felmérés, szerelés, karbantartás egy kézből.</span></h1>
+        <p class="hero-lead">Megnézzük a lakást, megmondjuk, mekkora gép kell, és egy nap alatt felszereljük. F-gáz képesítéssel, gyári garanciával, a klímagáz-nyilvántartásba bejegyezve.</p>
+        <div class="hero-cta">
+          <a class="btn" href="#kalkulator">Mekkora klíma kell? <span aria-hidden="true">→</span></a>
+          <a class="btn ghost" href="#idopontok">Szabad szerelési napok</a>
+        </div>
+      </div>
+      <div class="thermo">
+        <div class="dial">
+          <svg viewBox="0 0 100 100" aria-hidden="true">
+            <circle cx="50" cy="50" r="46" fill="none" stroke="rgb(255 255 255 / .2)" stroke-width="3" stroke-dasharray="216.8 289" stroke-linecap="round"/>
+            <circle id="arc" cx="50" cy="50" r="46" fill="none" stroke="#fff" stroke-width="3" stroke-dasharray="100 289" stroke-linecap="round"/>
+          </svg>
+          <p class="dial-num" aria-live="polite"><span id="temp">24</span><sup>°C</sup></p>
+          <p class="dial-cap">bent</p>
+        </div>
+        <label class="vrange">
+          <span>30°</span>
+          <input type="range" id="t-range" min="18" max="30" value="30" aria-label="Belső hőmérséklet">
+          <span>18°</span>
+        </label>
+        <p class="diff" id="diff">Húzza lejjebb, és nézze, mi történik.</p>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <section class="sec" id="kalkulator" aria-labelledby="kalk-cim">
+      <div class="wrap">
+        <div class="sec-head">
+          <div><p class="tag">Kalkulátor</p><h2 id="kalk-cim">Mekkora klíma kell a szobába?</h2></div>
+          <p>A túl kicsi gép nem bírja a kánikulát, a túl nagy pedig sokat kapcsolgat, és többet fogyaszt. Ez a becslés jó kiindulás, a pontos méretet a helyszíni felmérésen mondjuk meg.</p>
+        </div>
+        <div class="calc">
+          <div class="calc-in">
+            <div>
+              <div class="field-h"><label for="c-m2">Alapterület</label><output id="o-m2">20 m²</output></div>
+              <input type="range" id="c-m2" min="8" max="70" value="20">
+            </div>
+            <div>
+              <div class="field-h"><span>Belmagasság</span></div>
+              <div class="seg" data-key="height" role="group" aria-label="Belmagasság">
+                <button type="button" data-v="1" aria-pressed="true">2,5–2,7 m</button>
+                <button type="button" data-v="1.15" aria-pressed="false">3 m körül</button>
+                <button type="button" data-v="1.35" aria-pressed="false">polgári, 3,5 m+</button>
+              </div>
+            </div>
+            <div>
+              <div class="field-h"><span>Merre néznek az ablakok?</span></div>
+              <div class="seg" data-key="sun" role="group" aria-label="Tájolás">
+                <button type="button" data-v="0.9" aria-pressed="false">észak</button>
+                <button type="button" data-v="1" aria-pressed="true">kelet / nyugat</button>
+                <button type="button" data-v="1.15" aria-pressed="false">dél, nagy ablak</button>
+              </div>
+            </div>
+            <div style="display:grid;gap:12px">
+              <label class="check"><input type="checkbox" id="c-attic"> Tetőtér vagy legfelső emelet, lapostető alatt</label>
+              <label class="check"><input type="checkbox" id="c-heat"> Fűtésre is használnám (télen is)</label>
+            </div>
+          </div>
+          <div class="calc-out" aria-live="polite">
+            <div>
+              <p class="kw-cap">Javasolt teljesítmény</p>
+              <p class="kw"><span id="kw">2,5</span><small>kW</small></p>
+              <div class="sizes" id="sizes"><span>2,5</span><span>3,5</span><span>5,0</span><span>7,0</span></div>
+            </div>
+            <div>
+              <p class="kw-cap">Várható ár szereléssel</p>
+              <p class="price-range" id="price">—</p>
+              <p id="calc-note">Normál szerelés 3 m csővel, falátvezetéssel, beüzemeléssel. Tájékoztató ár, a felmérés után pontos ajánlatot adunk.</p>
+            </div>
+            <a class="btn" href="#ajanlat" id="calc-cta">Ezzel kérek ajánlatot <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="arban" aria-labelledby="arban-cim" style="padding-top:0">
+      <div class="wrap">
+        <div class="sec-head">
+          <div><p class="tag">Nincs meglepetés</p><h2 id="arban-cim">Ami benne van az árban</h2></div>
+          <p>A legtöbb vita abból lesz, hogy mi számít „normál szerelésnek”. Nálunk ez:</p>
+        </div>
+        <ul class="incl">
+          <li><span class="n">01</span><b>3 méter szigetelt rézcső</b><p>A kültéri és a beltéri egység között. Minden további méter 9 000 Ft.</p></li>
+          <li><span class="n">02</span><b>Egy falátvezetés</b><p>Fúrás téglafalon, vakolatjavítással. Betonfal vagy hőszigetelés esetén előre jelezzük a különbözetet.</p></li>
+          <li><span class="n">03</span><b>Kondenzvíz elvezetése</b><p>Gravitációsan a legközelebbi alkalmas helyre. Ha szivattyú kell, az külön tétel.</p></li>
+          <li><span class="n">04</span><b>Konzol és rezgéscsillapító</b><p>Horganyzott fali konzol a kültéri egységnek, hogy a szomszéd se hallja.</p></li>
+          <li><span class="n">05</span><b>Beüzemelés, nyomáspróba</b><p>Vákuumozás, tömörségvizsgálat, a távirányító és a wifi beállítása az ön telefonján.</p></li>
+          <li><span class="n">06</span><b>Papírok</b><p>Garanciajegy, munkalap és bejegyzés a klímagáz-nyilvántartásba, ahogy a jogszabály előírja.</p></li>
+        </ul>
+        <div class="service" style="margin-top:40px">
+          <div><h3>Klímatisztítás, 14 900 Ft / beltéri egység</h3><p>Évente egyszer ajánlott: fertőtlenítés, szűrőcsere, ellenőrzés. Nem nálunk vett gépet is tisztítunk.</p></div>
+          <a class="btn" href="#ajanlat" data-topic="tisztitas">Tisztítást kérek</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec sched-sec" id="idopontok" aria-labelledby="idopont-cim">
+      <div class="wrap">
+        <div class="sec-head">
+          <div><p class="tag" style="color:var(--ice)">Naprakész</p><h2 id="idopont-cim">Szabad szerelési napok</h2></div>
+          <p>Egy szerelőcsapattal dolgozunk, napi legfeljebb két szereléssel. Itt látja, mikor tudnánk legkorábban jönni. Nyáron gyorsan betelik, érdemes tavasszal szólni.</p>
+        </div>
+        <div class="days" id="days"></div>
+        <div class="legend"><span><i style="background:var(--ice)"></i>két szabad hely</span><span><i style="background:var(--hot)"></i>egy szabad hely</span><span><i style="background:#3c5269"></i>betelt</span></div>
+      </div>
+    </section>
+
+    <section class="sec" id="ajanlat" aria-labelledby="ajanlat-cim">
+      <div class="wrap">
+        <div class="sec-head">
+          <div><p class="tag">Ajánlatkérés</p><h2 id="ajanlat-cim">Négy lépésben a hűvösig</h2></div>
+          <p>Ha küld egy fotót a falról, ahová a gépet szeretné, sokszor már a felmérés előtt pontos árat tudunk mondani.</p>
+        </div>
+        <div class="quote">
+          <ol class="steps" style="list-style:none;padding:0;margin:0">
+            <li><b>1</b><div><h3>Ajánlatkérés</h3><p>Ezen az űrlapon, két perc. Munkanapokon 24 órán belül visszahívjuk.</p></div></li>
+            <li><b>2</b><div><h3>Felmérés</h3><p>Szegeden díjmentes, a környéken a kiszállási díjat a szereléskor jóváírjuk.</p></div></li>
+            <li><b>3</b><div><h3>Szerelés</h3><p>Általában fél nap. Fóliával takarunk, és porszívóval megyünk el.</p></div></li>
+            <li><b>4</b><div><h3>Karbantartás</h3><p>Egy év múlva magától szólunk, hogy esedékes a tisztítás.</p></div></li>
+          </ol>
+
+          <form id="q-form" novalidate>
+            <div class="attached" id="attached">A kalkulátor eredménye: <b id="att-kw">2,5 kW</b>, <span id="att-m2">20 m²</span>. Ezt az ajánlatkéréshez csatoljuk.</div>
+            <div class="row">
+              <label class="f">Név<input id="q-name" autocomplete="name"></label>
+              <label class="f">Telefon<input id="q-phone" type="tel" autocomplete="tel"></label>
+            </div>
+            <div class="row">
+              <label class="f">Település
+                <select id="q-town">
+                  <option value="0">Szeged</option>
+                  <option value="8">Algyő</option>
+                  <option value="12">Sándorfalva</option>
+                  <option value="10">Domaszék</option>
+                  <option value="12">Röszke</option>
+                  <option value="10">Deszk</option>
+                  <option value="20">Mórahalom</option>
+                  <option value="26">Hódmezővásárhely</option>
+                  <option value="34">Makó</option>
+                  <option value="30">Kistelek</option>
+                </select>
+              </label>
+              <label class="f">Mit szeretne?
+                <select id="q-topic">
+                  <option value="uj">Új klíma szerelése</option>
+                  <option value="multi">Több szobába (multi split)</option>
+                  <option value="tisztitas">Klímatisztítás</option>
+                  <option value="javitas">Hibás klíma javítása</option>
+                </select>
+              </label>
+            </div>
+            <p class="fee" id="fee"></p>
+            <label class="drop" id="drop">
+              <input type="file" id="q-photo" accept="image/*">
+              <b>Fotó a falról</b>
+              <span id="drop-text">Kattintson, vagy húzza ide. Nem kötelező.</span>
+            </label>
+            <label class="f">Megjegyzés<textarea id="q-note" rows="3" placeholder="Pl. hányadik emelet, van-e erkély, hová kerülne a kültéri egység"></textarea></label>
+            <div class="form-foot">
+              <p class="msg" id="q-msg" role="status"></p>
+              <button class="btn" type="submit">Ajánlatot kérek <span aria-hidden="true">→</span></button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span>© Hűs Klíma (demó) · F-gáz képesítés száma: 000000 (demó)</span>
+      <span>Weboldal, kalkulátor és ajánlatkérő: <a href="/">Gestware</a></span>
+    </div>
+  </footer>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+    const fmtK = (n) => Math.round(n / 1000).toLocaleString('hu-HU');
+
+    // ---- thermostat ----
+    const OUTSIDE = 36;
+    function setTemp(t) {
+      $('temp').textContent = t;
+      // comfortable temperatures read fully cool; the warm tint only appears above 24°
+      const heat = Math.max(0, (t - 24) / 6);
+      $('hero').style.setProperty('--heat', heat.toFixed(3));
+      $('arc').setAttribute('stroke-dasharray', `${(216.8 * heat).toFixed(1)} 289`);
+      const d = OUTSIDE - t;
+      $('diff').innerHTML = t >= 29 ? 'Húzza lejjebb, és nézze, mi történik.' : `<b>${d} fok</b> különbség. Ezt szereljük be.`;
+    }
+    $('t-range').addEventListener('input', (e) => setTemp(Number(e.target.value)));
+    setTemp(30);
+    const m = new Date().getMonth();
+    $('outside').textContent = m >= 5 && m <= 7 ? 'Kint 36 °C, árnyékban' : m >= 3 && m <= 8 ? 'Nyáron kint 36 °C is lehet' : 'Most hideg van, de júliusban 36 °C lesz';
+
+    // ---- calculator ----
+    const SIZES = [2.5, 3.5, 5.0, 7.0];
+    const PRICES = { 2.5: [290000, 380000], 3.5: [340000, 450000], 5: [480000, 620000], 7: [650000, 850000] };
+    const calc = { height: 1, sun: 1 };
+    document.querySelectorAll('.seg').forEach((seg) => {
+      seg.addEventListener('click', (e) => {
+        const b = e.target.closest('button');
+        if (!b) return;
+        seg.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+        calc[seg.dataset.key] = Number(b.dataset.v);
+        update();
+      });
+    });
+    ['c-m2', 'c-attic', 'c-heat'].forEach((id) => $(id).addEventListener('input', update));
+    let result = { kw: 2.5, m2: 20 };
+    function update() {
+      const m2 = Number($('c-m2').value);
+      $('o-m2').textContent = `${m2} m²`;
+      // ~100 W/m² cooling load as a rule of thumb, scaled by room height, sun and roof
+      let need = m2 * 0.1 * calc.height * calc.sun * ($('c-attic').checked ? 1.25 : 1);
+      if ($('c-heat').checked) need *= 1.1;
+      const kw = SIZES.find((s) => s >= need * 0.95) ?? 7.0;
+      const over = need > 7.3;
+      $('kw').textContent = over ? '7,0+' : kw.toFixed(1).replace('.', ',');
+      $('sizes').querySelectorAll('span').forEach((s, i) => s.classList.toggle('on', SIZES[i] === kw));
+      const [lo, hi] = PRICES[kw];
+      $('price').textContent = over ? 'multi split, egyedi ár' : `${fmtK(lo)}–${fmtK(hi)} ezer Ft`;
+      $('calc-note').textContent = over
+        ? 'Ekkora térhez két beltéri egység vagy multi split rendszer a jobb megoldás. Ezt mindenképp helyszínen nézzük meg.'
+        : `Normál szerelés 3 m csővel, falátvezetéssel, beüzemeléssel.${$('c-heat').checked ? ' Fűtésre inverteres, alacsony hőmérsékleten is hatékony gépet ajánlunk.' : ''} Tájékoztató ár.`;
+      result = { kw: over ? '7,0+' : kw.toFixed(1).replace('.', ','), m2 };
+      $('att-kw').textContent = `${result.kw} kW`;
+      $('att-m2').textContent = `${m2} m²`;
+    }
+    update();
+
+    // ---- install days: next 15 workdays ----
+    const hash = (s) => { let h = 11; for (const c of s) h = (h * 31 + c.charCodeAt(0)) >>> 0; return h; };
+    const DOW = ['V', 'H', 'K', 'Sze', 'Cs', 'P', 'Szo'];
+    const out = [];
+    const d = new Date(); d.setDate(d.getDate() + 1);
+    while (out.length < 15) {
+      if (d.getDay() !== 0 && d.getDay() !== 6) {
+        // the nearer the day, the likelier it is already full
+        const free = (hash(d.toDateString()) % 10) + out.length * 0.6 > 8 ? 2 : (hash(d.toDateString()) % 10) + out.length * 0.6 > 5 ? 1 : 0;
+        out.push({ date: new Date(d), free });
+      }
+      d.setDate(d.getDate() + 1);
+    }
+    $('days').innerHTML = out.map(({ date, free }) => `<div class="d ${['full', 'one', 'two'][free]}"><span>${DOW[date.getDay()]}</span><b>${date.getDate()}</b><small>${['betelt', '1 hely', '2 hely'][free]}</small></div>`).join('');
+    const first = out.find((x) => x.free);
+
+    // ---- quote form ----
+    function fee() {
+      const km = Number($('q-town').value);
+      $('fee').innerHTML = km === 0 ? 'Szegeden a felmérés <b>díjmentes</b>.' : `Kiszállási díj kb. ${km} km-re: <b>${(km * 2 * 250).toLocaleString('hu-HU')} Ft</b>, ezt szereléskor jóváírjuk.`;
+    }
+    $('q-town').addEventListener('change', fee);
+    fee();
+    $('q-topic').addEventListener('change', () => { $('attached').style.display = $('q-topic').value === 'uj' ? '' : 'none'; });
+    document.querySelectorAll('[data-topic]').forEach((a) => a.addEventListener('click', () => { $('q-topic').value = a.dataset.topic; $('q-topic').dispatchEvent(new Event('change')); }));
+    $('q-photo').addEventListener('change', (e) => { const f = e.target.files[0]; $('drop-text').textContent = f ? `${f.name} (${Math.round(f.size / 1024)} kB) csatolva` : 'Kattintson, vagy húzza ide. Nem kötelező.'; });
+    $('q-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const msg = $('q-msg');
+      if (!$('q-name').value.trim() || $('q-phone').value.replace(/\D/g, '').length < 9) {
+        msg.className = 'msg err';
+        msg.textContent = 'Név és telefonszám kell, hogy vissza tudjuk hívni.';
+        return;
+      }
+      msg.className = 'msg ok';
+      msg.textContent = `Köszönjük! Demó: nem ment el semmi. Élesben holnap délig hívnánk.${first ? ` Legkorábbi szabad szerelési nap: ${first.date.toLocaleDateString('hu-HU', { month: 'long', day: 'numeric' })}` : ''}`;
+      $('q-form').reset();
+      fee();
+    });
+  </script>
+</body>
+</html>

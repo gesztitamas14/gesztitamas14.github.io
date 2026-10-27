@@ -12,6 +12,7 @@ assets/css/style.css
 assets/js/main.js 
 assets/fonts/
 assets/img/
+demo/             mintaoldalak (egy-egy önálló index.html, közös betűk: demo/fonts/)
 firebase.json 
 .firebaserc 
 ```
@@ -35,3 +36,7 @@ npx firebase-tools deploy --only hosting
 ```
 
 Utána az oldal a https://gestware.web.app (és a https://gestware.firebaseapp.com) címen él.
+
+## Mintaoldalak
+
+A `demo/` mappában kitalált vállalkozások demóoldalai vannak (`noindex`, nincsenek a sitemapben). Mindegyik egyetlen statikus `index.html`, inline CSS-sel és JS-sel; a betűk a `demo/fonts/fonts.css`-ből jönnek (fontsource, OFL). A főoldal előnézeti képei: `assets/img/demo-*.jpg` (1280×800-as nézet, 0,75-ös skálával).

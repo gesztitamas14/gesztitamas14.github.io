@@ -1,0 +1,653 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Penge Barber — férfi hajvágás és szakáll, Szeged</title>
+  <meta name="description" content="Demó oldal a Gestware referenciái közül: barber shop online foglalással és élő sorállapottal.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#111111">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23111'/%3E%3Cpath d='M4 0h3L0 7V4zM10 0h3L0 13v-3zM16 3v3L6 16H3zM16 9v3l-4 4H9z' fill='%23d42a1f'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../fonts/fonts.css">
+  <style>
+    :root {
+      --black: #111111;
+      --char: #1b1a19;
+      --cream: #efe7d8;
+      --dim: #9a948a;
+      --red: #d42a1f;
+      --blue: #2347c6;
+      --rule: #3a3734;
+      --display: "Anton", Impact, "Arial Narrow", sans-serif;
+      --mono: "Space Mono", ui-monospace, Menlo, Consolas, monospace;
+      --gut: clamp(16px, 4vw, 40px);
+      --pole: repeating-linear-gradient(-45deg, var(--red) 0 14px, var(--cream) 14px 28px, var(--blue) 28px 42px, var(--cream) 42px 56px);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--black);
+      color: var(--cream);
+      font: 400 15px/1.6 var(--mono);
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3, p, ul, dl, dd, figure { margin: 0; }
+    ul { padding: 0; list-style: none; }
+    a { color: inherit; }
+    button { font: inherit; color: inherit; }
+    :focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
+    .wrap { max-width: 1240px; margin: 0 auto; padding: 0 var(--gut); }
+
+    .demo-bar { background: var(--cream); color: var(--black); font-size: 12px; padding: 6px 0; }
+    .demo-bar .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+
+    .top .wrap { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-top: 18px; padding-bottom: 18px; }
+    .top nav { display: flex; gap: 24px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; }
+    .top nav a { text-decoration: none; }
+    .top nav a:hover { color: var(--red); }
+    .status { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; }
+    .status i { width: 9px; height: 9px; border-radius: 50%; background: #4ccb5a; box-shadow: 0 0 0 4px rgb(76 203 90 / 0.18); }
+    .status.closed i { background: var(--red); box-shadow: 0 0 0 4px rgb(212 42 31 / 0.2); }
+
+    /* hero */
+    .hero { padding: 10px 0 0; }
+    .wordmark {
+      display: block;
+      font: 400 clamp(120px, 31vw, 440px)/0.8 var(--display);
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+      background: var(--pole);
+      background-size: 79px 79px;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: pole 2.4s linear infinite;
+      margin-left: -0.04em;
+    }
+    @keyframes pole { to { background-position: 79px 0; } }
+    .hero-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 1fr);
+      gap: 24px;
+      margin-top: 28px;
+      padding: 22px 0 40px;
+      border-top: 2px solid var(--cream);
+    }
+    .hero-row h1 { font: 400 clamp(28px, 3vw, 40px)/1.18 var(--display); text-transform: uppercase; letter-spacing: 0.01em; }
+    .hero-row p { color: var(--dim); }
+    .hero-row .cta { align-self: end; justify-self: end; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 24px;
+      border: 2px solid var(--cream);
+      background: var(--cream);
+      color: var(--black);
+      font: 400 22px/1 var(--display);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow: 6px 6px 0 var(--red);
+      transition: transform 0.12s, box-shadow 0.12s;
+    }
+    .btn:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 var(--red); }
+    .btn:active { transform: translate(4px, 4px); box-shadow: 2px 2px 0 var(--red); }
+    .btn[disabled] { opacity: 0.4; cursor: not-allowed; transform: none; box-shadow: 6px 6px 0 var(--rule); }
+
+    /* live chairs */
+    .live { background: var(--char); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+    .live .wrap { display: grid; grid-template-columns: auto 1fr auto; gap: 32px; align-items: center; padding-top: 22px; padding-bottom: 22px; }
+    .live-title { font: 400 20px/1 var(--display); text-transform: uppercase; letter-spacing: 0.04em; }
+    .live-title small { display: block; margin-top: 6px; font: 400 12px/1 var(--mono); color: var(--dim); text-transform: none; letter-spacing: 0; }
+    .chairs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+    .chair { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border: 1px solid var(--rule); font-size: 13px; }
+    .chair svg { flex: none; }
+    .chair b { display: block; font-weight: 700; }
+    .chair span { color: var(--dim); }
+    .chair.free { border-color: #4ccb5a; }
+    .chair.free b { color: #4ccb5a; }
+    .wait { text-align: right; font-size: 13px; color: var(--dim); }
+    .wait b { display: block; font: 400 34px/1 var(--display); color: var(--cream); }
+
+    /* sections */
+    .sec { padding: clamp(64px, 9vw, 120px) 0; }
+    .sec-head { display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; margin-bottom: 40px; }
+    .sec-head h2 { font: 400 clamp(52px, 8vw, 112px)/0.88 var(--display); text-transform: uppercase; }
+    .sec-head h2 em { font-style: normal; color: var(--red); }
+    .sec-head p { max-width: 30em; color: var(--dim); }
+
+    /* price board */
+    .board {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 56px;
+      padding: 34px 38px;
+      background: var(--cream);
+      color: var(--black);
+      transform: rotate(-0.6deg);
+      box-shadow: 10px 10px 0 var(--blue);
+    }
+    .board li { display: flex; align-items: baseline; gap: 10px; padding: 14px 0; border-bottom: 2px solid var(--black); }
+    .board h3 { font: 400 26px/1.05 var(--display); text-transform: uppercase; letter-spacing: 0.01em; }
+    .board h3 small { display: block; margin-top: 4px; font: 400 12px/1.3 var(--mono); text-transform: none; letter-spacing: 0; color: #55504a; }
+    .board .dots { flex: 1; border-bottom: 2px dotted var(--black); transform: translateY(-6px); min-width: 20px; }
+    .board .p { font: 700 18px/1 var(--mono); white-space: nowrap; }
+    .board .p small { font-size: 12px; }
+    .board-foot { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 8px 28px; padding-top: 18px; font-size: 13px; }
+
+    /* guard length */
+    .guard { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 48px; align-items: center; }
+    .guard-title { font: 400 clamp(40px, 5vw, 64px)/1 var(--display); text-transform: uppercase; }
+    .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+    .guard-num { font: 400 clamp(110px, 16vw, 220px)/0.85 var(--display); color: var(--red); }
+    .guard-num small { font-size: 0.35em; color: var(--cream); }
+    .guard-text { margin-top: 16px; max-width: 30em; color: var(--dim); }
+    .guard-text b { color: var(--cream); font-weight: 400; }
+    .hair { position: relative; height: 200px; border-bottom: 3px solid var(--cream); overflow: hidden; }
+    .hair svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .range { margin-top: 22px; }
+    .range input { width: 100%; accent-color: var(--red); height: 28px; }
+    .range-scale { display: flex; justify-content: space-between; font-size: 12px; color: var(--dim); }
+
+    /* barbers */
+    .crew { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
+    .tc {
+      position: relative;
+      padding: 18px;
+      background: var(--char);
+      border: 2px solid var(--cream);
+    }
+    .tc:nth-child(1) { transform: rotate(-1.5deg); }
+    .tc:nth-child(2) { transform: rotate(1deg) translateY(18px); }
+    .tc:nth-child(3) { transform: rotate(-0.5deg); }
+    .tc-top { display: flex; justify-content: space-between; font-size: 12px; color: var(--dim); }
+    .tc-portrait { margin: 12px 0 14px; height: 180px; background: var(--pole); background-size: 79px 79px; display: grid; place-items: center; border: 2px solid var(--cream); }
+    .tc-portrait span { padding: 6px 12px; background: var(--black); font: 400 64px/1 var(--display); }
+    .tc h3 { font: 400 36px/1.05 var(--display); text-transform: uppercase; }
+    .tc h3 small { display: block; font: 400 13px/1.4 var(--mono); text-transform: none; color: var(--red); margin-top: 6px; }
+    .stats { margin-top: 16px; display: grid; gap: 8px; font-size: 12px; }
+    .stats div { display: grid; grid-template-columns: 6.5em 1fr; align-items: center; gap: 10px; }
+    .bar { height: 10px; border: 1px solid var(--cream); }
+    .bar i { display: block; height: 100%; background: var(--cream); }
+    .tc p { margin-top: 14px; font-size: 13px; color: var(--dim); }
+
+    /* booking */
+    .book { background: var(--cream); color: var(--black); }
+    .book .sec-head p { color: #55504a; }
+    .flow { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 48px; align-items: start; }
+    .q { padding: 20px 0 24px; border-top: 2px solid var(--black); }
+    .q h3 { display: flex; gap: 12px; align-items: baseline; margin-bottom: 14px; font: 400 26px/1 var(--display); text-transform: uppercase; }
+    .q h3 span { font: 700 13px/1 var(--mono); color: var(--red); }
+    .picks { display: flex; flex-wrap: wrap; gap: 8px; }
+    .pick {
+      padding: 10px 14px;
+      border: 2px solid var(--black);
+      background: transparent;
+      cursor: pointer;
+      text-align: left;
+      font-size: 14px;
+      line-height: 1.3;
+    }
+    .pick small { display: block; font-size: 12px; color: #6b655d; }
+    .pick:hover { background: #e2d8c6; }
+    .pick[aria-pressed="true"] { background: var(--black); color: var(--cream); }
+    .pick[aria-pressed="true"] small { color: var(--dim); }
+    .pick:disabled { opacity: 0.3; text-decoration: line-through; cursor: not-allowed; background: transparent; }
+    .times { display: grid; grid-template-columns: repeat(auto-fill, minmax(72px, 1fr)); gap: 6px; }
+    .times .pick { text-align: center; }
+    .who { display: grid; gap: 10px; grid-template-columns: 1fr 1fr; }
+    .who input { width: 100%; padding: 12px; border: 2px solid var(--black); background: #f7f1e6; font: 400 15px/1.3 var(--mono); border-radius: 0; }
+    .who input:focus { outline: none; box-shadow: 4px 4px 0 var(--red); }
+
+    .receipt-wrap { position: sticky; top: 20px; }
+    .receipt {
+      position: relative;
+      padding: 26px 24px 30px;
+      background: #fffdf7;
+      color: var(--black);
+      font-size: 13px;
+      box-shadow: 0 18px 30px -18px rgb(0 0 0 / 0.5);
+      --notch: radial-gradient(circle at 8px 0, transparent 7px, #fffdf7 7.5px) -8px 0 / 16px 10px repeat-x;
+    }
+    .receipt::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -10px;
+      height: 10px;
+      background: radial-gradient(circle at 8px 10px, transparent 7px, #fffdf7 7.5px) 0 0 / 16px 10px repeat-x;
+    }
+    .receipt h4 { margin: 0 0 4px; font: 400 30px/1 var(--display); text-align: center; text-transform: uppercase; }
+    .receipt .c { text-align: center; color: #6b655d; }
+    .receipt hr { border: 0; border-top: 1px dashed #8c857a; margin: 14px 0; }
+    .receipt .line { display: flex; justify-content: space-between; gap: 12px; padding: 3px 0; }
+    .receipt .total { font-weight: 700; font-size: 16px; }
+    .receipt .num { margin: 10px 0 4px; text-align: center; font: 400 64px/1 var(--display); }
+    .barcode { height: 46px; margin-top: 12px; background: repeating-linear-gradient(90deg, #111 0 2px, transparent 2px 4px, #111 4px 5px, transparent 5px 8px, #111 8px 11px, transparent 11px 12px); }
+    .receipt .err { min-height: 1.5em; margin-top: 10px; color: var(--red); font-size: 13px; }
+    .receipt .btn { width: 100%; justify-content: center; margin-top: 8px; box-shadow: 6px 6px 0 var(--red); background: var(--black); color: var(--cream); border-color: var(--black); }
+    .printed .receipt { animation: print 0.9s steps(12) both; }
+    @keyframes print { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0 0 -20px 0); } }
+    .after { display: none; }
+    .printed .after { display: block; }
+    .printed .before { display: none; }
+
+    /* rules + visit */
+    .rules { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 2px solid var(--cream); }
+    .rules div { padding: 22px 22px 22px 0; }
+    .rules div + div { padding-left: 22px; border-left: 1px solid var(--rule); }
+    .rules b { display: block; font: 400 44px/1 var(--display); color: var(--red); }
+    .rules p { margin-top: 8px; font-size: 13px; color: var(--dim); }
+
+    .visit { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px; padding-top: 40px; }
+    .visit h3 { font: 400 22px/1 var(--display); text-transform: uppercase; margin-bottom: 12px; }
+    .visit p, .visit li { font-size: 14px; color: var(--dim); }
+    .visit li { display: flex; justify-content: space-between; max-width: 18em; }
+    .visit li.today { color: var(--cream); font-weight: 700; }
+
+    .pole-rule { height: 14px; background: var(--pole); background-size: 79px 79px; animation: pole 2.4s linear infinite; }
+    footer { padding: 26px 0 40px; font-size: 12px; color: var(--dim); }
+    footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+
+    @media (max-width: 960px) {
+      .hero-row { grid-template-columns: 1fr 1fr; }
+      .hero-row .cta { grid-column: 1 / -1; justify-self: start; }
+      .live .wrap { grid-template-columns: 1fr; gap: 14px; }
+      .wait { text-align: left; }
+      .board { grid-template-columns: 1fr; }
+      .guard, .flow { grid-template-columns: 1fr; }
+      .crew { grid-template-columns: 1fr; max-width: 420px; }
+      .tc:nth-child(2) { transform: rotate(1deg); }
+      .rules { grid-template-columns: 1fr 1fr; }
+      .rules div:nth-child(3) { padding-left: 0; border-left: 0; }
+      .visit { grid-template-columns: 1fr; }
+      .receipt-wrap { position: static; }
+    }
+    @media (max-width: 600px) {
+      .top nav a:not(.keep) { display: none; }
+      .hero-row { grid-template-columns: 1fr; }
+      .chairs { grid-template-columns: 1fr; }
+      .board { padding: 22px 18px; }
+      .board h3 { font-size: 22px; }
+      .who { grid-template-columns: 1fr; }
+      .rules { grid-template-columns: 1fr; }
+      .rules div + div { padding-left: 0; border-left: 0; border-top: 1px solid var(--rule); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .wordmark, .pole-rule { animation: none; }
+      .printed .receipt { animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="demo-bar">
+    <div class="wrap">
+      <span>Demó oldal: kitalált üzlet, a foglalás nem küld adatot.</span>
+      <a href="/#munkak">← Gestware referencia</a>
+    </div>
+  </div>
+
+  <header class="top">
+    <div class="wrap">
+      <span class="status" id="status"><i></i><span>…</span></span>
+      <nav aria-label="Fő menü">
+        <a href="#arak">Árak</a>
+        <a href="#csapat">Csapat</a>
+        <a class="keep" href="#foglalas">Foglalás</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-cim">
+      <div class="wrap">
+        <span class="wordmark" aria-hidden="true">Penge</span>
+        <div class="hero-row">
+          <h1 id="hero-cim">Barber, Szeged belváros. Hajvágás, szakáll, forró törölköző.</h1>
+          <p>Három szék, három borbély. Foglalj időpontot pár kattintással, vagy ugorj be: lent látod, most mennyit kellene várnod.</p>
+          <div class="cta"><a class="btn" href="#foglalas">Foglalok <span aria-hidden="true">→</span></a></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="live" aria-label="Élő sorállapot">
+      <div class="wrap">
+        <p class="live-title">Most a szalonban<small id="live-clock"></small></p>
+        <div class="chairs" id="chairs"></div>
+        <p class="wait">Becsült várakozás beugróként<b id="wait">—</b></p>
+      </div>
+    </section>
+
+    <section class="sec" id="arak" aria-labelledby="arak-cim">
+      <div class="wrap">
+        <div class="sec-head">
+          <h2 id="arak-cim">Árlista<em>.</em></h2>
+          <p>Minden hajvágás mosással és formázással. Az idők tájékoztató jellegűek, a foglalás ennyi időt köt le.</p>
+        </div>
+        <ul class="board">
+          <li><h3>Hajvágás<small>olló vagy gép, 40 perc</small></h3><span class="dots"></span><span class="p">7 500 <small>Ft</small></span></li>
+          <li><h3>Skin fade<small>bőrig átmenet, 50 perc</small></h3><span class="dots"></span><span class="p">8 500 <small>Ft</small></span></li>
+          <li><h3>Szakáll<small>igazítás, kontúr, olaj, 25 perc</small></h3><span class="dots"></span><span class="p">5 000 <small>Ft</small></span></li>
+          <li><h3>Haj + szakáll<small>a legtöbben ezt kérik, 60 perc</small></h3><span class="dots"></span><span class="p">11 500 <small>Ft</small></span></li>
+          <li><h3>Forró törölközős borotválás<small>borotvakéssel, 35 perc</small></h3><span class="dots"></span><span class="p">8 000 <small>Ft</small></span></li>
+          <li><h3>Gépi egyhossz<small>egy fokozat, 20 perc</small></h3><span class="dots"></span><span class="p">4 500 <small>Ft</small></span></li>
+          <li><h3>Apa + fia<small>12 éves korig, 70 perc</small></h3><span class="dots"></span><span class="p">12 000 <small>Ft</small></span></li>
+          <li><h3>Diák hétköznap 14-ig<small>diákigazolvánnyal</small></h3><span class="dots"></span><span class="p">6 000 <small>Ft</small></span></li>
+          <li class="board-foot"><span>✂ Kártya, készpénz, SZÉP-kártya</span><span>✂ Ajándékkártya bármilyen összegre</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="fokozat-cim" style="padding-top:0">
+      <div class="wrap guard">
+        <div>
+          <h2 class="guard-title" id="fokozat-cim">Hányas<br>fokozat?</h2>
+          <p class="guard-num" aria-live="polite"><span id="g-num">3</span><small> = <span id="g-mm">9</span> mm</small></p>
+          <p class="guard-text" id="g-text"></p>
+        </div>
+        <div>
+          <div class="hair"><svg id="hair" viewBox="0 0 600 200" preserveAspectRatio="none" aria-hidden="true"></svg></div>
+          <div class="range">
+            <label for="g-range" class="sr">Gépfokozat</label>
+            <input id="g-range" type="range" min="0" max="8" step="1" value="5">
+            <div class="range-scale"><span>0</span><span>0,5</span><span>1</span><span>1,5</span><span>2</span><span>3</span><span>4</span><span>6</span><span>8</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="csapat" aria-labelledby="csapat-cim" style="padding-top:0">
+      <div class="wrap">
+        <div class="sec-head">
+          <h2 id="csapat-cim">A csapat<em>.</em></h2>
+          <p>Mindenki mindent megcsinál, de van, amiben valaki egy fokkal jobb.</p>
+        </div>
+        <div class="crew">
+          <article class="tc">
+            <div class="tc-top"><span>#01 szék</span><span>2015 óta</span></div>
+            <div class="tc-portrait" aria-hidden="true"><span>BD</span></div>
+            <h3>Bence „Dízel”<small>alapító, fade-mániás</small></h3>
+            <div class="stats">
+              <div><span>Fade</span><span class="bar"><i style="width:96%"></i></span></div>
+              <div><span>Olló</span><span class="bar"><i style="width:70%"></i></span></div>
+              <div><span>Szakáll</span><span class="bar"><i style="width:82%"></i></span></div>
+            </div>
+            <p>Kedd–szombat. Ha nem tudod, mit szeretnél, vele kezdd.</p>
+          </article>
+          <article class="tc">
+            <div class="tc-top"><span>#02 szék</span><span>2019 óta</span></div>
+            <div class="tc-portrait" aria-hidden="true"><span>SR</span></div>
+            <h3>Sára „Olló”<small>klasszikus és hosszabb hajak</small></h3>
+            <div class="stats">
+              <div><span>Fade</span><span class="bar"><i style="width:74%"></i></span></div>
+              <div><span>Olló</span><span class="bar"><i style="width:98%"></i></span></div>
+              <div><span>Szakáll</span><span class="bar"><i style="width:68%"></i></span></div>
+            </div>
+            <p>Hétfő–péntek. Hosszabb hajnál, göndör hajnál ő a befutó.</p>
+          </article>
+          <article class="tc">
+            <div class="tc-top"><span>#03 szék</span><span>2022 óta</span></div>
+            <div class="tc-portrait" aria-hidden="true"><span>MK</span></div>
+            <h3>Milán „Kés”<small>borotválás, szakállformázás</small></h3>
+            <div class="stats">
+              <div><span>Fade</span><span class="bar"><i style="width:80%"></i></span></div>
+              <div><span>Olló</span><span class="bar"><i style="width:66%"></i></span></div>
+              <div><span>Szakáll</span><span class="bar"><i style="width:97%"></i></span></div>
+            </div>
+            <p>Szerda–szombat. Forró törölközős borotválásra őt kérd.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec book" id="foglalas" aria-labelledby="foglalas-cim">
+      <div class="wrap">
+        <div class="sec-head">
+          <h2 id="foglalas-cim">Foglalás<em>.</em></h2>
+          <p>Három kérdés, és kész. A sorszámot a végén megkapod, emailben pedig a lemondó linket is.</p>
+        </div>
+        <div class="flow" id="flow">
+          <div>
+            <div class="q"><h3><span>01</span>Mit csinálunk?</h3><div class="picks" id="p-service"></div></div>
+            <div class="q"><h3><span>02</span>Kinél?</h3><div class="picks" id="p-barber"></div></div>
+            <div class="q"><h3><span>03</span>Mikor?</h3><div class="picks" id="p-day" style="margin-bottom:12px"></div><div class="times" id="p-time"></div></div>
+            <div class="q"><h3><span>04</span>Ki vagy?</h3>
+              <div class="who">
+                <input id="b-name" placeholder="Név" autocomplete="name" aria-label="Név">
+                <input id="b-phone" type="tel" placeholder="Telefonszám" autocomplete="tel" aria-label="Telefonszám">
+              </div>
+            </div>
+          </div>
+          <div class="receipt-wrap">
+            <div class="receipt" aria-live="polite">
+              <h4>Penge</h4>
+              <p class="c">barber · szeged</p>
+              <hr>
+              <div class="line"><span>Szolgáltatás</span><span id="r-service">—</span></div>
+              <div class="line"><span>Borbély</span><span id="r-barber">—</span></div>
+              <div class="line"><span>Időpont</span><span id="r-time">—</span></div>
+              <div class="line"><span>Idő</span><span id="r-min">—</span></div>
+              <hr>
+              <div class="line total"><span>Összesen</span><span id="r-total">—</span></div>
+              <div class="before">
+                <p class="err" id="r-err" role="alert"></p>
+                <button class="btn" type="button" id="r-go">Lefoglalom</button>
+              </div>
+              <div class="after">
+                <hr>
+                <p class="c">a sorszámod</p>
+                <p class="num" id="r-num">#000</p>
+                <p class="c">Demó: valójában nem foglaltunk le semmit.<br>Éles oldalon itt jönne az SMS-emlékeztető.</p>
+                <div class="barcode" aria-hidden="true"></div>
+                <button class="btn" type="button" id="r-new" style="margin-top:18px">Új foglalás</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="pole-rule" aria-hidden="true"></div>
+
+    <section class="sec" aria-labelledby="szabalyok-cim" style="padding-bottom:40px">
+      <div class="wrap">
+        <div class="sec-head"><h2 id="szabalyok-cim">Házirend<em>.</em></h2></div>
+        <div class="rules">
+          <div><b>10'</b><p>Ennyit tudunk várni. Utána a következő vendég jön, neked új időpont kell.</p></div>
+          <div><b>12h</b><p>Eddig mondhatod le díjmentesen. Utána az ár felét elkérjük.</p></div>
+          <div><b>0 Ft</b><p>Kávé, víz és egy hideg sör, amíg vársz. A sör 18 év felett.</p></div>
+          <div><b>3</b><p>Ennyi kihagyott időpont után csak előre fizetve foglalhatsz.</p></div>
+        </div>
+        <div class="visit">
+          <div><h3>Hol?</h3><p>Szeged belváros (demó cím).<br>A villamosmegállótól 2 perc. Parkolni a mélygarázsban érdemes.</p></div>
+          <div><h3>Mikor?</h3><ul id="hours">
+            <li data-d="1"><span>Hétfő</span><span>10–19</span></li>
+            <li data-d="2"><span>Kedd</span><span>9–20</span></li>
+            <li data-d="3"><span>Szerda</span><span>9–20</span></li>
+            <li data-d="4"><span>Csütörtök</span><span>9–20</span></li>
+            <li data-d="5"><span>Péntek</span><span>9–20</span></li>
+            <li data-d="6"><span>Szombat</span><span>8–14</span></li>
+            <li data-d="0"><span>Vasárnap</span><span>zárva</span></li>
+          </ul></div>
+          <div><h3>Kérdés?</h3><p>Írj Instagramon vagy hívj nyitvatartási időben. A foglalást viszont tényleg gyorsabb itt elintézni.</p></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span>© Penge Barber — demó</span>
+      <span>Weboldal, foglaló és sorállapot: <a href="/">Gestware</a></span>
+    </div>
+  </footer>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+    const HOURS = { 0: null, 1: [10, 19], 2: [9, 20], 3: [9, 20], 4: [9, 20], 5: [9, 20], 6: [8, 14] };
+    const DAY = ['vasárnap', 'hétfő', 'kedd', 'szerda', 'csütörtök', 'péntek', 'szombat'];
+    const SERVICES = [
+      { id: 'haj', name: 'Hajvágás', min: 40, price: 7500 },
+      { id: 'fade', name: 'Skin fade', min: 50, price: 8500 },
+      { id: 'szakall', name: 'Szakáll', min: 25, price: 5000 },
+      { id: 'combo', name: 'Haj + szakáll', min: 60, price: 11500 },
+      { id: 'borotva', name: 'Borotválás', min: 35, price: 8000 },
+      { id: 'apa', name: 'Apa + fia', min: 70, price: 12000 },
+    ];
+    const BARBERS = [
+      { id: 'any', name: 'Akárki', days: [1, 2, 3, 4, 5, 6] },
+      { id: 'bence', name: 'Bence', days: [2, 3, 4, 5, 6] },
+      { id: 'sara', name: 'Sára', days: [1, 2, 3, 4, 5] },
+      { id: 'milan', name: 'Milán', days: [3, 4, 5, 6] },
+    ];
+    const fmt = (n) => n.toLocaleString('hu-HU') + ' Ft';
+    const hash = (s) => { let h = 7; for (const c of s) h = (h * 33 + c.charCodeAt(0)) >>> 0; return h; };
+
+    // ---- open / closed + live chairs ----
+    function live() {
+      const now = new Date();
+      const h = HOURS[now.getDay()];
+      const mins = now.getHours() * 60 + now.getMinutes();
+      const open = h && mins >= h[0] * 60 && mins < h[1] * 60;
+      const st = $('status');
+      st.classList.toggle('closed', !open);
+      st.lastElementChild.textContent = open ? `Nyitva, ${h[1]}:00-ig` : nextOpenText(now);
+      $('live-clock').textContent = `frissítve ${now.toLocaleTimeString('hu-HU', { hour: '2-digit', minute: '2-digit' })}`;
+
+      const names = ['Bence', 'Sára', 'Milán'];
+      const ids = ['bence', 'sara', 'milan'];
+      let waits = [];
+      $('chairs').replaceChildren(...names.map((n, i) => {
+        const works = open && BARBERS.find((b) => b.id === ids[i]).days.includes(now.getDay());
+        const seed = hash(`${now.toDateString()}${Math.floor(mins / 20)}${i}`);
+        const busy = works && seed % 4 !== 0;
+        const left = busy ? 5 + (seed % 35) : 0;
+        if (works) waits.push(left);
+        const el = document.createElement('div');
+        el.className = 'chair' + (works && !busy ? ' free' : '');
+        el.innerHTML = `<svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><path d="M7 4h14v10H7zM5 14h18v4H5zM9 18v5M19 18v5M6 23h16" fill="none" stroke="currentColor" stroke-width="2"/></svg><div><b>${n}</b><span>${!works ? 'ma nincs bent' : busy ? `még kb. ${left} perc` : 'szabad most'}</span></div>`;
+        return el;
+      }));
+      $('wait').textContent = !open ? 'zárva' : waits.length ? (Math.min(...waits) === 0 ? 'azonnal' : `~${Math.min(...waits)} perc`) : '—';
+    }
+    function nextOpenText(now) {
+      for (let i = 0; i < 7; i++) {
+        const d = new Date(now); d.setDate(now.getDate() + i);
+        const h = HOURS[d.getDay()];
+        if (!h) continue;
+        if (i === 0 && now.getHours() >= h[0]) continue;
+        return `Zárva, nyitunk ${i === 0 ? 'ma' : i === 1 ? 'holnap' : DAY[d.getDay()]} ${h[0]}:00-kor`;
+      }
+      return 'Zárva';
+    }
+    live();
+    setInterval(live, 60000);
+    document.querySelector(`#hours [data-d="${new Date().getDay()}"]`)?.classList.add('today');
+
+    // ---- clipper guard ----
+    const GUARDS = [
+      { n: '0', mm: 0.8, t: 'Szinte bőrig. Fade alsó részéhez, vagy ha nyáron semmi nem kell.' },
+      { n: '0,5', mm: 1.5, t: 'Bőr látszik át rajta. A fade első lépcsője.' },
+      { n: '1', mm: 3, t: 'Rövid, de már szín. Oldalra és tarkóra népszerű.' },
+      { n: '1,5', mm: 4.5, t: 'Átmenet az 1-es és a 2-es között. Kevesebb a lépcső.' },
+      { n: '2', mm: 6, t: 'Klasszikus rövid oldal. A legtöbb rövid frizura ide indul.' },
+      { n: '3', mm: 9, t: 'Egyhosszra a legkedveltebb. Rendezett, de nem katonás.' },
+      { n: '4', mm: 12, t: 'Már fésülhető. Átmenet a gépi és az ollós vágás között.' },
+      { n: '6', mm: 18, t: 'Hosszabb tető gépi vágással. Göndör hajnál óvatosan.' },
+      { n: '8', mm: 25, t: 'A gép felső határa. Ennél hosszabbat ollóval vágunk.' },
+    ];
+    const hair = $('hair');
+    const strands = Array.from({ length: 140 }, (_, i) => {
+      const l = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      l.setAttribute('stroke', '#efe7d8');
+      l.setAttribute('stroke-width', '2');
+      l.setAttribute('stroke-linecap', 'round');
+      hair.append(l);
+      return { l, x: 4 + i * 4.25, j: (hash(String(i)) % 100) / 100, lean: ((hash('l' + i) % 100) / 100 - 0.5) * 10 };
+    });
+    function setGuard(i) {
+      const g = GUARDS[i];
+      $('g-num').textContent = g.n;
+      $('g-mm').textContent = String(g.mm).replace('.', ',');
+      $('g-text').innerHTML = `<b>${g.n}-es fokozat.</b> ${g.t}`;
+      strands.forEach((s) => {
+        const len = (g.mm / 25) * 180 * (0.88 + s.j * 0.24) + 3;
+        s.l.setAttribute('x1', s.x); s.l.setAttribute('y1', 200);
+        s.l.setAttribute('x2', s.x + s.lean * (g.mm / 25)); s.l.setAttribute('y2', 200 - len);
+      });
+    }
+    $('g-range').addEventListener('input', (e) => setGuard(Number(e.target.value)));
+    setGuard(5);
+
+    // ---- booking ----
+    const st = { service: 'combo', barber: 'any', day: 0, time: null };
+    function days() {
+      const out = [];
+      const d = new Date(); d.setHours(0, 0, 0, 0);
+      while (out.length < 6) { if (HOURS[d.getDay()]) out.push(new Date(d)); d.setDate(d.getDate() + 1); }
+      return out;
+    }
+    function times(date, barberId, min) {
+      const h = HOURS[date.getDay()];
+      const now = new Date();
+      const list = barberId === 'any' ? BARBERS.slice(1) : BARBERS.filter((b) => b.id === barberId);
+      const out = [];
+      for (let t = h[0] * 60; t + min <= h[1] * 60; t += 30) {
+        const label = `${Math.floor(t / 60)}:${String(t % 60).padStart(2, '0')}`;
+        const past = date.toDateString() === now.toDateString() && t <= now.getHours() * 60 + now.getMinutes() + 15;
+        const free = list.find((b) => b.days.includes(date.getDay()) && hash(date.toDateString() + label + b.id) % 9 > 4);
+        if (list.some((b) => b.days.includes(date.getDay()))) out.push({ label, ok: !past && !!free, who: free?.name });
+      }
+      return out;
+    }
+    function pick(html, pressed, onClick) {
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'pick'; b.innerHTML = html;
+      b.setAttribute('aria-pressed', String(pressed));
+      b.addEventListener('click', onClick);
+      return b;
+    }
+    function render() {
+      const svc = SERVICES.find((s) => s.id === st.service);
+      $('p-service').replaceChildren(...SERVICES.map((s) => pick(`${s.name}<small>${s.min}' · ${fmt(s.price)}</small>`, s.id === st.service, () => { st.service = s.id; st.time = null; render(); })));
+      $('p-barber').replaceChildren(...BARBERS.map((b) => pick(b.name, b.id === st.barber, () => { st.barber = b.id; st.time = null; render(); })));
+      const ds = days();
+      $('p-day').replaceChildren(...ds.map((d, i) => {
+        const label = i === 0 && d.toDateString() === new Date().toDateString() ? 'Ma' : d.toLocaleDateString('hu-HU', { weekday: 'short', day: 'numeric' });
+        const free = times(d, st.barber, svc.min).filter((t) => t.ok).length;
+        const b = pick(`${label}<small>${free ? free + ' hely' : 'tele'}</small>`, i === st.day, () => { st.day = i; st.time = null; render(); });
+        b.disabled = !free;
+        return b;
+      }));
+      $('p-time').replaceChildren(...times(ds[st.day], st.barber, svc.min).map((t) => {
+        const b = pick(t.label, st.time?.label === t.label, () => { st.time = t; render(); });
+        b.disabled = !t.ok;
+        return b;
+      }));
+      $('r-service').textContent = svc.name;
+      $('r-barber').textContent = st.time ? (st.barber === 'any' ? st.time.who : BARBERS.find((b) => b.id === st.barber).name) : (st.barber === 'any' ? 'akárki' : BARBERS.find((b) => b.id === st.barber).name);
+      $('r-time').textContent = st.time ? `${ds[st.day].toLocaleDateString('hu-HU', { month: 'short', day: 'numeric' })} ${st.time.label}` : '—';
+      $('r-min').textContent = `${svc.min} perc`;
+      $('r-total').textContent = fmt(svc.price);
+    }
+    $('r-go').addEventListener('click', () => {
+      const err = $('r-err');
+      if (!st.time) { err.textContent = '→ Válassz időpontot.'; return; }
+      if (!$('b-name').value.trim() || $('b-phone').value.replace(/\D/g, '').length < 9) { err.textContent = '→ Név és telefonszám kell.'; return; }
+      err.textContent = '';
+      $('r-num').textContent = '#' + String(hash($('b-name').value + Date.now()) % 900 + 100);
+      $('flow').classList.remove('printed');
+      void $('flow').offsetWidth;
+      $('flow').classList.add('printed');
+    });
+    $('r-new').addEventListener('click', () => { $('flow').classList.remove('printed'); st.time = null; render(); });
+    // skip a fully booked today
+    if (!times(days()[0], 'any', 60).some((t) => t.ok)) st.day = 1;
+    render();
+  </script>
+</body>
+</html>

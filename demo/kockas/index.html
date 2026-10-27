@@ -1,0 +1,609 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kockás Tanoda — felvételi előkészítő és korrepetálás, Szeged</title>
+  <meta name="description" content="Demó oldal a Gestware referenciái közül: korrepetáló stúdió órarenddel, próbafeladattal és próbaóra-jelentkezéssel.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23fbfaf5'/%3E%3Cpath d='M4 0v16M8 0v16M12 0v16M0 4h16M0 8h16M0 12h16' stroke='%23b9cde0' stroke-width='.8'/%3E%3Cpath d='M3 8l3 3 7-8' stroke='%23e0352b' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../fonts/fonts.css">
+  <style>
+    :root {
+      --paper: #fbfaf5;
+      --grid: #d9e5ef;
+      --grid-strong: #c3d5e6;
+      --ink: #1b2240;
+      --ink-2: #545b75;
+      --red: #e0352b;
+      --hl: #fff27a;
+      --green: #2c8a4b;
+      --sans: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+      --hand: "Caveat", "Segoe Print", cursive;
+      --sq: 24px;
+      --gut: clamp(16px, 4vw, 40px);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      font: 400 17px/1.55 var(--sans);
+      background-color: var(--paper);
+      background-image:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+      background-size: var(--sq) var(--sq);
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3, p, ul, ol, dl, dd { margin: 0; }
+    ul, ol { padding: 0; list-style: none; }
+    a { color: inherit; }
+    button, input, select { font: inherit; color: inherit; }
+    :focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 0 var(--gut); }
+    .hand { font-family: var(--hand); color: var(--red); font-weight: 600; }
+    .hl { background: linear-gradient(transparent 52%, var(--hl) 52% 90%, transparent 90%); padding: 0 2px; }
+
+    .demo-bar { background: var(--ink); color: #fff; font-size: 13px; padding: 6px 0; }
+    .demo-bar .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+    /* red margin line like in a school notebook */
+    .margin { position: relative; }
+    .margin::before { content: ""; position: absolute; top: 0; bottom: 0; left: max(8px, calc(50% - 600px)); width: 2px; background: rgb(224 53 43 / 0.45); pointer-events: none; }
+
+    header .wrap { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-top: 20px; padding-bottom: 20px; }
+    .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; font-weight: 800; font-size: 22px; letter-spacing: -0.02em; }
+    .logo-box { display: grid; grid-template-columns: repeat(3, 8px); gap: 2px; }
+    .logo-box i { width: 8px; height: 8px; background: var(--ink); }
+    .logo-box i:nth-child(2), .logo-box i:nth-child(4), .logo-box i:nth-child(9) { background: transparent; box-shadow: inset 0 0 0 1px var(--grid-strong); }
+    .logo-box i:nth-child(5) { background: var(--red); }
+    nav { display: flex; gap: 24px; align-items: center; font-weight: 500; font-size: 15px; }
+    nav a { text-decoration: none; }
+    nav a:hover { text-decoration: underline wavy var(--red); text-underline-offset: 5px; }
+    .pill { padding: 9px 16px; background: var(--ink); color: #fff; border-radius: 999px; }
+    nav a.pill:hover { text-decoration: none; background: var(--red); }
+
+    /* hero */
+    .hero .wrap { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 48px; align-items: center; padding-top: clamp(24px, 5vw, 64px); padding-bottom: clamp(48px, 7vw, 96px); }
+    .hero h1 { font-weight: 800; font-size: clamp(44px, 6.4vw, 88px); line-height: 0.98; letter-spacing: -0.04em; }
+    .scribble { position: relative; display: inline-block; white-space: nowrap; }
+    .scribble svg { position: absolute; left: -4%; bottom: -0.12em; width: 108%; height: 0.36em; overflow: visible; }
+    .scribble path { fill: none; stroke: var(--red); stroke-width: 5; stroke-linecap: round; stroke-dasharray: 600; stroke-dashoffset: 600; animation: draw 1.1s 0.3s ease forwards; }
+    @keyframes draw { to { stroke-dashoffset: 0; } }
+    .hero .note { position: relative; margin-top: 8px; font-size: 26px; transform: rotate(-2deg); display: inline-block; }
+    .lead { margin-top: 22px; max-width: 32em; font-size: clamp(17px, 1.5vw, 20px); color: var(--ink-2); }
+    .cta { display: flex; flex-wrap: wrap; gap: 14px 22px; align-items: center; margin-top: 30px; }
+    .btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; border: 2px solid var(--ink); border-radius: 10px; background: var(--ink); color: #fff; font-weight: 700; text-decoration: none; cursor: pointer; box-shadow: 4px 4px 0 var(--red); transition: transform 0.12s, box-shadow 0.12s; }
+    .btn:hover { transform: translate(-1px, -1px); box-shadow: 5px 5px 0 var(--red); }
+    .btn.light { background: var(--paper); color: var(--ink); }
+
+    .countdown {
+      position: relative;
+      padding: 26px 26px 22px;
+      background: #fff;
+      border: 2px solid var(--ink);
+      border-radius: 4px;
+      transform: rotate(1.5deg);
+      box-shadow: 8px 8px 0 var(--ink);
+    }
+    .countdown::before { content: ""; position: absolute; top: -14px; left: 50%; width: 110px; height: 28px; transform: translateX(-50%) rotate(-3deg); background: rgb(255 242 122 / 0.85); }
+    .countdown .label { font-weight: 700; font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); }
+    .countdown .num { margin-top: 6px; font-weight: 800; font-size: clamp(84px, 10vw, 128px); line-height: 0.85; letter-spacing: -0.05em; font-variant-numeric: tabular-nums; }
+    .countdown .num small { font-size: 0.28em; letter-spacing: 0; font-weight: 700; }
+    .countdown p { margin-top: 10px; color: var(--ink-2); font-size: 15px; }
+    .countdown .hand { display: block; margin-top: 10px; font-size: 24px; transform: rotate(-2deg); }
+
+    .sec { padding: clamp(56px, 8vw, 104px) 0; }
+    .sec-head { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: 16px 48px; align-items: end; margin-bottom: 40px; }
+    .sec-head h2 { font-weight: 800; font-size: clamp(34px, 4.4vw, 56px); line-height: 1; letter-spacing: -0.035em; }
+    .sec-head p { color: var(--ink-2); max-width: 34em; }
+
+    /* try-a-task */
+    .tasks { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 40px; align-items: start; }
+    .sheet { position: relative; padding: 30px 30px 26px 30px; background: #fff; border: 2px solid var(--ink); border-radius: 4px; }
+    .tabs { display: flex; gap: 6px; margin-bottom: 20px; }
+    .tabs button { padding: 7px 14px; border: 2px solid var(--ink); border-radius: 999px; background: transparent; cursor: pointer; font-weight: 600; font-size: 14px; }
+    .tabs button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+    .tabs .done::after { content: " ✓"; color: var(--green); }
+    .tabs [aria-pressed="true"].done::after { color: #8fe0a8; }
+    .q-meta { font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); }
+    .q-text { margin-top: 10px; font-size: clamp(20px, 2vw, 25px); line-height: 1.35; font-weight: 500; letter-spacing: -0.01em; }
+    .answer { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 22px; }
+    .answer input { width: 140px; padding: 10px 12px; border: 0; border-bottom: 2px solid var(--ink); background: transparent; font: 600 26px/1 var(--sans); }
+    .answer input:focus { outline: none; border-bottom-color: var(--red); }
+    .answer .unit { font-size: 20px; font-weight: 600; }
+    .choice { padding: 10px 18px; border: 2px solid var(--ink); border-radius: 10px; background: transparent; cursor: pointer; font-size: 20px; font-weight: 600; }
+    .choice:hover { background: var(--hl); }
+    .check-btn { padding: 11px 18px; border: 0; border-radius: 10px; background: var(--red); color: #fff; font-weight: 700; cursor: pointer; }
+    .feedback { position: relative; min-height: 72px; margin-top: 18px; font-family: var(--hand); font-size: 27px; line-height: 1.15; color: var(--red); transform: rotate(-1deg); }
+    .feedback.good { color: var(--green); }
+    .mark { position: absolute; top: 18px; right: 22px; width: 84px; height: 84px; }
+    .mark path { fill: none; stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 200; stroke-dashoffset: 200; }
+    .mark.show path { animation: draw 0.5s ease forwards; }
+    .mark.ok path { stroke: var(--green); }
+    .mark.no path { stroke: var(--red); }
+    .solution { margin-top: 6px; padding: 14px 16px; border-left: 4px solid var(--hl); background: #fffdea; font-size: 16px; display: none; }
+    .solution.open { display: block; }
+    .solution b { font-weight: 700; }
+
+    .side-note { padding: 22px; border: 2px dashed var(--ink-2); border-radius: 4px; background: rgb(251 250 245 / 0.9); }
+    .side-note h3 { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; }
+    .side-note p { margin-top: 8px; color: var(--ink-2); font-size: 15.5px; }
+    .side-note .hand { display: block; margin-top: 14px; font-size: 24px; transform: rotate(-1.5deg); }
+    .app { display: flex; gap: 12px; align-items: center; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--grid-strong); font-size: 14px; }
+    .app img { width: 44px; height: 44px; border-radius: 10px; }
+
+    /* timetable */
+    .tt-wrap { overflow-x: auto; background: #fff; border: 2px solid var(--ink); border-radius: 4px; }
+    .tt { display: grid; grid-template-columns: 64px repeat(5, minmax(130px, 1fr)); grid-template-rows: 44px repeat(10, 36px); min-width: 720px; position: relative; }
+    .tt .h { display: grid; place-items: center; font-weight: 700; border-bottom: 2px solid var(--ink); border-left: 1px solid var(--grid-strong); }
+    .tt .h.today { background: var(--hl); }
+    .tt .t { padding: 0 8px; font-size: 12px; color: var(--ink-2); border-top: 1px solid var(--grid); text-align: right; transform: translateY(-8px); }
+    .tt .cell { border-left: 1px solid var(--grid-strong); border-top: 1px solid var(--grid); }
+    .slot {
+      position: relative;
+      z-index: 1;
+      margin: 3px 4px;
+      padding: 7px 9px;
+      border-radius: 6px;
+      border: 2px solid var(--ink);
+      background: var(--paper);
+      font-size: 13px;
+      line-height: 1.25;
+      cursor: pointer;
+      text-align: left;
+      overflow: hidden;
+    }
+    .slot b { display: block; font-size: 14px; }
+    .slot .tally { display: block; margin-top: 4px; font-family: var(--hand); font-size: 20px; line-height: 1; color: var(--red); }
+    .slot.math { background: #e8f1fb; }
+    .slot.hun { background: #fdecea; }
+    .slot.erett { background: #eef7e6; }
+    .slot.full { opacity: 0.55; cursor: not-allowed; }
+    .slot.full .tally { color: var(--ink-2); }
+    .slot:hover:not(.full) { box-shadow: 3px 3px 0 var(--ink); }
+    .slot[aria-pressed="true"] { background: var(--hl); box-shadow: 3px 3px 0 var(--red); }
+    .tt-legend { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 14px; font-size: 14px; color: var(--ink-2); }
+    .tt-legend span::before { content: ""; display: inline-block; width: 14px; height: 14px; margin-right: 8px; border: 2px solid var(--ink); border-radius: 3px; vertical-align: -2px; }
+    .tt-legend .m::before { background: #e8f1fb; }
+    .tt-legend .h2::before { background: #fdecea; }
+    .tt-legend .e::before { background: #eef7e6; }
+
+    /* prices + teachers */
+    .prices { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+    .price { padding: 24px; background: #fff; border: 2px solid var(--ink); border-radius: 4px; }
+    .price:nth-child(2) { transform: rotate(-1deg); box-shadow: 6px 6px 0 var(--red); }
+    .price h3 { font-size: 20px; font-weight: 700; }
+    .price .amt { margin-top: 8px; font-weight: 800; font-size: 44px; line-height: 1; letter-spacing: -0.04em; }
+    .price .amt small { font-size: 15px; letter-spacing: 0; font-weight: 600; color: var(--ink-2); }
+    .price ul { margin-top: 14px; display: grid; gap: 6px; font-size: 15px; color: var(--ink-2); }
+    .price li::before { content: "✓"; margin-right: 8px; color: var(--green); font-weight: 800; }
+    .price .hand { display: block; margin-top: 12px; font-size: 22px; }
+
+    .teachers { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; margin-top: 56px; }
+    .sticky { padding: 20px 20px 22px; background: #fff7b0; box-shadow: 0 10px 18px -12px rgb(27 34 64 / 0.45); }
+    .sticky:nth-child(1) { transform: rotate(-2deg); }
+    .sticky:nth-child(2) { transform: rotate(1.5deg); background: #ffd6d2; }
+    .sticky:nth-child(3) { transform: rotate(-0.8deg); background: #d6ecff; }
+    .sticky h3 { font-family: var(--hand); font-size: 34px; line-height: 1; font-weight: 700; }
+    .sticky .subj { margin-top: 4px; font-weight: 700; font-size: 14px; letter-spacing: 0.06em; text-transform: uppercase; }
+    .sticky p { margin-top: 10px; font-size: 15px; }
+
+    /* signup */
+    .signup { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 40px; align-items: start; }
+    form { padding: 28px; background: #fff; border: 2px solid var(--ink); border-radius: 4px; display: grid; gap: 18px; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    label.f { display: grid; gap: 4px; font-weight: 600; font-size: 14px; }
+    label.f input, label.f select {
+      padding: 10px 2px;
+      border: 0;
+      border-bottom: 2px solid var(--ink);
+      background: transparent;
+      font: 500 18px/1.3 var(--sans);
+      border-radius: 0;
+    }
+    label.f input:focus, label.f select:focus { outline: none; border-bottom-color: var(--red); }
+    .picked { padding: 12px 14px; background: var(--hl); font-size: 15px; border-radius: 4px; }
+    .form-err { min-height: 1.4em; font-family: var(--hand); font-size: 24px; color: var(--red); }
+    .ellenorzo { display: none; padding: 26px; background: #f3efe2; border: 2px solid var(--ink); border-radius: 4px; }
+    .signed .ellenorzo { display: block; }
+    .signed form { display: none; }
+    .ellenorzo .title { font-weight: 800; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-2); }
+    .ellenorzo .entry { margin-top: 14px; padding: 14px 0; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); font-family: var(--hand); font-size: 28px; line-height: 1.2; color: #2a3aa8; }
+    .ellenorzo .sign { display: flex; justify-content: space-between; align-items: end; margin-top: 16px; }
+    .ellenorzo .stamp { padding: 6px 12px; border: 3px double var(--red); color: var(--red); font-weight: 800; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; transform: rotate(-6deg); }
+    .ellenorzo p { margin-top: 12px; font-size: 14px; color: var(--ink-2); }
+    .faq li { padding: 16px 0; border-top: 2px solid var(--ink); }
+    .faq h3 { font-size: 18px; font-weight: 700; }
+    .faq p { margin-top: 6px; color: var(--ink-2); font-size: 15.5px; }
+
+    footer { padding: 30px 0 44px; background: var(--ink); color: #c8cde0; font-size: 14px; }
+    footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+    @media (max-width: 940px) {
+      .hero .wrap, .tasks, .signup, .sec-head { grid-template-columns: 1fr; }
+      .countdown { max-width: 420px; }
+      .prices, .teachers { grid-template-columns: 1fr; max-width: 480px; }
+      nav a:not(.pill) { display: none; }
+    }
+    @media (max-width: 560px) {
+      body { font-size: 16px; }
+      .sheet { padding: 22px 18px; }
+      .mark { width: 56px; height: 56px; top: 12px; right: 12px; }
+      .row { grid-template-columns: 1fr; }
+      form { padding: 20px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .scribble path, .mark path { animation: none; stroke-dashoffset: 0; }
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+  <div class="demo-bar">
+    <div class="wrap">
+      <span>Demó oldal: kitalált tanoda, a jelentkezés nem küld adatot.</span>
+      <a href="/#munkak">← Gestware referencia</a>
+    </div>
+  </div>
+
+  <div class="margin">
+  <header>
+    <div class="wrap">
+      <a class="logo" href="#"><span class="logo-box" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>kockás tanoda</a>
+      <nav aria-label="Fő menü">
+        <a href="#feladat">Próbafeladat</a>
+        <a href="#orarend">Órarend</a>
+        <a href="#arak">Árak</a>
+        <a class="pill" href="#jelentkezes">Ingyenes próbaóra</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-cim">
+      <div class="wrap">
+        <div>
+          <h1 id="hero-cim">Matekból is lehet <span class="scribble">ötös.<svg viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden="true"><path d="M4 14 C 50 4, 120 4, 196 10 M 30 18 C 80 12, 140 12, 180 16"/></svg></span><br>Csak nem egyedül.</h1>
+          <p class="note hand">← és magyarból is, természetesen</p>
+          <p class="lead">Felvételi előkészítő 6. és 8. osztályosoknak, érettségire készülő csoportok és egyéni korrepetálás Szeged belvárosában. <span class="hl">Legfeljebb hat gyerek egy csoportban</span>, hogy mindenkire jusson figyelem.</p>
+          <div class="cta">
+            <a class="btn" href="#jelentkezes">Jelentkezem próbaórára <span aria-hidden="true">→</span></a>
+            <a class="btn light" href="#feladat">Kipróbálok egy feladatot</a>
+          </div>
+        </div>
+        <aside class="countdown" aria-live="polite">
+          <p class="label">A központi írásbeliig</p>
+          <p class="num"><span id="days">—</span> <small>nap</small></p>
+          <p id="exam-date">…</p>
+          <span class="hand" id="weeks-note"></span>
+        </aside>
+      </div>
+    </section>
+
+    <section class="sec" id="feladat" aria-labelledby="feladat-cim" style="padding-top:0">
+      <div class="wrap">
+        <div class="sec-head">
+          <h2 id="feladat-cim">Két perc, egy feladat. Megy?</h2>
+          <p>Ilyen feladatokkal dolgozunk az órákon is. Írja be (vagy írd be) a választ, és kijavítjuk, piros tollal, ahogy illik.</p>
+        </div>
+        <div class="tasks">
+          <div class="sheet">
+            <div class="tabs" id="tabs" role="group" aria-label="Feladatok"></div>
+            <svg class="mark" id="mark" viewBox="0 0 84 84" aria-hidden="true"><path id="mark-path" d=""/></svg>
+            <p class="q-meta" id="q-meta"></p>
+            <p class="q-text" id="q-text"></p>
+            <div class="answer" id="answer"></div>
+            <p class="feedback" id="feedback" aria-live="polite"></p>
+            <div class="solution" id="solution"></div>
+          </div>
+          <div class="side-note">
+            <h3>Nem ment elsőre? Az a normális.</h3>
+            <p>A felvételin a hibák nagy része nem tudáshiányból jön, hanem abból, hogy a gyerek elsiet egy lépést, vagy nem azt válaszolja, amit kérdeztek. Az órákon ezt gyakoroljuk: lassan olvasni, és ellenőrizni.</p>
+            <span class="hand">„Mit kérdez a feladat?” — ezt írjuk fel a táblára minden órán.</span>
+            <div class="app">
+              <img src="/assets/img/pontjo-icon.png" width="44" height="44" alt="">
+              <span>Otthoni gyakorláshoz a <b>Pont jó</b> alkalmazást ajánljuk. Ezt is a Gestware készítette.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="orarend" aria-labelledby="orarend-cim" style="padding-top:0">
+      <div class="wrap">
+        <div class="sec-head">
+          <h2 id="orarend-cim">Órarend</h2>
+          <p>A strigulák a szabad helyeket jelölik. Kattintson egy órára, és a jelentkezésnél már ki is választottuk.</p>
+        </div>
+        <div class="tt-wrap"><div class="tt" id="tt"></div></div>
+        <div class="tt-legend"><span class="m">matematika</span><span class="h2">magyar</span><span class="e">érettségi</span></div>
+      </div>
+    </section>
+
+    <section class="sec" id="arak" aria-labelledby="arak-cim" style="padding-top:0">
+      <div class="wrap">
+        <div class="sec-head">
+          <h2 id="arak-cim">Árak, apróbetű nélkül</h2>
+          <p>Havonta előre fizetendő, átutalással vagy kártyával. Ha egy alkalom elmarad, a csoportos órát a hónapon belül egy másik csoportban pótolhatja.</p>
+        </div>
+        <div class="prices">
+          <div class="price">
+            <h3>Csoportos</h3>
+            <p class="amt">4 500 <small>Ft / 90 perc</small></p>
+            <ul><li>legfeljebb 6 fő</li><li>heti egy alkalom</li><li>feladatlapok az árban</li></ul>
+          </div>
+          <div class="price">
+            <h3>Felvételi csomag</h3>
+            <p class="amt">48 000 <small>Ft / 12 alkalom</small></p>
+            <ul><li>matek és magyar csoport</li><li>két teljes próbafelvételi, javítással</li><li>szülői visszajelzés havonta</li></ul>
+            <span class="hand">a legtöbben ezt választják</span>
+          </div>
+          <div class="price">
+            <h3>Egyéni</h3>
+            <p class="amt">8 000 <small>Ft / 60 perc</small></p>
+            <ul><li>személyesen vagy online</li><li>rugalmas időpont</li><li>lemondás 24 órával előtte</li></ul>
+          </div>
+        </div>
+        <div class="teachers">
+          <article class="sticky"><h3>Kata néni</h3><p class="subj">matematika</p><p>Húsz éve tanít általános iskolában. A törtekről is el tudja hitetni, hogy logikusak.</p></article>
+          <article class="sticky"><h3>Bálint</h3><p class="subj">magyar nyelv és irodalom</p><p>SZTE-s doktorandusz. Szövegértésből és fogalmazásból tart felvételi és érettségi csoportot.</p></article>
+          <article class="sticky"><h3>Dóra</h3><p class="subj">matek érettségi</p><p>Mérnök volt, mielőtt tanítani kezdett. Emelt szintre is készít, főleg egyéniben.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="jelentkezes" aria-labelledby="jel-cim" style="padding-top:0">
+      <div class="wrap signup" id="signup">
+        <div>
+          <div class="sec-head" style="grid-template-columns:1fr;margin-bottom:24px">
+            <h2 id="jel-cim">Az első óra ingyenes</h2>
+            <p>Jöjjön el, nézze meg a csoportot, és csak utána döntsön. A próbaóra után a tanár pár mondatban megírja, mit látott.</p>
+          </div>
+          <ul class="faq">
+            <li><h3>Melyik csoportba kerül a gyerek?</h3><p>Az évfolyam szerint, de az első órán megnézzük, hol tart. Ha kell, átrakjuk.</p></li>
+            <li><h3>Hol vannak az órák?</h3><p>Szeged belvárosában (demó cím), a villamosmegállótól két percre. Online is lehet csatlakozni.</p></li>
+            <li><h3>Mi kell az órára?</h3><p>Egy kockás füzet, toll, ceruza, vonalzó. A feladatlapokat mi adjuk.</p></li>
+          </ul>
+        </div>
+        <div>
+          <form id="form" novalidate>
+            <div class="picked" id="picked">Még nincs kiválasztott óra. Válasszon az órarendből, vagy itt lent.</div>
+            <div class="row">
+              <label class="f">A gyerek évfolyama
+                <select id="s-grade">
+                  <option value="6">6. osztály</option>
+                  <option value="8" selected>8. osztály</option>
+                  <option value="11">11. osztály</option>
+                  <option value="12">12. osztály</option>
+                </select>
+              </label>
+              <label class="f">Óra
+                <select id="s-slot"></select>
+              </label>
+            </div>
+            <div class="row">
+              <label class="f">Szülő neve<input id="s-name" autocomplete="name"></label>
+              <label class="f">Telefon<input id="s-phone" type="tel" autocomplete="tel"></label>
+            </div>
+            <label class="f">E-mail<input id="s-email" type="email" autocomplete="email"></label>
+            <p class="form-err" id="s-err" role="alert"></p>
+            <button class="btn" type="submit">Jelentkezem a próbaórára <span aria-hidden="true">→</span></button>
+          </form>
+          <div class="ellenorzo" aria-live="polite">
+            <p class="title">Ellenőrző · Üzenő</p>
+            <p class="entry" id="entry"></p>
+            <div class="sign"><span class="stamp">Kockás Tanoda</span><span class="hand" style="font-size:26px">Kata néni</span></div>
+            <p>Demó: valójában nem küldtünk semmit. Éles oldalon e-mailben érkezne a visszaigazolás és az emlékeztető az óra előtti napon.</p>
+            <button class="btn light" type="button" id="again" style="margin-top:16px">Másik órára is jelentkezem</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  </div>
+
+  <footer>
+    <div class="wrap">
+      <span>© Kockás Tanoda (demó) · Szeged</span>
+      <span>Weboldal, órarend és jelentkezés: <a href="/" style="color:#fff">Gestware</a></span>
+    </div>
+  </footer>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+
+    // ---- countdown to the central written exam: third Saturday of January ----
+    function examDate(year) {
+      const d = new Date(year, 0, 1);
+      const firstSat = 1 + ((6 - d.getDay() + 7) % 7);
+      return new Date(year, 0, firstSat + 14, 10);
+    }
+    const now = new Date();
+    let exam = examDate(now.getFullYear());
+    if (exam < now) exam = examDate(now.getFullYear() + 1);
+    const days = Math.ceil((exam - now) / 86400000);
+    $('days').textContent = days;
+    $('exam-date').textContent = `Várhatóan ${exam.toLocaleDateString('hu-HU', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' })}, 10 óra.`;
+    const weeks = Math.floor(days / 7);
+    $('weeks-note').textContent = weeks > 10 ? `ez ${weeks} hét, bőven elég, ha most kezdjük` : weeks > 3 ? `még ${weeks} hét, de már ne halogassuk!` : 'most már csak ismétlünk, nyugi :)';
+
+    // ---- try-a-task ----
+    const TASKS = [
+      {
+        tab: 'Törtek', meta: 'Matematika · 8. osztály · 2 pont',
+        text: 'Egy 24 fős osztály 3/8 része lány. Hány fiú jár az osztályba?',
+        type: 'num', unit: 'fiú', answer: 15,
+        wrong: { 9: 'Ez a lányok száma! Mit kérdez a feladat?', 3: 'Hármat osztottál nyolccal? Nézd meg újra a törtet.' },
+        solution: '<b>Megoldás:</b> a lányok száma 24 · 3/8 = 9. A fiúk száma 24 − 9 = <b>15</b>. Vagy rögtön: a fiúk az osztály 5/8 része, 24 · 5/8 = 15.',
+      },
+      {
+        tab: 'Geometria', meta: 'Matematika · 8. osztály · 3 pont',
+        text: 'Egy téglalap kerülete 30 cm, az egyik oldala 6 cm. Mekkora a területe?',
+        type: 'num', unit: 'cm²', answer: 54,
+        wrong: { 180: 'A kerületet szoroztad az oldallal. A területhez a két oldal kell!', 144: 'A másik oldal nem 24 cm: a kerületben minden oldal kétszer szerepel.', 24: 'Ez a másik oldal kétszerese lenne. Mekkora a terület?' },
+        solution: '<b>Megoldás:</b> a két szomszédos oldal összege a kerület fele: 30 : 2 = 15 cm. A másik oldal 15 − 6 = 9 cm. A terület 6 · 9 = <b>54 cm²</b>.',
+      },
+      {
+        tab: 'Helyesírás', meta: 'Magyar · 8. osztály · 1 pont',
+        text: 'Melyik a helyes? „___ nem tudok többet mondani.” (Jelentése: most még, egyelőre.)',
+        type: 'choice', options: ['Egyenlőre', 'Egyelőre'], answer: 'Egyelőre',
+        wrong: { Egyenlőre: 'Az „egyenlő” egyenlőséget jelent. A „most még” jelentésű szó: egyelőre.' },
+        solution: '<b>Megoldás:</b> <b>egyelőre</b>, azaz egy időre, most még. Az „egyenlőre” azt jelentené, hogy valamit egyenlő részekre osztunk, ez a mondatba nem illik.',
+      },
+    ];
+    let current = 0;
+    const solved = new Set();
+    function showMark(ok) {
+      const m = $('mark');
+      $('mark-path').setAttribute('d', ok ? 'M14 44 L34 64 L72 18' : 'M18 18 L66 66 M66 18 L18 66');
+      m.className.baseVal = `mark ${ok ? 'ok' : 'no'}`;
+      void m.getBoundingClientRect();
+      m.classList.add('show');
+    }
+    function check(value) {
+      const t = TASKS[current];
+      const ok = t.type === 'num' ? Number(String(value).replace(',', '.')) === t.answer : value === t.answer;
+      const fb = $('feedback');
+      if (value === '' || value === undefined) { fb.className = 'feedback'; fb.textContent = 'Előbb írj be valamit :)'; return; }
+      showMark(ok);
+      if (ok) {
+        fb.className = 'feedback good';
+        fb.textContent = ['Ötös! Pontosan ennyi.', 'Hibátlan, ügyes!', 'Így van, szép munka!'][current];
+        solved.add(current);
+        renderTabs();
+      } else {
+        fb.className = 'feedback';
+        fb.textContent = t.wrong[value] ?? 'Nem egészen. Olvasd el újra lassan, és próbáld meg még egyszer!';
+      }
+      $('solution').innerHTML = t.solution;
+      $('solution').classList.toggle('open', ok || fb.dataset.tries === '1');
+      fb.dataset.tries = ok ? '0' : String(Number(fb.dataset.tries || 0) + 1);
+    }
+    function renderTabs() {
+      $('tabs').replaceChildren(...TASKS.map((t, i) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.textContent = `${i + 1}. ${t.tab}`;
+        b.setAttribute('aria-pressed', String(i === current));
+        if (solved.has(i)) b.classList.add('done');
+        b.addEventListener('click', () => { current = i; renderTask(); });
+        return b;
+      }));
+    }
+    function renderTask() {
+      const t = TASKS[current];
+      renderTabs();
+      $('q-meta').textContent = t.meta;
+      $('q-text').textContent = t.text;
+      $('feedback').textContent = '';
+      $('feedback').dataset.tries = '0';
+      $('solution').classList.remove('open');
+      $('mark').className.baseVal = 'mark';
+      const a = $('answer');
+      if (t.type === 'num') {
+        a.innerHTML = `<input id="ans" inputmode="decimal" aria-label="Válasz"><span class="unit">${t.unit}</span><button class="check-btn" type="button" id="chk">Javítsd ki!</button>`;
+        $('chk').addEventListener('click', () => check($('ans').value.trim()));
+        $('ans').addEventListener('keydown', (e) => { if (e.key === 'Enter') check($('ans').value.trim()); });
+      } else {
+        a.replaceChildren(...t.options.map((o) => {
+          const b = document.createElement('button');
+          b.type = 'button'; b.className = 'choice'; b.textContent = o;
+          b.addEventListener('click', () => check(o));
+          return b;
+        }));
+      }
+    }
+    renderTask();
+
+    // ---- timetable ----
+    const DAYS = ['Hétfő', 'Kedd', 'Szerda', 'Csütörtök', 'Péntek'];
+    const START = 14; // 14:00, rows are half hours
+    const GROUPS = [
+      { id: 'm8a', day: 0, from: 15, to: 16.5, kind: 'math', title: 'Felvételi matek', grade: '8. o.', seats: 6, taken: 4, teacher: 'Kata néni', grades: [8] },
+      { id: 'e12', day: 0, from: 17, to: 18.5, kind: 'erett', title: 'Érettségi matek', grade: '12. o.', seats: 6, taken: 5, teacher: 'Dóra', grades: [11, 12] },
+      { id: 'h8a', day: 1, from: 15.5, to: 17, kind: 'hun', title: 'Felvételi magyar', grade: '8. o.', seats: 6, taken: 6, teacher: 'Bálint', grades: [8] },
+      { id: 'm6', day: 1, from: 17, to: 18.5, kind: 'math', title: 'Matek', grade: '6. o.', seats: 6, taken: 3, teacher: 'Kata néni', grades: [6] },
+      { id: 'm8b', day: 2, from: 15, to: 16.5, kind: 'math', title: 'Felvételi matek', grade: '8. o.', seats: 6, taken: 5, teacher: 'Kata néni', grades: [8] },
+      { id: 'h12', day: 2, from: 17, to: 18.5, kind: 'erett', title: 'Érettségi magyar', grade: '11–12. o.', seats: 6, taken: 2, teacher: 'Bálint', grades: [11, 12] },
+      { id: 'h8b', day: 3, from: 15, to: 16.5, kind: 'hun', title: 'Felvételi magyar', grade: '8. o.', seats: 6, taken: 3, teacher: 'Bálint', grades: [8] },
+      { id: 'h6', day: 3, from: 16.5, to: 18, kind: 'hun', title: 'Magyar', grade: '6. o.', seats: 6, taken: 4, teacher: 'Bálint', grades: [6] },
+      { id: 'pf', day: 4, from: 14.5, to: 17, kind: 'math', title: 'Próbafelvételi', grade: '8. o., kéthetente', seats: 6, taken: 1, teacher: 'Kata néni', grades: [8] },
+    ];
+    const tally = (n) => n === 0 ? 'betelt' : '|'.repeat(n);
+    let chosen = null;
+    function renderTT() {
+      const tt = $('tt');
+      tt.innerHTML = '';
+      const todayIdx = now.getDay() - 1;
+      tt.insertAdjacentHTML('beforeend', '<div class="h" style="grid-column:1;grid-row:1;border-left:0"></div>');
+      DAYS.forEach((d, i) => tt.insertAdjacentHTML('beforeend', `<div class="h${i === todayIdx ? ' today' : ''}" style="grid-column:${i + 2};grid-row:1">${d}</div>`));
+      for (let r = 0; r < 10; r++) {
+        const h = START + r / 2;
+        tt.insertAdjacentHTML('beforeend', `<div class="t" style="grid-column:1;grid-row:${r + 2}">${r % 2 === 0 && r > 0 ? `${h}:00` : ''}</div>`);
+        DAYS.forEach((_, i) => tt.insertAdjacentHTML('beforeend', `<div class="cell" style="grid-column:${i + 2};grid-row:${r + 2}"></div>`));
+      }
+      GROUPS.forEach((g) => {
+        const free = g.seats - g.taken;
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = `slot ${g.kind}${free ? '' : ' full'}`;
+        b.style.gridColumn = g.day + 2;
+        b.style.gridRow = `${(g.from - START) * 2 + 2} / ${(g.to - START) * 2 + 2}`;
+        b.setAttribute('aria-pressed', String(chosen === g.id));
+        b.innerHTML = `<b>${g.title}</b>${g.grade} · ${g.teacher}<span class="tally" aria-label="${free} szabad hely">${tally(free)}</span>`;
+        b.disabled = !free;
+        b.addEventListener('click', () => { choose(g.id); $('jelentkezes').scrollIntoView(); });
+        tt.append(b);
+      });
+    }
+    const time = (h) => `${Math.floor(h)}:${h % 1 ? '30' : '00'}`;
+    const label = (g) => `${g.title} (${g.grade}), ${DAYS[g.day].toLowerCase()} ${time(g.from)}`;
+    function fillSlots() {
+      const grade = Number($('s-grade').value);
+      const fit = GROUPS.filter((g) => g.grades.includes(grade) && g.seats > g.taken);
+      $('s-slot').innerHTML = fit.map((g) => `<option value="${g.id}">${label(g)}</option>`).join('') + '<option value="egyeni">Egyéni óra, egyeztetett időpontban</option>';
+      if (chosen && fit.some((g) => g.id === chosen)) $('s-slot').value = chosen;
+      updatePicked();
+    }
+    function updatePicked() {
+      const g = GROUPS.find((x) => x.id === $('s-slot').value);
+      $('picked').textContent = g ? `Kiválasztva: ${label(g)}. Még ${g.seats - g.taken} hely van.` : 'Egyéni óra: a jelentkezés után telefonon egyeztetünk időpontot.';
+    }
+    function choose(id) {
+      chosen = id;
+      const g = GROUPS.find((x) => x.id === id);
+      $('s-grade').value = String(g.grades.includes(Number($('s-grade').value)) ? $('s-grade').value : g.grades[g.grades.length - 1]);
+      fillSlots();
+      renderTT();
+    }
+    $('s-grade').addEventListener('change', fillSlots);
+    $('s-slot').addEventListener('change', () => { chosen = $('s-slot').value; renderTT(); updatePicked(); });
+    renderTT();
+    fillSlots();
+
+    $('form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const err = $('s-err');
+      const name = $('s-name').value.trim();
+      if (!name) { err.textContent = 'A neve hiányzik!'; return; }
+      if ($('s-phone').value.replace(/\D/g, '').length < 9 && !$('s-email').value.includes('@')) { err.textContent = 'Telefon vagy e-mail kell, hogy elérjük.'; return; }
+      err.textContent = '';
+      const g = GROUPS.find((x) => x.id === $('s-slot').value);
+      // next occurrence of the chosen group
+      let when = '';
+      if (g) {
+        const d = new Date(now);
+        do { d.setDate(d.getDate() + 1); } while (d.getDay() !== g.day + 1);
+        when = `${d.toLocaleDateString('hu-HU', { month: 'long', day: 'numeric' })}, ${time(g.from)}`;
+      }
+      $('entry').textContent = g
+        ? `Kedves ${name}! Szeretettel várjuk gyermekét próbaórára: ${g.title.toLowerCase()}, ${when}. Füzetet, tollat hozzon!`
+        : `Kedves ${name}! Hamarosan hívjuk, és egyeztetünk egy időpontot az egyéni órára.`;
+      $('signup').classList.add('signed');
+    });
+    $('again').addEventListener('click', () => { $('signup').classList.remove('signed'); $('form').reset(); fillSlots(); });
+  </script>
+</body>
+</html>

@@ -551,6 +551,73 @@ a:hover {
   margin-top: 112px;
 }
 
+/* demo sites */
+
+.demos {
+  margin-top: clamp(72px, 9vw, 120px);
+  padding-top: 28px;
+  border-top: 1px solid var(--rule);
+}
+
+.demos-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  column-gap: 48px;
+  margin-bottom: 36px;
+}
+
+.demos-head h3 {
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.demos-head p {
+  color: #2c2c2a;
+}
+
+.demo-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 40px 24px;
+}
+
+.demo-list a {
+  display: grid;
+  gap: 4px;
+  text-decoration: none;
+}
+
+.demo-list img {
+  width: 100%;
+  margin-bottom: 12px;
+  border-radius: 4px;
+  outline: 1px solid rgb(0 0 0 / 0.08);
+  transition: transform 0.2s;
+}
+
+.demo-list a:hover img {
+  transform: translateY(-3px);
+}
+
+.demo-name {
+  font-size: 19px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.demo-name::after {
+  content: " →";
+  color: var(--accent);
+}
+
+.demo-kind {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
 /* terms */
 
 .terms div {
@@ -826,6 +893,11 @@ a:hover {
     max-width: 560px;
   }
 
+  .demos-head {
+    grid-template-columns: 1fr;
+    row-gap: 12px;
+  }
+
   .shots figure:nth-child(2) {
     margin-top: 40px;
   }
@@ -871,6 +943,10 @@ a:hover {
   }
 
   .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .demo-list {
     grid-template-columns: 1fr;
   }
 
