@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Felhasználási feltételek – Pont jó</title>
+  <script>
+    // Az app témája (js/theme.js) itt is: rendszer szerint, vagy amit a felhasználó választott.
+    try {
+      var t = JSON.parse(localStorage.getItem('felvi.setting.theme') || '"system"');
+      if (t !== 'light' && t !== 'dark') t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.dataset.theme = t;
+    } catch (e) {}
+  </script>
+  <link rel="stylesheet" href="./legal.css">
+</head>
+<body>
+<main>
+  <h1>Általános felhasználási feltételek</h1>
+  <p class="meta">Pont jó – Központi felvételi alkalmazás · Hatályos: 2026.10.21. · Verzió: 1.1</p>
+
+  <h2>1. A szolgáltató</h2>
+  <p><strong>Geszti Tamás e.v.</strong> (egyéni vállalkozó)<br>
+    Székhely: 5400 Mezőtúr, Petőfi Sándor utca 3. 2/5.<br>
+    Nyilvántartási szám: 62993779 (egyéni vállalkozók nyilvántartása)<br>
+    Adószám: 92499144-1-36<br>
+    E-mail: <a href="mailto:pontjo.felveteli@gmail.com">pontjo.felveteli@gmail.com</a></p>
+
+  <h2>2. A szolgáltatás</h2>
+  <p>A Pont jó – Központi felvételi alkalmazás (a továbbiakban: az alkalmazás) a 9. évfolyamra szóló központi írásbeli felvételire (matematika, magyar nyelv) készülő diákoknak szóló gyakorló alkalmazás: témakörönkénti feladatok, megoldások, próbafelvételi és haladáskövetés.</p>
+  <p>A feladatok a szolgáltató saját feladatai, amelyek a központi írásbeli felépítését követik. Az alkalmazás <strong>nem az Oktatási Hivatal hivatalos kiadványa</strong>, és nem áll kapcsolatban vele. Az alkalmazás használata a felkészülést segíti, de <strong>nem garantál felvételi eredményt</strong>.</p>
+
+  <h2>3. Ingyenes és Prémium változat</h2>
+  <ul>
+    <li><strong>Ingyenes:</strong> az alapfeladatok és próbafelvételi-helyenként néhány felvételi-szerű feladat, naponta legfeljebb 10 feladat, tantárgyanként hetente 1 próbafelvételi.</li>
+    <li><strong>Prémium:</strong> a teljes feladatbank, korlátlan gyakorlás és próbafelvételi.</li>
+  </ul>
+  <p>A szolgáltató a feladatbankot folyamatosan bővítheti és javíthatja.</p>
+
+  <h2>4. Előfizetés és fizetés</h2>
+  <ul>
+    <li>A Prémium a <strong>Google Play áruházban</strong> vásárolható meg; a fizetésre és a számlázásra a Google Play feltételei vonatkoznak. Az árat az áruház a vásárlás előtt forintban, adóval együtt mutatja.</li>
+    <li><strong>Havi előfizetés:</strong> 1990 Ft/hó. Az első előfizetéshez <strong>3 napos ingyenes próbaidő</strong> tartozhat. A próbaidő végén – ha addig nem mondod le – az előfizetés díjköteles lesz, és havonta automatikusan megújul.</li>
+    <li><strong>Szezonbérlet:</strong> 7990 Ft egyszeri díj, a 2027. januári központi írásbeliig érvényes, <strong>nem újul meg automatikusan</strong>.</li>
+    <li><strong>Lemondás:</strong> a Google Play alkalmazásban, a <em>Fiók → Fizetések és előfizetések</em> menüben bármikor. A lemondás után a már kifizetett időszak végéig a Prémium elérhető marad.</li>
+    <li><strong>Visszatérítés:</strong> a Google Play visszatérítési szabályai szerint (<a href="https://support.google.com/googleplay/answer/2479637?hl=hu" rel="noopener">support.google.com/googleplay</a>). A fogyasztó elállási jogára a 45/2014. (II. 26.) Korm. rendelet szabályai vonatkoznak; digitális tartalom esetén az elállási jog a teljesítés megkezdésével – a fogyasztó kifejezett beleegyezése esetén – megszűnhet.</li>
+    <li>Az előfizetés a vásárláshoz használt Google-fiókhoz kötődik; új készüléken a <em>Korábbi vásárlás visszaállítása</em> gombbal érhető el újra.</li>
+  </ul>
+
+  <h2>5. Kiskorú felhasználók</h2>
+  <p>Az alkalmazást kiskorúak is használhatják. Előfizetést a Google-fiók tulajdonosa vásárolhat; 18 év alatti felhasználó esetén a vásárláshoz szülői vagy gondviselői hozzájárulás szükséges. A Google Play családi beállításaival a szülő a vásárlásokat jóváhagyáshoz kötheti.</p>
+
+  <h2>6. Szellemi tulajdon</h2>
+  <p>A feladatok, megoldások, olvasmányok (a közkincsnek számító irodalmi művek kivételével), a grafika és a kabalafigura a szolgáltató szellemi tulajdona. Ezek az alkalmazáson kívül, illetve üzletszerűen csak a szolgáltató írásos engedélyével használhatók fel. A közkincs versek forrását a feladat mellett feltüntetjük.</p>
+
+  <h2>7. Hibák, felelősség</h2>
+  <p>A feladatokat gondosan ellenőrizzük, de hiba előfordulhat. Ha hibát találsz, kérjük, jelezd az alkalmazásban a <em>Hibát találtam</em> gombbal. A szolgáltató az alkalmazás folyamatos, hibamentes működéséért és a feladatok esetleges hibáiból eredő következményekért – a jogszabály által megengedett mértékben – nem vállal felelősséget.</p>
+
+  <h2>8. Panaszkezelés, jogvita</h2>
+  <p>Panaszodat a fenti e-mail-címre küldheted; 30 napon belül írásban válaszolunk. Ha a panaszt elutasítjuk, vagy a válasszal nem vagy elégedett, fogyasztói jogvita esetén <strong>békéltető testülethez</strong> fordulhatsz – a lakóhelyed szerint illetékeshez, vagy a szolgáltató székhelye szerint illetékes <strong>Jász-Nagykun-Szolnok Vármegyei Békéltető Testülethez</strong> (5000 Szolnok, Verseghy park 8.) –, vagy bírósághoz. A békéltető testületek elérhetőségei: <a href="https://www.bekeltetes.hu" rel="noopener">bekeltetes.hu</a>. A szolgáltató a békéltető testületi eljárásban együttműködik. A Google Play-en keresztüli fizetéssel kapcsolatos panaszokat a Google ügyfélszolgálata is intézi.</p>
+
+  <h2>9. Egyéb</h2>
+  <p>A szerződés nyelve a magyar. A szolgáltató magatartási kódexnek nem vetette alá magát. A feltételekre a magyar jog az irányadó. A feltételek módosítását az alkalmazásban jelezzük; a módosítás a közzétételt követően a jövőre nézve hatályos. Az adatkezelésről az <a href="./adatvedelem.html">Adatkezelési tájékoztató</a> szól.</p>
+</main>
+</body>
+</html>

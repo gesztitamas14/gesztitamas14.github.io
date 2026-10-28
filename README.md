@@ -13,6 +13,7 @@ assets/js/main.js
 assets/fonts/
 assets/img/
 demo/             mintaoldalak (egy-egy önálló index.html, közös betűk: demo/fonts/)
+pontjo/           a Pont jó app jogi oldalai (ÁSZF, adatvédelem) – másolat, lásd lent
 firebase.json 
 .firebaserc 
 ```
@@ -36,6 +37,18 @@ npx firebase-tools deploy --only hosting
 ```
 
 Utána az oldal a https://gestware.web.app (és a https://gestware.firebaseapp.com) címen él.
+
+## A Pont jó jogi oldalai
+
+A `pontjo/` fájljai az app repójának `web/legal/` mappájából jönnek (ott a forrás,
+az app ugyanezeket mutatja offline). Ha a jogi szöveg változik, másold át, majd deploy:
+
+```
+cp ../felveteli-gyakorlo/web/legal/{adatvedelem.html,aszf.html,legal.css} pontjo/
+```
+
+Címek: https://gestware.web.app/pontjo/adatvedelem.html (ez van a Play Console-ban)
+és https://gestware.web.app/pontjo/aszf.html.
 
 ## Mintaoldalak
 

@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Adatkezelési tájékoztató – Pont jó</title>
+  <script>
+    // Az app témája (js/theme.js) itt is: rendszer szerint, vagy amit a felhasználó választott.
+    try {
+      var t = JSON.parse(localStorage.getItem('felvi.setting.theme') || '"system"');
+      if (t !== 'light' && t !== 'dark') t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.dataset.theme = t;
+    } catch (e) {}
+  </script>
+  <link rel="stylesheet" href="./legal.css">
+</head>
+<body>
+<main>
+  <h1>Adatkezelési tájékoztató</h1>
+  <p class="meta">Pont jó – Központi felvételi alkalmazás · Hatályos: 2026.10.21. · Verzió: 1.1</p>
+
+  <h2>Röviden</h2>
+  <ul>
+    <li>Az alkalmazás <strong>nem kér regisztrációt</strong>, nem kér nevet, e-mail-címet vagy telefonszámot.</li>
+    <li>A gyakorlás eredményei (melyik feladatot oldottad meg, mennyire jól) <strong>csak a te készülékeden</strong> tárolódnak, hozzánk nem jutnak el.</li>
+    <li><strong>Nincs követés</strong>, nem használunk analitikai vagy marketing-sütiket.</li>
+    <li><strong>Reklám csak akkor jelenik meg, ha te magad kéred:</strong> az ingyenes változatban, ha elfogytak a napi feladatok, egy rövid videó megnézéséért újabb feladatokat kaphatsz. Ez <strong>nem személyre szabott</strong> reklám. Előfizetéssel nincs reklám.</li>
+    <li>Ha előfizetsz, a fizetést a <strong>Google Play</strong> intézi; a kártyaadataidat mi soha nem látjuk.</li>
+    <li>Ha hibát jelentesz egy feladatban, az általad beküldött üzenetet megkapjuk, hogy kijavíthassuk a feladatot.</li>
+  </ul>
+
+  <h2>1. Ki kezeli az adatokat?</h2>
+  <p>Adatkezelő: <strong>Geszti Tamás e.v.</strong> (egyéni vállalkozó)<br>
+    Székhely: 5400 Mezőtúr, Petőfi Sándor utca 3. 2/5.<br>
+    Nyilvántartási szám: 62993779<br>
+    Adószám: 92499144-1-36<br>
+    E-mail: <a href="mailto:pontjo.felveteli@gmail.com">pontjo.felveteli@gmail.com</a></p>
+  <p>Adatvédelmi kérdésekben a fenti e-mail-címen érhetsz el minket.</p>
+
+  <h2>2. Milyen adatokat kezelünk, és miért?</h2>
+  <table>
+    <tr><th>Adat</th><th>Cél</th><th>Hol van?</th><th>Jogalap</th><th>Meddig?</th></tr>
+    <tr>
+      <td>Gyakorlási eredmények, napi sorozat, beállítások (pl. hang), ingyenes keret számlálója</td>
+      <td>Az app működése: haladás mutatása, a gyakorlás személyre szabása</td>
+      <td>Csak a te készülékeden (a böngésző/app helyi tárolójában). Hozzánk nem kerül.</td>
+      <td>Az app használata (GDPR 6. cikk (1) b) pont)</td>
+      <td>Amíg nem törlöd (Haladás → Helyi adatok törlése), vagy el nem távolítod az appot</td>
+    </tr>
+    <tr>
+      <td>Előfizetés adatai: egy véletlenszerű, névtelen felhasználói azonosító, a megvásárolt csomag, a vásárlás és a lejárat ideje, a készülék típusa</td>
+      <td>Annak ellenőrzése, hogy van-e érvényes előfizetésed</td>
+      <td>A RevenueCat szolgáltatónál (adatfeldolgozó), a Google Play-től kapott vásárlási igazolás alapján</td>
+      <td>Szerződés teljesítése (GDPR 6. cikk (1) b) pont)</td>
+      <td>Az előfizetés fennállása alatt és utána legfeljebb 5 évig, illetve amíg jogszabály előírja</td>
+    </tr>
+    <tr>
+      <td>Reklámvideó (csak ha elindítod): a készülék reklámazonosítója, IP-cím, a készülék és az app alapadatai, a reklám megjelenése és megtekintése</td>
+      <td>A videó lejátszása, a visszaélések kiszűrése, a megjelenések számolása. Személyre szabott reklámhoz nem használjuk: minden kérésben jelezzük, hogy a felhasználó korhatár alatti, és csak nem személyre szabott, mindenki számára megfelelő („General”) reklám jelenhet meg.</td>
+      <td>A Google AdMob szolgáltatásnál (Google Ireland Ltd.)</td>
+      <td>Jogos érdek: az ingyenes változat fenntartása (GDPR 6. cikk (1) f) pont)</td>
+      <td>A Google adatmegőrzési szabályai szerint (<a href="https://policies.google.com/technologies/ads?hl=hu" rel="noopener">policies.google.com/technologies/ads</a>)</td>
+    </tr>
+    <tr>
+      <td>Hibajelentés: a feladat azonosítója, a hiba típusa, az általad írt megjegyzés, a beírt válaszod, az app verziója és a készülék típusa</td>
+      <td>A hibás feladat kijavítása</td>
+      <td>Google Űrlapok / Google Táblázatok (adatfeldolgozó), vagy e-mail, ha azzal küldöd</td>
+      <td>Jogos érdek: a feladatok javítása (GDPR 6. cikk (1) f) pont)</td>
+      <td>A hiba javításáig, legfeljebb 1 évig</td>
+    </tr>
+    <tr>
+      <td>E-mailben küldött üzenet és e-mail-cím</td>
+      <td>Válasz a megkeresésedre</td>
+      <td>A levelezőrendszerünkben</td>
+      <td>Jogos érdek (GDPR 6. cikk (1) f) pont)</td>
+      <td>Az ügy lezárásáig, legfeljebb 1 évig</td>
+    </tr>
+  </table>
+  <p>A hibajelentésbe kérjük, ne írj személyes adatot (pl. nevet, iskolát).</p>
+
+  <h2>3. A fizetésről</h2>
+  <p>Az előfizetést a Google Play áruházban vásárolhatod meg. A vásárlás során a <strong>Google önálló adatkezelőként</strong> jár el a saját adatvédelmi szabályai szerint (<a href="https://policies.google.com/privacy?hl=hu" rel="noopener">policies.google.com/privacy</a>). Mi a nevedet, a kártyaadataidat és a számlázási adataidat nem kapjuk meg – csak azt, hogy a névtelen azonosítóhoz tartozik-e érvényes előfizetés.</p>
+
+  <h2>4. Kik az adatfeldolgozóink?</h2>
+  <ul>
+    <li><strong>RevenueCat, Inc.</strong> (USA) – az előfizetések ellenőrzése. <a href="https://www.revenuecat.com/privacy" rel="noopener">Adatvédelmi tájékoztatója</a></li>
+    <li><strong>Google Ireland Ltd.</strong> – Google Űrlapok és Táblázatok a hibajelentésekhez; Google AdMob a jutalmazott reklámvideókhoz.</li>
+  </ul>
+  <p>Az Európai Unión kívüli (USA-beli) adattovábbítás az EU–USA adatvédelmi keretrendszer, illetve az Európai Bizottság által jóváhagyott általános szerződési feltételek alapján történik.</p>
+
+  <h2>5. Gyerekek</h2>
+  <p>Az alkalmazás a központi felvételire készülő, jellemzően 12–15 éves diákoknak és szüleiknek szól. Az app személyes adatot nem kér a diáktól. Az előfizetést a Google-fiók tulajdonosa (jellemzően a szülő) vásárolja meg; a Google Play családi beállításaival a szülő a vásárlást jóváhagyáshoz kötheti.</p>
+
+  <h2>6. Milyen jogaid vannak?</h2>
+  <ul>
+    <li><strong>Tájékoztatás és hozzáférés:</strong> megkérdezheted, milyen adatot kezelünk rólad.</li>
+    <li><strong>Helyesbítés, törlés, korlátozás:</strong> kérheted az adataid javítását vagy törlését.</li>
+    <li><strong>Tiltakozás:</strong> a jogos érdeken alapuló adatkezelés ellen tiltakozhatsz.</li>
+    <li><strong>Adathordozhatóság</strong>, ahol a jogszabály ezt lehetővé teszi.</li>
+  </ul>
+  <p>A készülékeden tárolt gyakorlási adatokat te magad bármikor törölheted az appban (<em>Haladás → Helyi adatok törlése</em>), vagy az app eltávolításával. Kérésedet a fenti e-mail-címre küldd; legfeljebb egy hónapon belül válaszolunk.</p>
+  <p>Panasszal a <strong>Nemzeti Adatvédelmi és Információszabadság Hatósághoz</strong> fordulhatsz (1055 Budapest, Falk Miksa utca 9–11.; <a href="https://naih.hu" rel="noopener">naih.hu</a>), vagy bírósághoz.</p>
+
+  <h2>7. Változások</h2>
+  <p>Ha a tájékoztató lényegesen változik, az appban jelezzük. Az aktuális változat mindig ezen az oldalon érhető el.</p>
+</main>
+</body>
+</html>

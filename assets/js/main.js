@@ -10,7 +10,7 @@ const GOOGLE_FORM = {
   },
 };
 
-const MAIL_TO = 'gesztitamas15@gmail.com';
+const MAIL_TO = 'gestware.app@gmail.com';
 
 const TEXT = {
   hu: {
