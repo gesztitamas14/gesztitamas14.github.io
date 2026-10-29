@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Kisasztal Bisztró — napi menü és asztalfoglalás, Szeged</title>
-  <meta name="description" content="Demó oldal a Gestware referenciái közül: bisztró heti menüvel és asztalfoglalással, napilap stílusban.">
+  <meta name="description" content="Demó oldal a Gestware referenciái közül: bisztró heti menüvel és asztalfoglalással.">
   <meta name="robots" content="noindex">
   <meta name="theme-color" content="#f1ece1">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23f1ece1'/%3E%3Ctext x='8' y='13' text-anchor='middle' font-family='serif' font-weight='700' font-size='14' fill='%23161412'%3EK%3C/text%3E%3C/svg%3E">
@@ -23,88 +23,88 @@
       --gut: clamp(16px, 3.5vw, 36px);
     }
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; scroll-padding-top: 72px; }
     body {
       margin: 0;
       background: var(--paper);
       color: var(--ink);
       font: 400 18px/1.5 var(--body);
       -webkit-font-smoothing: antialiased;
-      font-variant-numeric: oldstyle-nums;
     }
-    h1, h2, h3, h4, p, ul, ol, dl, dd { margin: 0; }
+    h1, h2, h3, h4, p, ul, ol, figure { margin: 0; }
     ul, ol { padding: 0; list-style: none; }
     a { color: inherit; }
+    img { display: block; max-width: 100%; height: auto; }
     button, input, select { font: inherit; color: inherit; }
     :focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
-    .page { max-width: 1280px; margin: 0 auto; padding: 0 var(--gut); }
-    .smallcaps { font-variant: all-small-caps; letter-spacing: 0.06em; }
+    .page { max-width: 1200px; margin: 0 auto; padding: 0 var(--gut); }
+    .num { font-variant-numeric: lining-nums tabular-nums; }
 
     .demo-bar { background: var(--ink); color: var(--paper); font: 400 14px/1.4 var(--body); padding: 6px 0; }
     .demo-bar .page { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 
-    /* masthead */
-    .ears { display: grid; grid-template-columns: 1fr auto 1fr; gap: 16px; align-items: end; padding-top: 18px; }
-    .ear { border: 1px solid var(--rule); padding: 8px 10px; font-size: 14px; line-height: 1.3; max-width: 15em; }
-    .ear b { display: block; font: 700 15px/1.2 var(--head); }
-    .ear.r { justify-self: end; text-align: right; }
-    .mast {
-      grid-column: 2;
-      font: 900 clamp(56px, 11vw, 150px)/0.9 var(--head);
-      letter-spacing: -0.02em;
-      text-align: center;
-      font-variant-numeric: lining-nums;
+    .btn {
+      display: inline-block;
+      padding: 13px 22px;
+      background: var(--red);
+      color: #fff;
+      font: 700 14px/1 var(--body);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 0;
+      cursor: pointer;
     }
-    .motto { margin-top: 10px; text-align: center; font: italic 400 17px/1.3 var(--body); color: var(--ink-2); }
-    .dateline {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px 24px;
-      flex-wrap: wrap;
-      margin-top: 14px;
-      padding: 6px 0;
-      border-top: 3px double var(--rule);
-      border-bottom: 1px solid var(--rule);
-      font-size: 15px;
-    }
-    .sections { display: flex; justify-content: center; flex-wrap: wrap; gap: 4px 28px; padding: 8px 0; border-bottom: 3px double var(--rule); font-size: 15px; }
-    .sections a { text-decoration: none; }
-    .sections a:hover { color: var(--red); text-decoration: underline; }
+    .btn:hover { background: var(--ink); }
+    .btn.ghost { background: transparent; color: inherit; box-shadow: inset 0 0 0 1px currentColor; }
+    .btn.ghost:hover { background: var(--paper); color: var(--ink); }
 
-    /* front page */
-    .front { display: grid; grid-template-columns: minmax(0, 8fr) minmax(0, 4fr); gap: 0; margin-top: 22px; }
-    .lead-story { padding-right: 28px; border-right: 1px solid var(--rule); }
+    /* top bar */
+    .top { position: sticky; top: 0; z-index: 10; background: var(--paper); border-bottom: 3px double var(--rule); }
+    .top .page { display: flex; align-items: center; gap: 24px; min-height: 64px; }
+    .logo { font: 900 30px/1 var(--head); letter-spacing: -0.02em; text-decoration: none; }
+    .top nav { display: flex; gap: 22px; margin-left: auto; font-size: 16px; }
+    .top nav a { text-decoration: none; }
+    .top nav a:hover { color: var(--red); text-decoration: underline; }
+    .top .tel { font-weight: 700; text-decoration: none; font-variant-numeric: lining-nums; white-space: nowrap; }
+    .top .btn { padding: 11px 16px; white-space: nowrap; }
+
+    /* hero: photo + today's menu */
+    .hero { position: relative; color: #fff; background: #2a201a; }
+    .hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.78; }
+    .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(14, 10, 8, 0.82) 0%, rgba(14, 10, 8, 0.45) 55%, rgba(14, 10, 8, 0.1) 100%); }
+    .hero .page { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); gap: 40px; align-items: center; min-height: min(620px, 82vh); padding-top: 48px; padding-bottom: 48px; }
     .kicker { font: 700 14px/1 var(--body); letter-spacing: 0.16em; text-transform: uppercase; color: var(--red); }
-    .headline { margin-top: 10px; font: 800 clamp(40px, 5.6vw, 76px)/0.98 var(--head); letter-spacing: -0.015em; }
-    .deck { margin-top: 14px; font: italic 400 clamp(19px, 1.8vw, 24px)/1.35 var(--body); color: var(--ink-2); max-width: 36em; }
-    .byline { margin-top: 14px; padding: 6px 0; border-top: 1px solid var(--hair); border-bottom: 1px solid var(--hair); font-size: 14px; color: var(--ink-2); }
-    .cols { margin-top: 16px; column-count: 3; column-gap: 28px; column-rule: 1px solid var(--hair); hyphens: auto; }
-    .cols p + p { text-indent: 1.4em; }
-    .cols p:first-child::first-letter { float: left; font: 800 64px/0.8 var(--head); padding: 6px 8px 0 0; }
-    .menu-card { break-inside: avoid; margin: 10px 0; padding: 10px 12px; border: 1px solid var(--rule); text-align: left; }
-    .menu-card h4 { font: 700 15px/1.2 var(--head); text-transform: uppercase; letter-spacing: 0.08em; }
-    .menu-card li { display: flex; justify-content: space-between; gap: 10px; padding: 4px 0; border-top: 1px dotted var(--hair); font-size: 16px; }
-    .menu-card .price { font-weight: 600; white-space: nowrap; font-variant-numeric: lining-nums; }
+    .hero .kicker { color: #ffb4ac; }
+    .hero h1 { margin-top: 14px; font: 800 clamp(40px, 5.4vw, 72px)/1 var(--head); letter-spacing: -0.015em; text-wrap: balance; }
+    .hero .lede { margin-top: 16px; max-width: 30em; font: italic 400 clamp(19px, 1.8vw, 23px)/1.4 var(--body); color: #efe7da; }
+    .hero .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
 
-    aside.side { padding-left: 28px; display: grid; gap: 22px; align-content: start; }
-    .box { border-top: 3px solid var(--rule); padding-top: 8px; }
-    .box h3 { font: 800 22px/1.1 var(--head); }
-    .box p { margin-top: 6px; font-size: 16px; color: var(--ink-2); }
-    .crowd { display: grid; grid-template-columns: repeat(8, 1fr); gap: 4px; align-items: end; height: 110px; margin-top: 12px; border-bottom: 1px solid var(--rule); }
-    .crowd i { display: block; background: var(--ink); position: relative; }
-    .crowd i.now { background: var(--red); }
-    .crowd i.now::after { content: "most"; position: absolute; top: -20px; left: 50%; transform: translateX(-50%); font: italic 13px var(--body); color: var(--red); }
-    .crowd-l { display: grid; grid-template-columns: repeat(8, 1fr); gap: 4px; font-size: 12px; color: var(--ink-2); text-align: center; font-variant-numeric: lining-nums; }
-    .hours li { display: flex; justify-content: space-between; padding: 3px 0; border-bottom: 1px dotted var(--hair); font-size: 16px; }
-    .hours li.today { font-weight: 700; color: var(--red); }
-    .stamp-price { display: flex; align-items: center; gap: 14px; margin-top: 10px; }
-    .stamp-price b { display: grid; place-items: center; width: 92px; height: 92px; border: 2px solid var(--red); border-radius: 50%; color: var(--red); font: 800 20px/1 var(--head); text-align: center; transform: rotate(-10deg); font-variant-numeric: lining-nums; }
-    .stamp-price b small { display: block; font: italic 400 12px var(--body); }
+    .today { background: var(--paper); color: var(--ink); padding: 18px 20px 20px; border-top: 6px solid var(--ink); box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35); }
+    .today h2 { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding-bottom: 8px; border-bottom: 3px double var(--rule); font: 800 26px/1.1 var(--head); }
+    .today h2 small { font: italic 400 15px var(--body); color: var(--ink-2); }
+    .today li { display: flex; justify-content: space-between; gap: 14px; padding: 9px 0; border-bottom: 1px dotted var(--hair); font-size: 17px; line-height: 1.3; }
+    .today li b { color: var(--red); margin-right: 6px; }
+    .today li .p { font-weight: 600; white-space: nowrap; font-variant-numeric: lining-nums; }
+    .today li.total { border-bottom: 1px solid var(--rule); font-weight: 700; }
+    .today .small { margin-top: 10px; font-size: 15px; color: var(--ink-2); }
+
+    /* info strip */
+    .info { border-bottom: 1px solid var(--rule); }
+    .info .page { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .info .page > div { padding: 16px 18px; border-left: 1px solid var(--hair); }
+    .info .page > div:first-child { border-left: 0; padding-left: 0; }
+    .info h3 { font: 700 13px/1 var(--body); letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-2); }
+    .info p { margin-top: 6px; font-size: 18px; font-variant-numeric: lining-nums; }
+    .info a { text-decoration: none; font-weight: 700; }
+
+    section.block { padding: 64px 0 0; }
+    .rule-title { display: flex; align-items: center; gap: 16px; margin-bottom: 22px; }
+    .rule-title::before, .rule-title::after { content: ""; flex: 1; height: 0; border-top: 3px double var(--rule); }
+    .rule-title h2 { font: 800 clamp(30px, 3.6vw, 44px)/1 var(--head); text-align: center; }
+    .sub { text-align: center; margin: -10px auto 22px; color: var(--ink-2); max-width: 40em; }
 
     /* week */
-    .rule-title { display: flex; align-items: center; gap: 16px; margin: 56px 0 18px; }
-    .rule-title::before, .rule-title::after { content: ""; flex: 1; height: 0; border-top: 3px double var(--rule); }
-    .rule-title h2 { font: 800 clamp(28px, 3.4vw, 40px)/1 var(--head); text-align: center; }
     .week { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
     .day { padding: 14px 16px 18px; border-left: 1px solid var(--hair); }
     .day:first-child { border-left: 0; }
@@ -114,33 +114,35 @@
     .day .opt { margin-top: 10px; padding-top: 8px; border-top: 1px dotted var(--hair); font-size: 16px; line-height: 1.35; }
     .day .opt b { font: 700 13px/1 var(--body); letter-spacing: 0.1em; color: var(--red); margin-right: 6px; }
     .day .al { display: block; margin-top: 3px; font-size: 13px; color: var(--ink-2); letter-spacing: 0.08em; }
-    .day.today { background: var(--ink); color: var(--paper); }
-    .day.today .soup, .day.today h3 small, .day.today .al { color: #c9c1b1; }
-    .day.today .opt b { color: #ff8f84; }
-    .day.today .opt { border-color: #5a544c; }
+    .day.is-today { background: var(--ink); color: var(--paper); }
+    .day.is-today .soup, .day.is-today h3 small, .day.is-today .al { color: #c9c1b1; }
+    .day.is-today .opt b { color: #ff8f84; }
+    .day.is-today .opt { border-color: #5a544c; }
     .week-foot { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px 24px; margin-top: 10px; font-size: 14px; color: var(--ink-2); }
+    .pass { display: flex; align-items: center; gap: 18px; margin-top: 22px; padding: 14px 18px; background: var(--paper-2); }
+    .pass b { display: grid; place-items: center; width: 84px; height: 84px; flex: none; border: 2px solid var(--red); border-radius: 50%; color: var(--red); font: 800 19px/1 var(--head); text-align: center; transform: rotate(-10deg); font-variant-numeric: lining-nums; }
+    .pass b small { display: block; font: italic 400 12px var(--body); }
 
-    /* lower: carte + classifieds */
-    .lower { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 0; margin-top: 56px; border-top: 3px solid var(--rule); }
-    .carte { padding: 18px 28px 0 0; border-right: 1px solid var(--rule); }
-    .carte h2, .classified h2 { font: 800 clamp(30px, 3.4vw, 44px)/1 var(--head); }
-    .carte .cols2 { column-count: 2; column-gap: 28px; column-rule: 1px solid var(--hair); margin-top: 16px; }
-    .carte h3 { margin: 0 0 6px; font: 700 14px/1 var(--body); text-transform: uppercase; letter-spacing: 0.16em; color: var(--red); break-after: avoid; }
-    .carte ul { margin-bottom: 18px; break-inside: avoid; }
-    .carte li { display: grid; grid-template-columns: 1fr auto; gap: 0 10px; padding: 7px 0; border-bottom: 1px dotted var(--hair); }
+    /* carte */
+    .photos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-bottom: 28px; }
+    .photos img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+    .photos figcaption { margin-top: 6px; font-size: 15px; font-style: italic; color: var(--ink-2); }
+    .carte { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 32px; }
+    .carte h3 { margin-bottom: 6px; font: 700 14px/1 var(--body); text-transform: uppercase; letter-spacing: 0.16em; color: var(--red); }
+    .carte li { display: grid; grid-template-columns: 1fr auto; gap: 0 10px; padding: 8px 0; border-bottom: 1px dotted var(--hair); }
     .carte li b { font: 700 18px/1.2 var(--head); }
     .carte li span { grid-column: 1; font-size: 15px; color: var(--ink-2); font-style: italic; }
     .carte li em { grid-row: 1; grid-column: 2; font-style: normal; font-weight: 600; font-variant-numeric: lining-nums; }
-    .allergen { font-size: 13px; color: var(--ink-2); margin-top: 8px; }
+    .allergen { font-size: 13px; color: var(--ink-2); margin-top: 12px; }
 
-    .classified { padding: 18px 0 0 28px; }
-    .classified > p { margin-top: 8px; color: var(--ink-2); font-size: 16px; }
-    .ad-form { margin-top: 16px; padding: 14px; border: 1px solid var(--rule); background: var(--paper-2); display: grid; gap: 10px; }
-    .ad-form .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .ad-form label { display: grid; gap: 2px; font: 700 12px/1.2 var(--body); letter-spacing: 0.14em; text-transform: uppercase; }
-    .ad-form input, .ad-form select {
+    /* booking */
+    .book { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; align-items: start; }
+    .form { padding: 20px; border: 1px solid var(--rule); background: var(--paper-2); display: grid; gap: 12px; }
+    .form .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .form label { display: grid; gap: 2px; font: 700 12px/1.2 var(--body); letter-spacing: 0.14em; text-transform: uppercase; }
+    .form input, .form select {
       width: 100%;
-      padding: 6px 0;
+      padding: 7px 0;
       border: 0;
       border-bottom: 1px solid var(--ink);
       border-radius: 0;
@@ -149,49 +151,77 @@
       letter-spacing: 0;
       text-transform: none;
     }
-    .ad-form input:focus, .ad-form select:focus { outline: none; border-bottom: 2px solid var(--red); }
-    .ad-form button { margin-top: 4px; padding: 12px; border: 0; background: var(--ink); color: var(--paper); font: 700 15px/1 var(--body); letter-spacing: 0.16em; text-transform: uppercase; cursor: pointer; }
-    .ad-form button:hover { background: var(--red); }
-    .ad-err { min-height: 1.3em; font-size: 15px; color: var(--red); font-style: italic; }
-    .ads { margin-top: 16px; column-count: 2; column-gap: 14px; }
-    .ad { break-inside: avoid; margin-bottom: 10px; padding: 8px 10px; border: 1px solid var(--hair); font-size: 14.5px; line-height: 1.35; }
-    .ad b { font-weight: 800; text-transform: uppercase; letter-spacing: 0.03em; }
-    .ad.new { border: 2px solid var(--red); animation: ink 0.8s ease both; }
+    .form input:focus, .form select:focus { outline: none; border-bottom: 2px solid var(--red); }
+    .form .btn { margin-top: 4px; }
+    .err { min-height: 1.3em; font-size: 15px; color: var(--red); font-style: italic; }
+    .ok { padding: 12px 14px; border: 2px solid var(--red); background: var(--paper); font-size: 17px; animation: ink 0.6s ease both; }
+    .ok b { display: block; font: 800 20px/1.2 var(--head); margin-bottom: 4px; }
     @keyframes ink { from { opacity: 0; filter: blur(3px); } to { opacity: 1; filter: none; } }
+    .book-side img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; filter: grayscale(1) contrast(1.08); }
+    .book-side figcaption { margin-top: 6px; font-size: 15px; font-style: italic; color: var(--ink-2); }
+    .crowd-box { margin-top: 22px; padding-top: 10px; border-top: 3px solid var(--rule); }
+    .crowd-box h3 { font: 800 21px/1.1 var(--head); }
+    .crowd-box p { margin-top: 4px; font-size: 16px; color: var(--ink-2); }
+    .crowd { display: grid; grid-template-columns: repeat(8, 1fr); gap: 4px; align-items: end; height: 80px; margin-top: 12px; border-bottom: 1px solid var(--rule); }
+    .crowd i { display: block; background: var(--ink); position: relative; }
+    .crowd i.now { background: var(--red); }
+    .crowd i.now::after { content: "most"; position: absolute; top: -20px; left: 50%; transform: translateX(-50%); font: italic 13px var(--body); color: var(--red); }
+    .crowd-l { display: grid; grid-template-columns: repeat(8, 1fr); gap: 4px; font-size: 12px; color: var(--ink-2); text-align: center; font-variant-numeric: lining-nums; }
 
-    .catering { display: grid; grid-template-columns: auto 1fr auto; gap: 24px; align-items: center; margin-top: 48px; padding: 18px 0; border-top: 3px double var(--rule); border-bottom: 3px double var(--rule); }
-    .catering b { font: 900 54px/1 var(--head); font-variant-numeric: lining-nums; }
-    .catering p { font-size: 17px; }
-    .catering a { padding: 10px 18px; border: 1px solid var(--ink); text-decoration: none; font-weight: 600; white-space: nowrap; }
-    .catering a:hover { background: var(--ink); color: var(--paper); }
+    /* catering */
+    .catering { margin-top: 64px; background: var(--ink); color: var(--paper); }
+    .catering .page { display: grid; grid-template-columns: auto minmax(0, 1fr) minmax(0, 1.1fr); gap: 28px; align-items: center; padding-top: 28px; padding-bottom: 28px; }
+    .catering .big { font: 900 60px/1 var(--head); font-variant-numeric: lining-nums; }
+    .catering h2 { font: 800 26px/1.1 var(--head); }
+    .catering p { margin-top: 6px; color: #d8d0c2; font-size: 17px; }
+    .catering .form { background: transparent; border-color: #5a544c; grid-template-columns: 1fr 1fr auto; align-items: end; padding: 14px; }
+    .catering .form input { border-bottom-color: var(--paper); }
+    .catering .form .btn { margin: 0; white-space: nowrap; }
+    .catering .err { grid-column: 1 / -1; min-height: 0; color: #ffb4ac; }
 
-    footer { margin-top: 40px; padding: 16px 0 40px; border-top: 1px solid var(--rule); font-size: 14px; color: var(--ink-2); }
+    /* contact + footer */
+    .contact { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+    .contact > div { padding: 18px 20px; border-left: 1px solid var(--hair); }
+    .contact > div:first-child { border-left: 0; padding-left: 0; }
+    .contact h3 { font: 800 22px/1.1 var(--head); margin-bottom: 8px; }
+    .contact p, .contact li { font-size: 17px; font-variant-numeric: lining-nums; }
+    .contact a { font-weight: 700; text-decoration: none; }
+    .hours li { display: flex; justify-content: space-between; padding: 3px 0; border-bottom: 1px dotted var(--hair); }
+    .hours li.today { font-weight: 700; color: var(--red); }
+    footer { margin-top: 40px; padding: 18px 0 40px; border-top: 3px double var(--rule); font-size: 14px; color: var(--ink-2); }
     footer .page { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px 24px; }
+    footer .credits { flex-basis: 100%; font-size: 13px; }
 
     @media (max-width: 1000px) {
-      .cols { column-count: 2; }
+      .top nav { display: none; }
+      .top .tel { margin-left: auto; }
+      .hero .page { grid-template-columns: 1fr; min-height: 0; }
       .week { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .day { border-left: 0; border-top: 1px solid var(--hair); }
       .day:nth-child(even) { border-left: 1px solid var(--hair); }
-      .day.today { grid-column: 1 / -1; order: -1; }
+      .day.is-today { grid-column: 1 / -1; order: -1; }
+      .info .page { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .info .page > div:nth-child(3) { border-left: 0; padding-left: 0; }
+      .info .page > div:nth-child(n + 3) { border-top: 1px solid var(--hair); }
+      .carte { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .catering .page { grid-template-columns: auto minmax(0, 1fr); }
+      .catering .form { grid-column: 1 / -1; }
     }
-    @media (max-width: 820px) {
-      .ears { grid-template-columns: 1fr; }
-      .ear { display: none; }
-      .mast { grid-column: 1; }
-      .front, .lower { grid-template-columns: 1fr; }
-      .lead-story, .carte { padding-right: 0; border-right: 0; }
-      aside.side { padding-left: 0; margin-top: 28px; }
-      .classified { padding-left: 0; margin-top: 32px; border-top: 3px solid var(--rule); }
-      .catering { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 560px) {
+    @media (max-width: 720px) {
       body { font-size: 17px; }
-      .cols, .carte .cols2, .ads { column-count: 1; }
+      .top .tel { display: none; }
+      .top .btn { margin-left: auto; padding: 10px 12px; font-size: 13px; letter-spacing: 0.1em; }
+      .hero::after { background: linear-gradient(180deg, rgba(14, 10, 8, 0.35) 0%, rgba(14, 10, 8, 0.85) 60%); }
+      .hero .page { padding-top: 120px; }
+      .photos { grid-template-columns: 1fr 1fr; }
+      .photos figure:last-child { display: none; }
+      .carte, .book, .contact { grid-template-columns: 1fr; }
+      .contact > div { border-left: 0; padding-left: 0; border-top: 1px solid var(--hair); }
+      .contact > div:first-child { border-top: 0; }
       .week { grid-template-columns: 1fr; }
       .day:nth-child(even) { border-left: 0; }
-      .dateline { justify-content: center; text-align: center; }
-      .ad-form .row { grid-template-columns: 1fr; }
+      .form .row, .catering .form { grid-template-columns: 1fr; }
+      .catering .page { grid-template-columns: 1fr; gap: 14px; }
     }
   </style>
 </head>
@@ -203,56 +233,156 @@
     </div>
   </div>
 
-  <header class="page">
-    <div class="ears">
-      <p class="ear"><b>Ma délben</b><span id="ear-today">…</span></p>
-      <h1 class="mast">Kisasztal</h1>
-      <p class="ear r"><b>Asztal kell?</b>Foglaljon a 4. oldalon,<br>vagy hívjon 10 óra után.</p>
+  <header class="top">
+    <div class="page">
+      <a class="logo" href="#">Kisasztal</a>
+      <nav aria-label="Fő menü">
+        <a href="#het">Heti menü</a>
+        <a href="#etlap">Étlap</a>
+        <a href="#asztal">Foglalás</a>
+        <a href="#ceges">Céges ebéd</a>
+        <a href="#kapcsolat">Kapcsolat</a>
+      </nav>
+      <a class="tel" href="tel:+3662000000">06 62 000 000</a>
+      <a class="btn" href="#asztal">Asztalt foglalok</a>
     </div>
-    <p class="motto">Bisztró és napi menü — Szeged, belváros — megjelenik hétköznaponként, délben</p>
-    <div class="dateline">
-      <span id="volume">…</span>
-      <span id="dateline-date">…</span>
-      <span>Ára: <b>3 290 Ft</b> (napi menü)</span>
-    </div>
-    <nav class="sections" aria-label="Rovatok">
-      <a href="#ma">Mai menü</a>
-      <a href="#het">A heti menü</a>
-      <a href="#etlap">Étlap</a>
-      <a href="#asztal">Asztalfoglalás</a>
-      <a href="#ceges">Céges ebéd</a>
-    </nav>
   </header>
 
-  <main class="page">
-    <section class="front" id="ma" aria-labelledby="headline">
-      <article class="lead-story">
-        <p class="kicker" id="lead-kicker">A mai menü</p>
-        <h2 class="headline" id="headline">…</h2>
-        <p class="deck" id="deck">…</p>
-        <p class="byline">Írta: a konyha · Fotó helyett: <span class="smallcaps">képzelet</span> · Olvasási idő: egy leves</p>
-        <div class="cols">
-          <p>A Kisasztal tíz asztallal és egy rövid étlappal nyitott a belvárosban. A gondolat azóta sem változott: délben legyen egy tisztességes, kiszámítható menü, este pedig egy pohár bor mellé valami, amiért érdemes visszajönni.</p>
-          <p>A heti menüt péntek délután írjuk meg, és a piacon vett alapanyagokhoz igazítjuk. Ezért előfordul, hogy szerdán kicseréljük a főzeléket, ha a mórahalmi termelőtől szebb tök érkezik, mint amire számítottunk.</p>
-          <div class="menu-card" id="today-card"></div>
-          <p>A menü 11:30-tól tart, amíg el nem fogy. Ez általában fél kettő körül történik, ezért ha biztosra menne, foglaljon asztalt, vagy rendelje meg előre, és mi félretesszük.</p>
-          <p>Elvitelre is kérhető, saját dobozzal 200 forinttal olcsóbban. Az ételek allergénjeit a heti menünél betűjellel jelöljük; ha kérdése van, a pultnál szívesen elmondjuk, mi van benne.</p>
-          <p>Hétvégén nincs menü. Szombaton délben és este à la carte főzünk, vasárnap pedig pihen a konyha és a szakács is.</p>
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <img src="img/paprikas.jpg" alt="" width="1920" height="1277" fetchpriority="high">
+      <div class="page">
+        <div>
+          <p class="kicker">Bisztró és napi menü · Szeged, belváros</p>
+          <h1 id="hero-title">Délben tisztességes menü, este egy pohár bor mellé valami jó.</h1>
+          <p class="lede">Tíz asztal, rövid étlap, piaci alapanyag. A heti menüt péntekenként írjuk, a halászlét pedig passzírozva főzzük, ahogy Szegeden illik.</p>
+          <div class="actions">
+            <a class="btn" href="#asztal">Asztalt foglalok</a>
+            <a class="btn ghost" href="#het">A heti menü</a>
+          </div>
         </div>
-      </article>
+        <div class="today" id="today"></div>
+      </div>
+    </section>
 
-      <aside class="side">
-        <div class="box">
-          <h3>Konyhai előrejelzés</h3>
-          <p>Mikor mennyien vagyunk általában. Ha nem szeret sorban állni, jöjjön fél kettő után.</p>
-          <div class="crowd" id="crowd" aria-hidden="true"></div>
-          <div class="crowd-l" aria-hidden="true"><span>11</span><span>11½</span><span>12</span><span>12½</span><span>13</span><span>13½</span><span>14</span><span>14½</span></div>
+    <div class="info">
+      <div class="page">
+        <div><h3>Ma nyitva</h3><p id="open-today">11–22</p></div>
+        <div><h3>Napi menü</h3><p>11:30-tól, amíg tart</p></div>
+        <div><h3>Telefon</h3><p><a href="tel:+3662000000">06 62 000 000</a></p></div>
+        <div><h3>Cím</h3><p>Szeged, belváros <span style="color:var(--ink-2)">(demó)</span></p></div>
+      </div>
+    </div>
+
+    <section class="block page" id="het">
+      <div class="rule-title"><h2>A heti menü</h2></div>
+      <p class="sub">Leves és A vagy B főétel 3 290 Ft. Elvitelre is, saját dobozzal 200 Ft-tal olcsóbban.</p>
+      <div class="week" id="week"></div>
+      <p class="week-foot"><span>Leves + főétel: 3 290 Ft · csak főétel: 2 690 Ft · csak leves: 1 100 Ft</span><span>Allergének: G glutén · L laktóz · T tojás · Z zeller · M mustár · H hal · D dió</span></p>
+      <div class="pass"><b>15 500<small>5 menü</small></b><p><strong>Menübérlet.</strong> Öt menü egy hónapon belül, bármelyik hétköznap. Egy ebéd így 3 100 Ft. A pultnál vehető.</p></div>
+    </section>
+
+    <section class="block page" id="etlap">
+      <div class="rule-title"><h2>Étlap, este és szombaton</h2></div>
+      <div class="photos">
+        <figure><img src="img/szekelykaposzta.jpg" alt="Székelykáposzta tarjával" width="1280" height="850" loading="lazy"><figcaption>Székelykáposzta, ahogy Szegeden főzik</figcaption></figure>
+        <figure><img src="img/paprikas.jpg" alt="Paprikás csirke galuskával" width="1920" height="1277" loading="lazy"><figcaption>Paprikás csirke, vajas galuskával</figcaption></figure>
+        <figure><img src="img/tokleves.jpg" alt="Sütőtökkrémleves" width="1280" height="865" loading="lazy"><figcaption>Sütőtökkrémleves, tökmagolajjal</figcaption></figure>
+      </div>
+      <div class="carte">
+        <div>
+          <h3>Előételek, levesek</h3>
+          <ul>
+            <li><b>Szegedi halászlé</b><em>3 900</em><span>pontyból és harcsából, passzírozva</span></li>
+            <li><b>Sütőtökkrémleves</b><em>1 900</em><span>pirított tökmag, tökmagolaj</span></li>
+            <li><b>Libamájpástétom</b><em>3 400</em><span>birsalmalekvár, pirított kalács</span></li>
+          </ul>
         </div>
-        <div class="box">
-          <h3>Menübérlet</h3>
-          <div class="stamp-price"><b>15 500<small>5 menü</small></b><p>Öt menü egy hónapon belül, bármelyik hétköznap. Egy ebéd így 3 100 Ft.</p></div>
+        <div>
+          <h3>Főételek</h3>
+          <ul>
+            <li><b>Paprikás csirke</b><em>4 600</em><span>szegedi őrölt paprikával, vajas galuskával</span></li>
+            <li><b>Rántott harcsa</b><em>5 200</em><span>petrezselymes burgonya, házi tartár</span></li>
+            <li><b>Székelykáposzta</b><em>4 300</em><span>füstölt tarjával, tejföllel</span></li>
+            <li><b>Túrós csusza</b><em>3 600</em><span>pirított szalonnával vagy anélkül</span></li>
+          </ul>
         </div>
-        <div class="box">
+        <div>
+          <h3>Desszert</h3>
+          <ul>
+            <li><b>Szilvás gombóc</b><em>2 200</em><span>fahéjas morzsa, amíg van szilva</span></li>
+            <li><b>Rétes</b><em>1 800</em><span>meggyes vagy túrós</span></li>
+          </ul>
+        </div>
+      </div>
+      <p class="allergen">Az árak forintban értendők és az áfát tartalmazzák. A felszolgálási díj 10%, ezt a számla külön tételként mutatja.</p>
+    </section>
+
+    <section class="block page" id="asztal">
+      <div class="rule-title"><h2>Asztalfoglalás</h2></div>
+      <div class="book">
+        <div>
+          <form class="form" id="book-form" novalidate>
+            <div class="row">
+              <label>Nap<select id="a-day"></select></label>
+              <label>Időpont<select id="a-time"></select></label>
+            </div>
+            <div class="row">
+              <label>Létszám<select id="a-people">
+                <option value="1">1 fő</option>
+                <option value="2" selected>2 fő</option>
+                <option value="3">3 fő</option>
+                <option value="4">4 fő</option>
+                <option value="6">6 fő</option>
+                <option value="8">8 fő</option>
+              </select></label>
+              <label>Név<input id="a-name" autocomplete="name"></label>
+            </div>
+            <label>Telefon<input id="a-phone" type="tel" autocomplete="tel"></label>
+            <p class="err" id="a-err" role="alert"></p>
+            <button class="btn" type="submit">Asztalt foglalok</button>
+            <p style="font-size:15px;color:var(--ink-2)">Az éles oldalon e-mailben és SMS-ben kapna visszaigazolást. Nyolc főnél nagyobb társaságnak inkább hívjon.</p>
+          </form>
+          <div id="book-ok" aria-live="polite"></div>
+        </div>
+        <div class="book-side">
+          <figure>
+            <img src="img/bisztro.jpg" alt="Bisztró belső tere, terített asztalokkal" width="1280" height="853" loading="lazy">
+            <figcaption>Tíz asztal, egy pult. Az ablak melletti asztalt érdemes előre kérni.</figcaption>
+          </figure>
+          <div class="crowd-box">
+            <h3>Mikor van hely?</h3>
+            <p>Hétköznap délben általában ennyien vagyunk. Fél kettő után már nyugodtabb.</p>
+            <div class="crowd" id="crowd" aria-hidden="true"></div>
+            <div class="crowd-l" aria-hidden="true"><span>11</span><span>11½</span><span>12</span><span>12½</span><span>13</span><span>13½</span><span>14</span><span>14½</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="catering" id="ceges" aria-labelledby="cat-title">
+      <div class="page">
+        <span class="big">10+</span>
+        <div>
+          <h2 id="cat-title">Céges ebéd, kiszállítva</h2>
+          <p>Tíz adagtól a heti menüt az irodába visszük a belvárosba és Újszegedre, újrahasználható dobozokban. Havi számlával.</p>
+        </div>
+        <form class="form" id="cat-form" novalidate>
+          <label>Adag / nap<input id="c-qty" type="number" min="10" value="10" inputmode="numeric"></label>
+          <label>E-mail<input id="c-mail" type="email" autocomplete="email"></label>
+          <button class="btn" type="submit">Ajánlatot kérek</button>
+          <p class="err" id="c-err" role="alert"></p>
+        </form>
+      </div>
+    </section>
+
+    <section class="block page" id="kapcsolat">
+      <div class="contact">
+        <div>
+          <h3>Hol vagyunk?</h3>
+          <p>Szeged, belváros (demó cím)<br>A villamosmegállótól két perc.<br>Parkolni a mélygarázsban érdemes.</p>
+        </div>
+        <div>
           <h3>Nyitvatartás</h3>
           <ul class="hours" id="hours">
             <li data-d="1"><span>Hétfő–péntek</span><span>11–22</span></li>
@@ -260,129 +390,53 @@
             <li data-d="0"><span>Vasárnap</span><span>zárva</span></li>
           </ul>
         </div>
-      </aside>
-    </section>
-
-    <div class="rule-title" id="het"><h2>A heti menü</h2></div>
-    <div class="week" id="week"></div>
-    <p class="week-foot"><span>Leves + A vagy B főétel: 3 290 Ft · csak főétel: 2 690 Ft · csak leves: 1 100 Ft</span><span>Allergének: G glutén · L laktóz · T tojás · Z zeller · M mustár · H hal · D dió</span></p>
-
-    <section class="lower">
-      <div class="carte" id="etlap">
-        <h2>Étlap, este és szombaton</h2>
-        <div class="cols2">
-          <h3>Előételek, levesek</h3>
-          <ul>
-            <li><b>Szegedi halászlé</b><em>3 900</em><span>pontyból és harcsából, passzírozva, belsőséggel kérésre</span></li>
-            <li><b>Sütőtökkrémleves</b><em>1 900</em><span>pirított tökmag, tökmagolaj</span></li>
-            <li><b>Libamájpástétom</b><em>3 400</em><span>birsalmalekvár, pirított kalács</span></li>
-          </ul>
-          <h3>Főételek</h3>
-          <ul>
-            <li><b>Paprikás csirke</b><em>4 600</em><span>szegedi őrölt paprikával, vajas galuskával</span></li>
-            <li><b>Rántott harcsa</b><em>5 200</em><span>petrezselymes burgonya, házi tartármártás</span></li>
-            <li><b>Székelykáposzta</b><em>4 300</em><span>füstölt tarjával, tejföllel, ahogy Szegeden főzik</span></li>
-            <li><b>Túrós csusza</b><em>3 600</em><span>pirított szalonnával vagy anélkül</span></li>
-          </ul>
-          <h3>Desszert</h3>
-          <ul>
-            <li><b>Szilvás gombóc</b><em>2 200</em><span>fahéjas morzsa, ősszel, amíg van szilva</span></li>
-            <li><b>Rétes</b><em>1 800</em><span>meggyes vagy túrós, a délelőtti adagból</span></li>
-          </ul>
-        </div>
-        <p class="allergen">Az árak forintban értendők és az áfát tartalmazzák. A felszolgálási díj 10%, ezt a számla külön tételként mutatja.</p>
-      </div>
-
-      <div class="classified" id="asztal">
-        <h2>Apróhirdetés: asztalt keresünk</h2>
-        <p>Töltse ki, és a hirdetése azonnal megjelenik lent. Az éles oldalon ilyenkor e-mailben és SMS-ben kapna visszaigazolást.</p>
-        <form class="ad-form" id="ad-form" novalidate>
-          <div class="row">
-            <label>Nap<select id="a-day"></select></label>
-            <label>Időpont<select id="a-time"></select></label>
-          </div>
-          <div class="row">
-            <label>Létszám<select id="a-people">
-              <option value="1">egy fő</option>
-              <option value="2" selected>két fő</option>
-              <option value="3">három fő</option>
-              <option value="4">négy fő</option>
-              <option value="6">hat fő</option>
-              <option value="8">nyolc fő</option>
-            </select></label>
-            <label>Jelige (név)<input id="a-name" autocomplete="name"></label>
-          </div>
-          <label>Telefon<input id="a-phone" type="tel" autocomplete="tel"></label>
-          <p class="ad-err" id="a-err" role="alert"></p>
-          <button type="submit">Hirdetés feladása</button>
-        </form>
-        <div class="ads" id="ads" aria-live="polite">
-          <p class="ad"><b>Négy fő</b> asztalt foglal pénteken este hétre, ablak mellé, ha lehet. Jelige: <i>Évforduló</i>.</p>
-          <p class="ad"><b>Irodai társaság</b> (12 fő) csütörtökön delelne. A menüt előre kérik. Jelige: <i>Könyvelés</i>.</p>
-          <p class="ad"><b>Két fő</b> holnap 12:30-ra, gyerekszékkel. Jelige: <i>Kicsi</i>.</p>
+        <div>
+          <h3>Elérhetőség</h3>
+          <p>Telefon: <a href="tel:+3662000000">06 62 000 000</a><br>E-mail: <a href="mailto:asztal@kisasztal.example">asztal@kisasztal.example</a><br>Foglalás telefonon 10 órától.</p>
         </div>
       </div>
-    </section>
-
-    <section class="catering" id="ceges" aria-label="Céges ebéd">
-      <b>10+</b>
-      <p><strong>Céges ebéd, kiszállítva.</strong> Tíz adagtól a heti menüt az irodába visszük a belvárosba és Újszegedre, újrahasználható dobozokban. Havi számlával, egy kapcsolattartóval.</p>
-      <a href="#asztal">Ajánlatot kérek</a>
     </section>
   </main>
 
   <footer>
     <div class="page">
-      <span>Kiadja a Kisasztal Bisztró (demó). Felelős szerkesztő: a séf.</span>
-      <span>Szedés, tördelés, foglalási rendszer: <a href="/">Gestware</a></span>
+      <span>Kisasztal Bisztró (demó) · Szeged</span>
+      <span>Weboldal és foglalási rendszer: <a href="/">Gestware</a></span>
+      <span class="credits">Fotók (Wikimedia Commons): <a href="https://commons.wikimedia.org/wiki/File:Chicken_paprikash.jpg">stu_spivack</a>, CC BY-SA 2.0 · <a href="https://commons.wikimedia.org/wiki/File:Szeged_goulash_from_pork.jpg">Rkolarsky</a>, CC BY-SA 3.0 · <a href="https://commons.wikimedia.org/wiki/File:Cream_of_pumpkin_soup.jpg">P1898</a>, CC BY 4.0 · <a href="https://commons.wikimedia.org/wiki/File:Bistro_01_(8691077378).jpg">Edmir Silvestre</a>, CC BY 2.0. A képek illusztrációk, nem a demó bisztróban készültek.</span>
     </div>
   </footer>
 
   <script>
     const $ = (id) => document.getElementById(id);
     const WEEK = [
-      { d: 'Hétfő', soup: 'Lebbencsleves', a: ['Rántott sajt, petrezselymes burgonya, tartármártás', 'G L T'], b: ['Lencsefőzelék, sült kolbász', 'G M'], deck: 'Rántott sajt, mert hétfő van, és mert hétfőn ez jár. Előtte lebbencsleves, ahogy a nagymamák főzték, sok paprikával.' },
-      { d: 'Kedd', soup: 'Gulyásleves', a: ['Paprikás csirke, vajas galuska', 'G L T'], b: ['Rakott kel, tejföllel', 'L'], deck: 'Kedden a szegedi paprikáé a főszerep: gulyás, aztán paprikás csirke, olyan galuskával, amit nem kell szégyellni.' },
-      { d: 'Szerda', soup: 'Tárkonyos raguleves', a: ['Sült tarja, hagymás tört burgonya', 'M'], b: ['Spenótfőzelék, tükörtojás', 'L T'], deck: 'Hét közepén a tarja: lassan sütve, hagymás tört burgonyával. A spenótot reggel vettük a Mars téri piacon.' },
-      { d: 'Csütörtök', soup: 'Sütőtökkrémleves', a: ['Székelykáposzta, tejföl, friss kenyér', 'G L'], b: ['Rántott karfiol, rizs, tartár', 'G L T'], deck: 'Ősszel nincs csütörtök sütőtök nélkül. Utána székelykáposzta, ahogy Szegeden hívják és főzik.' },
-      { d: 'Péntek', soup: 'Szegedi halászlé', a: ['Túrós csusza, pirított szalonna', 'G L'], b: ['Rántott harcsa, petrezselymes burgonya', 'G T H'], deck: 'Péntek, tehát hal. A halászlé passzírozott, ahogy itt a folyóparton illik, utána túrós csusza, ha még bírja.' },
+      { d: 'Hétfő', soup: 'Lebbencsleves', a: ['Rántott sajt, petrezselymes burgonya, tartármártás', 'G L T'], b: ['Lencsefőzelék, sült kolbász', 'G M'] },
+      { d: 'Kedd', soup: 'Gulyásleves', a: ['Paprikás csirke, vajas galuska', 'G L T'], b: ['Rakott kel, tejföllel', 'L'] },
+      { d: 'Szerda', soup: 'Tárkonyos raguleves', a: ['Sült tarja, hagymás tört burgonya', 'M'], b: ['Spenótfőzelék, tükörtojás', 'L T'] },
+      { d: 'Csütörtök', soup: 'Sütőtökkrémleves', a: ['Székelykáposzta, tejföl, friss kenyér', 'G L'], b: ['Rántott karfiol, rizs, tartár', 'G L T'] },
+      { d: 'Péntek', soup: 'Szegedi halászlé', a: ['Túrós csusza, pirított szalonna', 'G L'], b: ['Rántott harcsa, petrezselymes burgonya', 'G T H'] },
     ];
     const DAY = ['vasárnap', 'hétfő', 'kedd', 'szerda', 'csütörtök', 'péntek', 'szombat'];
     const now = new Date();
     const dow = now.getDay();
     const idx = dow >= 1 && dow <= 5 ? dow - 1 : null;
 
-    // dateline: volume since opening in 2015, issue = day of the year
-    const roman = (n) => [[10, 'X'], [9, 'IX'], [5, 'V'], [4, 'IV'], [1, 'I']].reduce((s, [v, r]) => { while (n >= v) { s += r; n -= v; } return s; }, '');
-    const start = new Date(now.getFullYear(), 0, 0);
-    const issue = Math.floor((now - start) / 86400000);
-    $('volume').textContent = `${roman(now.getFullYear() - 2015)}. évfolyam, ${issue}. szám`;
-    $('dateline-date').textContent = now.toLocaleDateString('hu-HU', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' });
+    $('open-today').textContent = dow === 0 ? 'Ma zárva' : dow === 6 ? '12–22' : '11–22';
 
-    // lead story
-    if (idx !== null) {
-      const t = WEEK[idx];
-      $('headline').textContent = `${t.soup}, utána ${t.a[0].split(',')[0].toLowerCase()}`;
-      $('deck').textContent = t.deck;
-      $('ear-today').textContent = `${t.soup} és ${t.a[0].split(',')[0].toLowerCase()}`;
-    } else {
-      $('lead-kicker').textContent = dow === 6 ? 'Szombati kiadás' : 'Vasárnapi szünet';
-      $('headline').textContent = dow === 6 ? 'Ma nincs menü, de van halászlé' : 'Ma pihen a konyha';
-      $('deck').textContent = dow === 6 ? 'Szombaton délben és este az étlapról főzünk. A heti menü hétfőn folytatódik.' : 'Vasárnap zárva vagyunk. Hétfőn lebbencslevessel és rántott sajttal nyitunk.';
-      $('ear-today').textContent = dow === 6 ? 'à la carte, 12-től' : 'zárva, hétfőn jövünk';
-    }
+    // today's menu card in the hero
     const t = WEEK[idx ?? 0];
-    $('today-card').innerHTML = `<h4>${idx !== null ? 'Mai menü' : 'Hétfői menü'}</h4><ul>
-      <li><span>${t.soup}</span><span class="price">1 100 Ft</span></li>
-      <li><span><b>A</b> ${t.a[0]}</span><span class="price">2 690 Ft</span></li>
-      <li><span><b>B</b> ${t.b[0]}</span><span class="price">2 690 Ft</span></li>
-      <li><span><i>Leves + főétel</i></span><span class="price">3 290 Ft</span></li></ul>`;
+    const when = idx !== null ? `${DAY[dow]}, ${now.toLocaleDateString('hu-HU', { month: 'short', day: 'numeric' })}` : 'hétfőtől';
+    $('today').innerHTML = `<h2>${idx !== null ? 'Mai menü' : 'Hétfői menü'}<small>${when}</small></h2><ul>
+      <li><span>${t.soup}</span><span class="p">1 100 Ft</span></li>
+      <li><span><b>A</b>${t.a[0]}</span><span class="p">2 690 Ft</span></li>
+      <li><span><b>B</b>${t.b[0]}</span><span class="p">2 690 Ft</span></li>
+      <li class="total"><span>Leves + főétel</span><span class="p">3 290 Ft</span></li></ul>
+      <p class="small">${idx !== null ? '11:30-tól, amíg tart. Félretesszük, ha előre szól.' : 'Hétvégén nincs menü, szombaton az étlapról főzünk.'}</p>`;
 
     // week
     const monday = new Date(now); monday.setDate(now.getDate() - ((dow + 6) % 7));
     $('week').innerHTML = WEEK.map((w, i) => {
       const d = new Date(monday); d.setDate(monday.getDate() + i);
-      return `<article class="day${i === idx ? ' today' : ''}">
+      return `<article class="day${i === idx ? ' is-today' : ''}">
         <h3>${w.d}<small>${d.toLocaleDateString('hu-HU', { month: 'short', day: 'numeric' })}${i === idx ? ' · ma' : ''}</small></h3>
         <p class="soup">${w.soup}</p>
         <p class="opt"><b>A</b>${w.a[0]}<span class="al">${w.a[1]}</span></p>
@@ -397,16 +451,15 @@
 
     document.querySelector(`#hours [data-d="${dow >= 1 && dow <= 5 ? 1 : dow}"]`)?.classList.add('today');
 
-    // reservation as a classified ad
-    const ON = { hétfő: 'hétfőn', kedd: 'kedden', szerda: 'szerdán', csütörtök: 'csütörtökön', péntek: 'pénteken', szombat: 'szombaton' };
-    const NUMS = { 1: 'Egy fő', 2: 'Két fő', 3: 'Három fő', 4: 'Négy fő', 6: 'Hat fő', 8: 'Nyolc fő' };
+    // booking
+    const ON = { ma: 'ma', holnap: 'holnap', hétfő: 'hétfőn', kedd: 'kedden', szerda: 'szerdán', csütörtök: 'csütörtökön', péntek: 'pénteken', szombat: 'szombaton' };
     const days = [];
-    for (let i = 0, d = new Date(now); days.length < 7; i++, d.setDate(d.getDate() + 1)) {
+    for (let d = new Date(now); days.length < 7; d.setDate(d.getDate() + 1)) {
       if (d.getDay() !== 0) days.push(new Date(d));
     }
     $('a-day').innerHTML = days.map((d, i) => {
-      const label = d.toDateString() === now.toDateString() ? 'ma' : i === 1 && (d - now) < 2 * 86400000 ? 'holnap' : DAY[d.getDay()];
-      return `<option value="${i}">${label}, ${d.toLocaleDateString('hu-HU', { month: 'short', day: 'numeric' })}</option>`;
+      const lbl = d.toDateString() === now.toDateString() ? 'ma' : i === 1 && (d - now) < 2 * 86400000 ? 'holnap' : DAY[d.getDay()];
+      return `<option value="${i}">${lbl}, ${d.toLocaleDateString('hu-HU', { month: 'short', day: 'numeric' })}</option>`;
     }).join('');
     function fillTimes() {
       const d = days[$('a-day').value];
@@ -416,31 +469,42 @@
         if (d.toDateString() === now.toDateString() && m <= now.getHours() * 60 + now.getMinutes() + 30) continue;
         out.push(`${Math.floor(m / 60)}:${String(m % 60).padStart(2, '0')}`);
       }
-      $('a-time').innerHTML = out.length ? out.map((t) => `<option${t === '12:30' ? ' selected' : ''}>${t}</option>`).join('') : '<option value="">mára már nincs</option>';
+      $('a-time').innerHTML = out.length ? out.map((x) => `<option${x === '12:30' ? ' selected' : ''}>${x}</option>`).join('') : '<option value="">mára már nincs</option>';
     }
     $('a-day').addEventListener('change', fillTimes);
     fillTimes();
 
-    $('ad-form').addEventListener('submit', (e) => {
+    $('book-form').addEventListener('submit', (e) => {
       e.preventDefault();
       const name = $('a-name').value.trim();
       const phone = $('a-phone').value.replace(/\D/g, '');
       const time = $('a-time').value;
       const err = $('a-err');
       if (!time) { err.textContent = 'Erre a napra már nincs szabad időpont.'; return; }
-      if (!name) { err.textContent = 'Jelige nélkül nem tudjuk, kit várunk.'; return; }
+      if (!name) { err.textContent = 'Kérjük a nevét, hogy tudjuk, kit várunk.'; return; }
       if (phone.length < 9) { err.textContent = 'Kérünk egy telefonszámot, ha közbejönne valami.'; return; }
       err.textContent = '';
       const sel = $('a-day');
       const dayText = sel.options[sel.selectedIndex].text.split(',')[0];
-      const people = $('a-people').value;
-      const ad = document.createElement('p');
-      ad.className = 'ad new';
-      ad.innerHTML = `<b>${NUMS[people]}</b> asztalt foglal ${ON[dayText] ?? dayText} ${time}-ra. Jelige: <i></i>. <span class="smallcaps">Visszaigazolva (demó).</span>`;
-      ad.querySelector('i').textContent = name;
-      $('ads').prepend(ad);
-      $('ad-form').reset();
+      const ok = document.createElement('p');
+      ok.className = 'ok';
+      ok.innerHTML = `<b>Köszönjük, <span></span>!</b>${$('a-people').value} főre foglaltunk asztalt ${ON[dayText] ?? dayText} ${time}-ra. (Demó: valójában nem küldtünk adatot.)`;
+      ok.querySelector('span').textContent = name;
+      $('book-ok').replaceChildren(ok);
+      $('book-form').reset();
       fillTimes();
+    });
+
+    $('cat-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const qty = Number($('c-qty').value);
+      const mail = $('c-mail').value.trim();
+      const err = $('c-err');
+      if (!(qty >= 10)) { err.textContent = 'Tíz adagtól szállítunk.'; return; }
+      if (!/^\S+@\S+\.\S+$/.test(mail)) { err.textContent = 'Kérünk egy e-mail-címet az ajánlathoz.'; return; }
+      err.textContent = `Köszönjük! Az ajánlatot ${qty} adagra küldjük a megadott címre (demó).`;
+      err.style.fontStyle = 'normal';
+      err.style.color = 'var(--paper)';
     });
   </script>
 </body>
