@@ -110,3 +110,33 @@ if (demoList && demoCount) {
     demoCount.textContent = atEnd ? cards.length : Math.round(demoList.scrollLeft / step) + 1;
   }, { passive: true });
 }
+
+// Hero: sketch vs. finished page. The range input sits invisibly on top of the
+// picture, so dragging, clicking and the arrow keys all move the divider.
+const compare = document.querySelector('.compare-view');
+
+if (compare) {
+  const slider = compare.querySelector('input');
+  const setPos = (value) => compare.style.setProperty('--pos', `${value}%`);
+  slider.addEventListener('input', () => setPos(slider.value));
+
+  // one gentle swing the first time it scrolls into view, so it reads as movable
+  if (matchMedia('(prefers-reduced-motion: no-preference)').matches && 'IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      observer.disconnect();
+      let start;
+      const swing = (time) => {
+        if (document.activeElement === slider) return;
+        start ??= time;
+        const k = Math.min((time - start) / 1600, 1);
+        const value = 50 + Math.sin(k * Math.PI * 2) * 22 * (1 - k);
+        setPos(value);
+        slider.value = value;
+        if (k < 1) requestAnimationFrame(swing);
+      };
+      setTimeout(() => requestAnimationFrame(swing), 500);
+    }, { threshold: 0.6 });
+    observer.observe(compare);
+  }
+}

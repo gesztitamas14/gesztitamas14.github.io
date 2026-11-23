@@ -53,3 +53,5 @@ Címek: https://gestware.web.app/pontjo/adatvedelem.html (ez van a Play Console-
 ## Mintaoldalak
 
 A `demo/` mappában kitalált vállalkozások demóoldalai vannak (`noindex`, nincsenek a sitemapben). Mindegyik egyetlen statikus `index.html`, inline CSS-sel és JS-sel; a betűk a `demo/fonts/fonts.css`-ből jönnek (fontsource, OFL). A főoldal előnézeti képei: `assets/img/demo-*.jpg` (1280×800-as nézet, 0,75-ös skálával).
+
+A főoldal nyitóképén lévő csúszka két képe a Rozmaring-demó nyitóoldala 1280×800-as nézetben: `assets/img/rozmaring-kesz.jpg` (a kész oldal) és `assets/img/rozmaring-vazlat.jpg` (ugyanez drótvázként).

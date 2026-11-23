@@ -1,0 +1,710 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rozmaring Virágbolt — csokrok, kiszállítás, adventi koszorú, Szeged</title>
+  <meta name="description" content="Demó oldal a Gestware referenciái közül: virágbolt csokorkészítővel, kiszállítással és adventi koszorú-előrendeléssel.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#f4ede2">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%2334432f'/%3E%3Cpath d='M8 13V4M8 6l-2.5-1.5M8 8l2.5-1.5M8 10l-2.5-1.5' stroke='%23f4ede2' stroke-width='1.3' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../fonts/fonts.css">
+  <style>
+    :root {
+      --paper: #f4ede2;
+      --paper-2: #ebe1d1;
+      --card: #fbf7f0;
+      --kraft: #d8c2a0;
+      --ink: #2b2a24;
+      --ink-2: #6b6355;
+      --green: #34432f;
+      --green-2: #4c5e45;
+      --rose: #b0503c;
+      --hair: #d5c8b4;
+      --head: "Young Serif", Georgia, serif;
+      --body: "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
+      --hand: "Caveat", "Segoe Print", cursive;
+      --gut: clamp(16px, 3.5vw, 36px);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font: 400 17px/1.55 var(--body);
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3, h4, p, ul, ol, figure { margin: 0; }
+    ul, ol { padding: 0; list-style: none; }
+    a { color: inherit; }
+    img { display: block; max-width: 100%; height: auto; }
+    button, input, select, textarea { font: inherit; color: inherit; }
+    :focus-visible { outline: 2px solid var(--rose); outline-offset: 3px; }
+    .page { max-width: 1180px; margin: 0 auto; padding: 0 var(--gut); }
+    .num { font-variant-numeric: tabular-nums; }
+    [hidden] { display: none !important; }
+    .hand { font-family: var(--hand); }
+
+    .demo-bar { background: var(--green); color: var(--paper); font-size: 14px; padding: 6px 0; }
+    .demo-bar .page { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 13px 22px;
+      border: 0;
+      border-radius: 999px;
+      background: var(--green);
+      color: var(--paper);
+      font: 600 15px/1 var(--body);
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-color 0.15s;
+    }
+    .btn:hover { background: var(--rose); }
+    .btn.line { background: transparent; color: var(--green); box-shadow: inset 0 0 0 1.5px var(--green); }
+    .btn.line:hover { background: var(--green); color: var(--paper); }
+
+    /* top bar */
+    .top { position: sticky; top: 0; z-index: 10; background: rgb(244 237 226 / 0.94); backdrop-filter: blur(6px); border-bottom: 1px solid var(--hair); }
+    .top .page { display: flex; align-items: center; gap: 28px; min-height: 66px; }
+    .logo { display: inline-flex; align-items: center; gap: 8px; font: 400 26px/1 var(--head); color: var(--green); text-decoration: none; }
+    .logo svg { width: 22px; height: 26px; }
+    .top nav { display: flex; gap: 24px; margin-left: auto; font-size: 15px; }
+    .top nav a { text-decoration: none; }
+    .top nav a:hover { color: var(--rose); }
+    .top .btn { padding: 11px 18px; }
+
+    /* hero */
+    .hero .page { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 72px); align-items: center; padding-top: clamp(36px, 6vw, 72px); padding-bottom: clamp(40px, 6vw, 72px); }
+    .kicker { font-size: 14px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rose); }
+    .hero h1 { margin-top: 16px; font: 400 clamp(40px, 5.2vw, 66px)/1.04 var(--head); letter-spacing: -0.01em; color: var(--green); text-wrap: balance; }
+    .hero .lede { margin-top: 20px; max-width: 30em; font-size: clamp(18px, 1.6vw, 20px); color: #4a463d; }
+    .hero .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+    .hero-photo { position: relative; }
+    .hero-photo img { width: 100%; aspect-ratio: 4 / 4.4; object-fit: cover; object-position: 85% 50%; border-radius: 999px 999px 14px 14px; }
+    .note {
+      position: absolute;
+      left: -28px;
+      bottom: 36px;
+      width: 220px;
+      padding: 14px 16px 16px;
+      background: var(--card);
+      box-shadow: 0 1px 0 var(--hair), 0 14px 30px rgb(52 40 20 / 0.16);
+      transform: rotate(-3deg);
+      font-family: var(--hand);
+      font-size: 22px;
+      line-height: 1.15;
+    }
+    .note::before { content: ""; position: absolute; top: -9px; left: 50%; width: 56px; height: 18px; margin-left: -28px; background: rgb(216 194 160 / 0.8); transform: rotate(2deg); }
+    .note b { display: block; margin-bottom: 4px; font-weight: 700; color: var(--rose); }
+
+    /* info strip */
+    .info { background: var(--paper-2); }
+    .info .page { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .info .page > div { padding: 16px 20px; border-left: 1px solid var(--hair); }
+    .info .page > div:first-child { border-left: 0; padding-left: 0; }
+    .info h3 { font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); }
+    .info p { margin-top: 4px; font-size: 17px; }
+    .info a { font-weight: 600; text-decoration: none; }
+    .dot { display: inline-block; width: 8px; height: 8px; margin-right: 8px; border-radius: 50%; background: #6c8f4e; vertical-align: 1px; }
+    .dot.off { background: var(--rose); }
+
+    section.block { padding-top: clamp(64px, 8vw, 104px); }
+    .head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px 48px; align-items: end; margin-bottom: 32px; }
+    .head h2 { font: 400 clamp(32px, 3.8vw, 46px)/1.08 var(--head); color: var(--green); }
+    .head p { color: #4a463d; max-width: 34em; }
+
+    /* bouquets */
+    .bouquets { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; }
+    .bq img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 10px; }
+    .bq h3 { margin-top: 14px; font: 400 22px/1.15 var(--head); }
+    .bq p { margin-top: 4px; font-size: 15px; color: var(--ink-2); }
+    .bq .row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--hair); }
+    .bq .price { font-weight: 600; }
+    .bq button { padding: 0; border: 0; background: none; color: var(--rose); font-weight: 600; cursor: pointer; text-decoration: underline; text-underline-offset: 0.2em; }
+
+    /* in the shop now: kraft price list */
+    .now { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: clamp(24px, 4vw, 56px); align-items: center; margin-top: clamp(48px, 6vw, 72px); }
+    .kraft {
+      padding: 24px 28px 26px;
+      background: var(--kraft);
+      background-image: radial-gradient(rgb(120 90 50 / 0.08) 1px, transparent 1px);
+      background-size: 5px 5px;
+      border-radius: 4px;
+      font-family: var(--hand);
+      color: #33291c;
+    }
+    .kraft h3 { font: 700 34px/1 var(--hand); }
+    .kraft small { display: block; margin-top: 2px; font-size: 20px; color: #6e5a3e; }
+    .kraft ul { margin-top: 14px; }
+    .kraft li { display: flex; align-items: baseline; gap: 8px; font-size: 25px; line-height: 1.5; }
+    .kraft li::after { content: ""; order: 1; flex: 1; border-bottom: 2px dotted rgb(51 41 28 / 0.35); }
+    .kraft li span:last-child { order: 2; }
+    .now-text h3 { font: 400 28px/1.15 var(--head); color: var(--green); }
+    .now-text p { margin-top: 12px; color: #4a463d; }
+
+    /* builder */
+    .builder { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr); gap: 32px; align-items: start; }
+    .steps { display: grid; gap: 26px; }
+    fieldset { margin: 0; padding: 0; border: 0; min-width: 0; }
+    legend { display: flex; gap: 10px; align-items: baseline; margin-bottom: 12px; padding: 0; font: 400 21px/1.2 var(--head); }
+    legend i { font: 700 22px/1 var(--hand); font-style: normal; color: var(--rose); }
+    .choice { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+    .choice.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .opt { position: relative; display: grid; gap: 2px; padding: 12px; border: 1.5px solid var(--hair); border-radius: 10px; background: var(--card); cursor: pointer; transition: border-color 0.15s; }
+    .opt:hover { border-color: var(--green-2); }
+    .opt input { position: absolute; opacity: 0; pointer-events: none; }
+    .opt:has(input:checked) { border-color: var(--green); box-shadow: inset 0 0 0 1px var(--green); }
+    .opt:has(input:focus-visible) { outline: 2px solid var(--rose); outline-offset: 2px; }
+    .opt img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 6px; margin-bottom: 6px; }
+    .opt b { font-weight: 600; font-size: 16px; }
+    .opt span { font-size: 14px; color: var(--ink-2); }
+    .opt .size { display: grid; place-items: end center; height: 46px; margin-bottom: 4px; }
+    .opt .size i { display: block; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #e9a99a, var(--rose)); }
+    .fields { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .field { display: grid; gap: 4px; font-size: 14px; font-weight: 600; }
+    .field input, .field select, .field textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1.5px solid var(--hair);
+      border-radius: 8px;
+      background: var(--card);
+      font: 400 16px/1.35 var(--body);
+    }
+    .field textarea { resize: vertical; min-height: 76px; }
+    .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--green); }
+    .field .count { justify-self: end; font-weight: 400; color: var(--ink-2); font-size: 13px; }
+    .wide { grid-column: 1 / -1; }
+
+    .summary { position: sticky; top: 90px; display: grid; gap: 18px; }
+    .card-prev {
+      position: relative;
+      min-height: 200px;
+      padding: 22px 24px;
+      background: #fffdf8;
+      border-radius: 4px;
+      box-shadow: 0 1px 0 var(--hair), 0 18px 34px rgb(52 40 20 / 0.14);
+      transform: rotate(1.2deg);
+      font: 400 28px/1.2 var(--hand);
+      color: #2c3a52;
+      overflow-wrap: anywhere;
+    }
+    .card-prev::after { content: "Rozmaring"; position: absolute; right: 16px; bottom: 10px; font: 400 12px var(--head); color: var(--green-2); opacity: 0.7; }
+    .card-prev .to { display: block; margin-bottom: 6px; font-weight: 700; }
+    .card-prev .ph { color: #9aa2b0; }
+    .bill { padding: 20px; border-radius: 10px; background: var(--green); color: var(--paper); }
+    .bill h3 { font: 400 22px/1.2 var(--head); }
+    .bill ul { margin-top: 12px; }
+    .bill li { display: flex; justify-content: space-between; gap: 12px; padding: 6px 0; border-bottom: 1px solid rgb(244 237 226 / 0.18); font-size: 15px; }
+    .bill li span:last-child { white-space: nowrap; font-variant-numeric: tabular-nums; }
+    .bill .total { display: flex; justify-content: space-between; align-items: baseline; margin: 14px 0 16px; font: 400 28px/1 var(--head); }
+    .bill .total small { font: 400 14px var(--body); opacity: 0.75; }
+    .bill .btn { width: 100%; justify-content: center; background: var(--paper); color: var(--green); }
+    .bill .btn:hover { background: var(--rose); color: #fff; }
+    .bill .fine { margin-top: 10px; font-size: 13px; opacity: 0.75; }
+    .err { min-height: 1.2em; font-size: 15px; color: #ffc9bc; }
+    .ok { padding: 16px 18px; border-radius: 10px; background: var(--card); border: 1.5px solid var(--green); animation: rise 0.4s ease both; }
+    .ok b { display: block; font: 400 21px/1.2 var(--head); color: var(--green); margin-bottom: 4px; }
+    @keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+    /* advent */
+    .advent { margin-top: clamp(64px, 8vw, 104px); background: var(--green); color: var(--paper); }
+    .advent .page { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: clamp(28px, 5vw, 64px); align-items: center; padding-top: clamp(40px, 6vw, 72px); padding-bottom: clamp(40px, 6vw, 72px); }
+    .advent img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 50%; }
+    .advent .kicker { color: #e8b4a5; }
+    .advent h2 { margin-top: 12px; font: 400 clamp(32px, 3.8vw, 46px)/1.08 var(--head); }
+    .advent .lede { margin-top: 12px; color: #dcd6c8; max-width: 32em; }
+    .wreaths { margin-top: 22px; border-top: 1px solid rgb(244 237 226 / 0.25); }
+    .wreaths li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 16px; padding: 12px 0; border-bottom: 1px solid rgb(244 237 226 / 0.25); }
+    .wreaths b { font-weight: 600; }
+    .wreaths span { grid-column: 1; font-size: 15px; color: #cfc8b8; }
+    .wreaths em { grid-row: 1; grid-column: 2; font-style: normal; font-weight: 600; }
+    .workshop { margin-top: 22px; padding: 18px 20px; border-radius: 10px; background: rgb(244 237 226 / 0.08); box-shadow: inset 0 0 0 1px rgb(244 237 226 / 0.2); }
+    .workshop h3 { font: 400 22px/1.2 var(--head); }
+    .workshop p { margin-top: 4px; font-size: 15px; color: #dcd6c8; }
+    .seats { display: flex; gap: 6px; margin: 12px 0; }
+    .seats i { width: 16px; height: 16px; border-radius: 50%; box-shadow: inset 0 0 0 1.5px var(--paper); }
+    .seats i.taken { background: var(--paper); }
+    .ws-form { display: grid; grid-template-columns: 1fr 1fr auto; gap: 10px; align-items: end; }
+    .ws-form input { width: 100%; padding: 10px 12px; border: 0; border-radius: 8px; background: var(--paper); color: var(--ink); font-size: 16px; }
+    .ws-form .btn { background: var(--rose); }
+    .ws-form .btn:hover { background: var(--paper); color: var(--green); }
+    .ws-msg { grid-column: 1 / -1; min-height: 1.2em; font-size: 15px; color: #ffc9bc; }
+    .ws-msg.good { color: var(--paper); }
+
+    /* about */
+    .about { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 64px); align-items: center; }
+    .about img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 10px; }
+    .about h2 { font: 400 clamp(30px, 3.4vw, 40px)/1.1 var(--head); color: var(--green); }
+    .about p { margin-top: 14px; color: #4a463d; max-width: 32em; }
+    .sign { margin-top: 14px; font: 700 30px/1 var(--hand); color: var(--rose); }
+
+    /* contact */
+    .contact { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+    .contact > div { padding: 20px 22px; border-radius: 10px; background: var(--card); box-shadow: 0 0 0 1px var(--hair); }
+    .contact h3 { margin-bottom: 8px; font: 400 21px/1.2 var(--head); color: var(--green); }
+    .contact p, .contact li { font-size: 16px; }
+    .contact a { font-weight: 600; text-decoration: none; }
+    .hours li { display: flex; justify-content: space-between; gap: 12px; padding: 4px 0; border-bottom: 1px dotted var(--hair); }
+    .hours li.today { font-weight: 700; color: var(--rose); }
+    .zones li { display: flex; justify-content: space-between; gap: 12px; padding: 4px 0; border-bottom: 1px dotted var(--hair); }
+
+    footer { margin-top: clamp(56px, 7vw, 88px); padding: 22px 0 40px; border-top: 1px solid var(--hair); font-size: 14px; color: var(--ink-2); }
+    footer .page { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px 24px; }
+    footer .credits { flex-basis: 100%; font-size: 13px; }
+
+    @media (max-width: 1000px) {
+      .top nav { display: none; }
+      .top .btn { margin-left: auto; }
+      .bouquets { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .builder { grid-template-columns: 1fr; }
+      .summary { position: static; grid-template-columns: 1fr 1fr; align-items: start; }
+      .info .page { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .info .page > div:nth-child(3) { border-left: 0; padding-left: 0; }
+      .info .page > div:nth-child(n + 3) { border-top: 1px solid var(--hair); }
+    }
+    @media (max-width: 760px) {
+      body { font-size: 16px; }
+      .hero .page, .head, .now, .advent .page, .about { grid-template-columns: 1fr; }
+      .hero-photo { margin: 0 8px; }
+      .note { left: -8px; bottom: 20px; width: 190px; font-size: 20px; }
+      .choice { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .choice.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .choice.three .opt { padding: 10px 8px; }
+      .fields, .summary, .contact { grid-template-columns: 1fr; }
+      .advent img { max-width: 320px; margin: 0 auto; }
+      .ws-form { grid-template-columns: 1fr; }
+      .kraft li { font-size: 22px; }
+    }
+    @media (max-width: 420px) {
+      .bouquets { gap: 20px 14px; }
+      .bq h3 { font-size: 19px; }
+      .bq .row { flex-direction: column; gap: 2px; }
+      .info .page { grid-template-columns: 1fr; }
+      .info .page > div { border-left: 0; padding-left: 0; }
+      .info .page > div:nth-child(n + 2) { border-top: 1px solid var(--hair); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .ok { animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="demo-bar">
+    <div class="page">
+      <span>Demó oldal: kitalált virágbolt, a rendelés nem küld adatot.</span>
+      <a href="/#munkak">← Gestware referencia</a>
+    </div>
+  </div>
+
+  <header class="top">
+    <div class="page">
+      <a class="logo" href="#">
+        <svg viewBox="0 0 22 26" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M11 25V3"/><path d="M11 7c-3-1-5-3-5.5-5.5M11 7c3-1 5-3 5.5-5.5M11 13c-3.5-1-6-3.5-6.5-6.5M11 13c3.5-1 6-3.5 6.5-6.5M11 19c-4-1-6.5-4-7-7.5M11 19c4-1 6.5-4 7-7.5"/></svg>
+        Rozmaring
+      </a>
+      <nav aria-label="Fő menü">
+        <a href="#csokrok">Csokrok</a>
+        <a href="#keszito">Csokorkészítő</a>
+        <a href="#advent">Advent</a>
+        <a href="#bolt">Bolt és kiszállítás</a>
+      </nav>
+      <a class="btn" href="#keszito">Csokrot rendelek</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="page">
+        <div>
+          <p class="kicker">Virágbolt és kötészet · Szeged, Felsőváros</p>
+          <h1 id="hero-title">Csokor, amit nem a polcról veszünk le.</h1>
+          <p class="lede">Minden csokrot akkor kötünk meg, amikor megrendelik, aznap reggel érkezett virágból. A pultnál nyolctól várjuk, Szegeden belül pedig még aznap házhoz visszük.</p>
+          <div class="actions">
+            <a class="btn" href="#keszito">Összeállítom a csokrot</a>
+            <a class="btn line" href="#advent">Adventi koszorúk</a>
+          </div>
+        </div>
+        <div class="hero-photo">
+          <img src="img/kotes.jpg" alt="Virágkötő elvágja a csokor szárait, mellette csomagolópapír" width="1800" height="1200" fetchpriority="high">
+          <div class="note" aria-label="Ma reggel érkezett">
+            <b>Ma reggel jött:</b>
+            <span id="note-list">eukaliptusz, krizantém, ilex bogyó, fehér rózsa</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="info">
+      <div class="page">
+        <div><h3>Ma</h3><p id="open-today"><span class="dot"></span>Nyitva 8–18</p></div>
+        <div><h3>Kiszállítás</h3><p id="same-day">Ma még kivisszük</p></div>
+        <div><h3>Telefon</h3><p><a href="tel:+3662000001">06 62 000 001</a></p></div>
+        <div><h3>Cím</h3><p>Szeged, Felsőváros <span style="color:var(--ink-2)">(demó)</span></p></div>
+      </div>
+    </div>
+
+    <section class="block page" id="csokrok" aria-labelledby="csokrok-cim">
+      <div class="head">
+        <h2 id="csokrok-cim">Négy hangulat, három méret</h2>
+        <p>Nem fix csokrokat árulunk, hanem hangulatot: megmondja, milyen legyen, mi pedig abból kötjük meg, ami aznap a legszebb. A képek csak irányt mutatnak.</p>
+      </div>
+      <div class="bouquets" id="bouquets"></div>
+
+      <div class="now">
+        <div class="kraft">
+          <h3 id="season-title">Most a boltban</h3>
+          <small id="season-sub">szálanként is, a pultnál</small>
+          <ul id="season"></ul>
+        </div>
+        <div class="now-text">
+          <h3>Szálanként is lehet.</h3>
+          <p>Ha csak egy szál kell az asztalra, vagy maga állítaná össze, a pultnál szálanként is adunk. A listát reggelente frissítjük, ahogy a nagybani piacról megérkezünk.</p>
+          <p>Csomagolás kraft papírban ingyen, és ha szól, a szárakat is levágjuk úgy, hogy hazáig bírja víz nélkül.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="block page" id="keszito" aria-labelledby="keszito-cim">
+      <div class="head">
+        <h2 id="keszito-cim">Csokorkészítő</h2>
+        <p>Három kérdés, és ott az ár. A kártyát kézzel írjuk meg, a saját szavaival.</p>
+      </div>
+      <form class="builder" id="order" novalidate>
+        <div class="steps">
+          <fieldset>
+            <legend><i>1.</i> Milyen hangulatú legyen?</legend>
+            <div class="choice" id="moods"></div>
+          </fieldset>
+
+          <fieldset>
+            <legend><i>2.</i> Mekkora?</legend>
+            <div class="choice three" id="sizes"></div>
+          </fieldset>
+
+          <fieldset>
+            <legend><i>3.</i> Miben adjuk át?</legend>
+            <div class="choice three" id="wraps"></div>
+          </fieldset>
+
+          <fieldset>
+            <legend><i>4.</i> Kártya és kézbesítés</legend>
+            <div class="fields">
+              <label class="field">Kinek szól?<input id="o-to" placeholder="pl. Anna" maxlength="30" autocomplete="off"></label>
+              <label class="field">Átvétel
+                <select id="o-zone"></select>
+              </label>
+              <label class="field wide">A kártya szövege
+                <textarea id="o-msg" maxlength="140" placeholder="Boldog születésnapot! Puszi, Bori"></textarea>
+                <span class="count" id="o-count">0 / 140</span>
+              </label>
+              <label class="field">Nap<select id="o-day"></select></label>
+              <label class="field">Időablak<select id="o-slot"></select></label>
+              <label class="field">Az ön neve<input id="o-name" autocomplete="name"></label>
+              <label class="field">Telefon<input id="o-phone" type="tel" autocomplete="tel" placeholder="06 30 …"></label>
+              <label class="field wide" id="addr-wrap" hidden>Kézbesítési cím<input id="o-addr" autocomplete="street-address" placeholder="utca, házszám, csengő"></label>
+            </div>
+          </fieldset>
+        </div>
+
+        <aside class="summary" aria-label="Összesítő">
+          <div class="card-prev" aria-live="polite"><span class="to" id="p-to">Kedves …!</span><span id="p-msg" class="ph">Boldog születésnapot! Puszi, Bori</span></div>
+          <div class="bill">
+            <h3>A rendelése</h3>
+            <ul id="bill"></ul>
+            <p class="total"><small>összesen</small><span id="total" class="num">0 Ft</span></p>
+            <button class="btn" type="submit">Megrendelem</button>
+            <p class="err" id="o-err" role="alert"></p>
+            <p class="fine">Fizetés átvételkor kártyával vagy készpénzzel. Az éles oldalon online fizetés is lehetne.</p>
+          </div>
+          <div id="o-ok" aria-live="polite"></div>
+        </aside>
+      </form>
+    </section>
+
+    <section class="advent" id="advent" aria-labelledby="advent-cim">
+      <div class="page">
+        <img src="img/koszoru.jpg" alt="Adventi koszorú négy piros gyertyával, szárított naranccsal, fahéjjal és tobozzal" width="1200" height="1083" loading="lazy">
+        <div>
+          <p class="kicker" id="advent-kicker">Advent</p>
+          <h2 id="advent-cim">Adventi koszorú, előrendelésre</h2>
+          <p class="lede">Friss nordmann fenyőből, kézzel kötve. A koszorúkat csütörtökön és pénteken kötjük, szombattól átvehetők a boltban, vagy kivisszük.</p>
+          <ul class="wreaths">
+            <li><b>Erdei</b><em>8 900 Ft</em><span>szárított narancs, fahéj, toboz, piros gyertya</span></li>
+            <li><b>Csendes</b><em>9 400 Ft</em><span>ezüstfenyő, fehér gyertya, len szalag</span></li>
+            <li><b>Csak a koszorú</b><em>5 900 Ft</em><span>gyertya és dísz nélkül, otthon díszítené</span></li>
+          </ul>
+          <div class="workshop">
+            <h3>Kössük meg együtt</h3>
+            <p id="ws-when">Koszorúkötő délután a boltban, szombaton 15 órától. Forralt bor, minden alapanyag, két óra. 7 900 Ft fejenként.</p>
+            <div class="seats" id="seats" aria-hidden="true"></div>
+            <form class="ws-form" id="ws-form" novalidate>
+              <label class="field">Név<input id="w-name" autocomplete="name"></label>
+              <label class="field">Telefon<input id="w-phone" type="tel" autocomplete="tel"></label>
+              <button class="btn" type="submit">Helyet foglalok</button>
+              <p class="ws-msg" id="w-msg" role="status"></p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block page" aria-labelledby="rolunk-cim">
+      <div class="about">
+        <img src="img/muhely.jpg" alt="Virágkötő keze a munkaasztal fölött, körülötte szálanként előkészített virágok" width="1200" height="800" loading="lazy">
+        <div>
+          <h2 id="rolunk-cim">Kis bolt, egy munkaasztallal.</h2>
+          <p>2011 óta kötünk csokrot ugyanabban a felsővárosi üzletben. Ketten vagyunk, és a legtöbb törzsvásárlónkat név szerint ismerjük. Esküvőre, temetésre, rendezvényre egyeztetés után vállalunk munkát, ilyenkor el is megyünk megnézni a helyszínt.</p>
+          <p>A virágot hetente háromszor hozzuk a nagybaniról, a száraz virágokat nyáron magunk szárítjuk a bolt hátsó szobájában.</p>
+          <p class="sign">Kati és Bence</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="block page" id="bolt" aria-labelledby="bolt-cim">
+      <div class="head">
+        <h2 id="bolt-cim">Bolt és kiszállítás</h2>
+        <p>Szegeden belül hétfőtől szombatig szállítunk. Ha délután egyig megrendeli, még aznap odaérünk.</p>
+      </div>
+      <div class="contact">
+        <div>
+          <h3>Nyitvatartás</h3>
+          <ul class="hours" id="hours">
+            <li data-d="1"><span>Hétfő–péntek</span><span>8–18</span></li>
+            <li data-d="6"><span>Szombat</span><span>8–13</span></li>
+            <li data-d="0"><span>Vasárnap</span><span>zárva</span></li>
+          </ul>
+          <p style="margin-top:10px;font-size:15px;color:var(--ink-2)">Adventi vasárnapokon 9–12 óráig nyitva vagyunk.</p>
+        </div>
+        <div>
+          <h3>Kiszállítási díjak</h3>
+          <ul class="zones" id="zones"></ul>
+        </div>
+        <div>
+          <h3>Elérhetőség</h3>
+          <p>Szeged, Felsőváros (demó cím)<br>A villamos végállomásától három perc.</p>
+          <p style="margin-top:10px">Telefon: <a href="tel:+3662000001">06 62 000 001</a><br>E-mail: <a href="mailto:csokor@rozmaring.example">csokor@rozmaring.example</a></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="page">
+      <span>Rozmaring Virágbolt (demó) · Szeged</span>
+      <span>Weboldal és rendelési rendszer: <a href="/">Gestware</a></span>
+      <span class="credits">Fotók (Wikimedia Commons): <a href="https://commons.wikimedia.org/wiki/File:Florist_cutting_flower_stems.jpg">direct2Florist</a>, CC BY 2.0 · <a href="https://commons.wikimedia.org/wiki/File:Florist_working.jpg">direct2Florist</a>, CC BY 2.0 · <a href="https://commons.wikimedia.org/wiki/File:2023_Adventskranz_5.jpg">Burkhard Mücke</a>, CC BY 4.0 · <a href="https://commons.wikimedia.org/wiki/File:Peony_vase_(Unsplash).jpg">Alexandra Seinet</a>, CC0 · <a href="https://commons.wikimedia.org/wiki/File:A_bouquet_of_orange_tulips_on_a_table.jpg">George E. Koronaios</a>, CC BY-SA 4.0 · <a href="https://commons.wikimedia.org/wiki/File:My_bouquet..._(2949945463).jpg">Catherine from Australia</a>, CC BY 2.0 · <a href="https://commons.wikimedia.org/wiki/File:Decoration_with_dried_flowers_in_Martfeld.jpg">Anastasiya Lvova</a>, CC BY-SA 4.0. A képek illusztrációk, nem a demó boltban készültek.</span>
+    </div>
+  </footer>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+    const ft = (n) => `${String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ' ')} Ft`;
+    const now = new Date();
+    const dow = now.getDay();
+    const mins = now.getHours() * 60 + now.getMinutes();
+    const DAY = ['vasárnap', 'hétfő', 'kedd', 'szerda', 'csütörtök', 'péntek', 'szombat'];
+
+    const MOODS = [
+      { id: 'pasztell', name: 'Pasztell', img: 'bazsarozsa', w: 600, h: 900, alt: 'Rózsaszín bazsarózsák kerámiavázában', desc: 'Púder, halvány rózsaszín, sok zöld. Születésnapra, köszönetnek.', add: 0 },
+      { id: 'elenk', name: 'Élénk', img: 'tulipan', w: 1200, h: 810, alt: 'Narancssárga tulipáncsokor egy asztalon', desc: 'Narancs, korall, sárga. Amikor fel kell vidítani valakit.', add: 0 },
+      { id: 'romantikus', name: 'Romantikus', img: 'rozsa', w: 1200, h: 1004, alt: 'Rózsaszín és fehér rózsákból kötött kerek csokor', desc: 'Rózsa és frézia, kerekre kötve. Évfordulóra.', add: 1500 },
+      { id: 'szaraz', name: 'Száraz', img: 'szaraz', w: 1200, h: 900, alt: 'Fejjel lefelé száradó levendula és sóvirág csokrok', desc: 'Sóvirág, levendula, fű. Hónapokig szép, víz nélkül.', add: 1000 },
+    ];
+    const SIZES = [
+      { id: 's', name: 'Kicsi', desc: 'kb. 7 szál', price: 6900, d: 22 },
+      { id: 'm', name: 'Közepes', desc: 'kb. 12 szál', price: 10900, d: 32 },
+      { id: 'l', name: 'Nagy', desc: 'kb. 20 szál', price: 15900, d: 44 },
+    ];
+    const WRAPS = [
+      { id: 'kraft', name: 'Kraft papír', desc: 'zsineggel', price: 0 },
+      { id: 'selyem', name: 'Selyempapír', desc: 'szalaggal', price: 600 },
+      { id: 'doboz', name: 'Kalapdoboz', desc: 'vízzel, vázát sem kér', price: 2400 },
+    ];
+    const ZONES = [
+      { id: 'bolt', name: 'Átveszem a boltban', price: 0 },
+      { id: 'belvaros', name: 'Belváros, Felsőváros', price: 1500 },
+      { id: 'ujszeged', name: 'Újszeged, Rókus, Móraváros', price: 2000 },
+      { id: 'tarjan', name: 'Tarján, Északi városrész', price: 2000 },
+      { id: 'kulso', name: 'Szőreg, Kiskundorozsma, Tápé', price: 3000 },
+    ];
+
+    // bouquet cards
+    $('bouquets').innerHTML = MOODS.map((m) => `
+      <article class="bq">
+        <img src="img/${m.img}.jpg" alt="${m.alt}" width="${m.w}" height="${m.h}" loading="lazy">
+        <h3>${m.name}</h3>
+        <p>${m.desc}</p>
+        <div class="row"><span class="price">${ft(SIZES[0].price + m.add)}-tól</span><button type="button" data-mood="${m.id}">Ezt kérem</button></div>
+      </article>`).join('');
+
+    // builder options
+    const radio = (group, o, inner, checked) => `<label class="opt"><input type="radio" name="${group}" value="${o.id}"${checked ? ' checked' : ''}>${inner}</label>`;
+    $('moods').innerHTML = MOODS.map((m, i) => radio('mood', m, `<img src="img/${m.img}.jpg" alt="" width="${m.w}" height="${m.h}" loading="lazy"><b>${m.name}</b><span>${m.add ? `+${ft(m.add)}` : 'alapár'}</span>`, i === 0)).join('');
+    $('sizes').innerHTML = SIZES.map((s, i) => radio('size', s, `<span class="size" aria-hidden="true"><i style="width:${s.d}px;height:${s.d}px"></i></span><b>${s.name}</b><span>${s.desc} · ${ft(s.price)}</span>`, i === 1)).join('');
+    $('wraps').innerHTML = WRAPS.map((w, i) => radio('wrap', w, `<b>${w.name}</b><span>${w.desc}</span><span>${w.price ? `+${ft(w.price)}` : 'ingyenes'}</span>`, i === 0)).join('');
+    $('o-zone').innerHTML = ZONES.map((z) => `<option value="${z.id}">${z.name}${z.price ? ` · ${ft(z.price)}` : ''}</option>`).join('');
+    $('zones').innerHTML = ZONES.slice(1).map((z) => `<li><span>${z.name}</span><span>${ft(z.price)}</span></li>`).join('') + '<li><span>Boltban átvéve</span><span>ingyenes</span></li>';
+
+    const form = $('order');
+    const pick = (name, list) => list.find((x) => x.id === form.elements[name].value);
+
+    // delivery days: today (until 13:00) and the next six non-Sundays
+    const days = [];
+    for (let d = new Date(now); days.length < 6; d.setDate(d.getDate() + 1)) {
+      if (d.getDay() === 0) continue;
+      if (d.toDateString() === now.toDateString() && mins >= 13 * 60) continue;
+      days.push(new Date(d));
+    }
+    const dayLabel = (d) => {
+      const diff = Math.round((new Date(d.toDateString()) - new Date(now.toDateString())) / 86400000);
+      const name = diff === 0 ? 'ma' : diff === 1 ? 'holnap' : DAY[d.getDay()];
+      return `${name}, ${d.toLocaleDateString('hu-HU', { month: 'short', day: 'numeric' })}`;
+    };
+    $('o-day').innerHTML = days.map((d, i) => `<option value="${i}">${dayLabel(d)}</option>`).join('');
+
+    function fillSlots() {
+      const d = days[$('o-day').value];
+      const shop = $('o-zone').value === 'bolt';
+      const close = d.getDay() === 6 ? 13 : 18;
+      const slots = shop
+        ? Array.from({ length: close - 9 }, (_, i) => [9 + i, 10 + i])
+        : (d.getDay() === 6 ? [[9, 12]] : [[9, 12], [12, 15], [15, 18]]);
+      const today = d.toDateString() === now.toDateString();
+      const ok = slots.filter(([a]) => !today || a * 60 >= mins + 120);
+      $('o-slot').innerHTML = ok.length
+        ? ok.map(([a, b]) => `<option>${a}–${b} óra</option>`).join('')
+        : '<option value="">erre a napra már nincs</option>';
+    }
+
+    function update() {
+      const m = pick('mood', MOODS);
+      const s = pick('size', SIZES);
+      const w = pick('wrap', WRAPS);
+      const z = ZONES.find((x) => x.id === $('o-zone').value);
+      $('addr-wrap').hidden = z.id === 'bolt';
+      const lines = [
+        [`${m.name} csokor, ${s.name.toLowerCase()}`, s.price + m.add],
+        [w.name, w.price],
+        ['Kézzel írt kártya', 0],
+        [z.id === 'bolt' ? 'Átvétel a boltban' : `Kiszállítás: ${z.name}`, z.price],
+      ];
+      $('bill').innerHTML = lines.map(([t, p]) => `<li><span>${t}</span><span>${p ? ft(p) : '0 Ft'}</span></li>`).join('');
+      $('total').textContent = ft(lines.reduce((sum, [, p]) => sum + p, 0));
+
+      const to = $('o-to').value.trim();
+      const msg = $('o-msg').value.trim();
+      $('p-to').textContent = `Kedves ${to || '…'}!`;
+      $('p-msg').textContent = msg || $('o-msg').placeholder;
+      $('p-msg').classList.toggle('ph', !msg);
+      $('o-count').textContent = `${$('o-msg').value.length} / 140`;
+    }
+
+    form.addEventListener('input', update);
+    form.addEventListener('change', (e) => {
+      if (e.target.id === 'o-day' || e.target.id === 'o-zone') fillSlots();
+      update();
+    });
+    $('bouquets').addEventListener('click', (e) => {
+      const id = e.target.closest('[data-mood]')?.dataset.mood;
+      if (!id) return;
+      form.querySelector(`input[name="mood"][value="${id}"]`).checked = true;
+      update();
+      $('keszito').scrollIntoView();
+    });
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const err = $('o-err');
+      const name = $('o-name').value.trim();
+      const phone = $('o-phone').value.replace(/\D/g, '');
+      const shop = $('o-zone').value === 'bolt';
+      if (!$('o-slot').value) { err.textContent = 'Erre a napra már nincs szabad időablak, válasszon másik napot.'; return; }
+      if (!name) { err.textContent = 'Kérjük a nevét, hogy tudjuk, kinek kötjük.'; $('o-name').focus(); return; }
+      if (phone.length < 9) { err.textContent = 'Kérünk egy telefonszámot, ha kérdésünk lenne.'; $('o-phone').focus(); return; }
+      if (!shop && $('o-addr').value.trim().length < 5) { err.textContent = 'Hová vigyük? Kérjük a kézbesítési címet.'; $('o-addr').focus(); return; }
+      err.textContent = '';
+      const day = $('o-day').options[$('o-day').selectedIndex].text.split(',')[0];
+      const ok = document.createElement('div');
+      ok.className = 'ok';
+      ok.innerHTML = `<b>Köszönjük, <span></span>!</b>A csokor ${day} ${$('o-slot').value.replace(' óra', '')} óra között ${shop ? 'átvehető a boltban' : 'megérkezik'}. Összesen ${$('total').textContent}. (Demó: valójában nem küldtünk adatot.)`;
+      ok.querySelector('span').textContent = name;
+      $('o-ok').replaceChildren(ok);
+    });
+
+    fillSlots();
+    update();
+
+    // today strip
+    const hours = dow === 0 ? null : dow === 6 ? [8, 13] : [8, 18];
+    const open = hours && mins >= hours[0] * 60 && mins < hours[1] * 60;
+    $('open-today').innerHTML = hours
+      ? `<span class="dot${open ? '' : ' off'}"></span>${open ? 'Nyitva' : 'Most zárva'}, ${hours[0]}–${hours[1]}`
+      : '<span class="dot off"></span>Ma zárva';
+    if (dow !== 0 && mins < 13 * 60) {
+      const left = 13 * 60 - mins;
+      $('same-day').textContent = `Ma még kivisszük, ha ${Math.floor(left / 60) ? `${Math.floor(left / 60)} óra ` : ''}${left % 60} percen belül rendel`;
+    } else {
+      $('same-day').textContent = `Legközelebb ${dayLabel(days[0]).split(',')[0]} reggeltől`;
+    }
+    document.querySelector(`#hours [data-d="${dow >= 1 && dow <= 5 ? 1 : dow}"]`)?.classList.add('today');
+
+    // what's in the shop, by season
+    const SEASONS = [
+      { m: [10, 11, 0, 1], title: 'Most a boltban', items: [['Krizantém', '450 Ft'], ['Eukaliptusz', '600 Ft'], ['Ilex bogyó', '700 Ft'], ['Amarillisz', '1 400 Ft'], ['Fehér rózsa', '650 Ft']], note: 'eukaliptusz, ilex bogyó, amarillisz, fehér rózsa' },
+      { m: [2, 3, 4], title: 'Most a boltban', items: [['Tulipán', '350 Ft'], ['Nárcisz', '250 Ft'], ['Ranunkulusz', '700 Ft'], ['Jácint', '600 Ft'], ['Barka', '300 Ft']], note: 'tulipán, ranunkulusz, nárcisz, barka' },
+      { m: [5, 6, 7], title: 'Most a boltban', items: [['Bazsarózsa', '900 Ft'], ['Napraforgó', '500 Ft'], ['Levendula', '200 Ft'], ['Margaréta', '300 Ft'], ['Kerti rózsa', '600 Ft']], note: 'bazsarózsa, levendula, napraforgó, margaréta' },
+      { m: [8, 9], title: 'Most a boltban', items: [['Krizantém', '450 Ft'], ['Dália', '700 Ft'], ['Hortenzia', '1 200 Ft'], ['Eukaliptusz', '600 Ft'], ['Csipkebogyó-ág', '500 Ft']], note: 'eukaliptusz, krizantém, dália, hortenzia' },
+    ];
+    const season = SEASONS.find((s) => s.m.includes(now.getMonth()));
+    $('season-sub').textContent = `${now.toLocaleDateString('hu-HU', { month: 'long', day: 'numeric' })} · szálanként, a pultnál`;
+    $('season').innerHTML = season.items.map(([n, p]) => `<li><span>${n}</span><span>${p}</span></li>`).join('');
+    $('note-list').textContent = season.note;
+
+    // advent: first Sunday of Advent = four Sundays before Christmas
+    const firstAdvent = (y) => {
+      const xmas = new Date(y, 11, 25);
+      const fourth = new Date(y, 11, 25 - (xmas.getDay() || 7));
+      return new Date(y, 11, fourth.getDate() - 21);
+    };
+    let adv = firstAdvent(now.getFullYear());
+    const xmas = new Date(now.getFullYear(), 11, 25);
+    const today0 = new Date(now.toDateString());
+    if (today0 > xmas) adv = firstAdvent(now.getFullYear() + 1);
+    const daysTo = Math.round((adv - today0) / 86400000);
+    const advText = adv.toLocaleDateString('hu-HU', { month: 'long', day: 'numeric' });
+    $('advent-kicker').textContent = daysTo > 0
+      ? `Advent első vasárnapja: ${advText} · még ${daysTo} nap`
+      : 'Advent van · a koszorúk készen állnak';
+    const ws = new Date(adv); ws.setDate(adv.getDate() - 1);
+    if (daysTo > 1) {
+      $('ws-when').textContent = `Koszorúkötő délután a boltban: ${ws.toLocaleDateString('hu-HU', { month: 'long', day: 'numeric' })}, szombat, 15 órától. Forralt bor, minden alapanyag, két óra. 7 900 Ft fejenként.`;
+    }
+
+    const SEATS = 8;
+    let taken = 5;
+    const drawSeats = () => { $('seats').innerHTML = Array.from({ length: SEATS }, (_, i) => `<i class="${i < taken ? 'taken' : ''}"></i>`).join(''); };
+    drawSeats();
+    $('w-msg').textContent = `${SEATS - taken} hely maradt.`;
+    $('w-msg').classList.add('good');
+
+    $('ws-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const msg = $('w-msg');
+      const name = $('w-name').value.trim();
+      if (taken >= SEATS) { msg.textContent = 'Sajnos betelt. Hívjon, és szólunk, ha valaki lemondja.'; msg.classList.remove('good'); return; }
+      if (!name) { msg.textContent = 'Kérjük a nevét.'; msg.classList.remove('good'); return; }
+      if ($('w-phone').value.replace(/\D/g, '').length < 9) { msg.textContent = 'Kérünk egy telefonszámot is.'; msg.classList.remove('good'); return; }
+      taken += 1;
+      drawSeats();
+      msg.classList.add('good');
+      msg.textContent = `Köszönjük, ${name}, a hely az öné. ${SEATS - taken ? `Még ${SEATS - taken} hely maradt.` : 'Ezzel betelt.'} (Demó.)`;
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>

@@ -2,6 +2,9 @@
   "hosting": {
     "site": "gestware",
     "public": ".",
+    "redirects": [
+      { "source": "/demo/penge{,/**}", "destination": "/demo/rozmaring/", "type": 301 }
+    ],
     "ignore": [
       "firebase.json",
       "README.md",
